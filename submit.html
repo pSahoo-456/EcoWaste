@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWaste - Submit E-Waste</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: #f9f9f9;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background: rgba(46, 204, 113, 0.1);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+            background: rgba(46, 204, 113, 0.1);
+        }
+
+        .main-content {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.05), rgba(39, 174, 96, 0.05));
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .submission-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+            animation: fadeInUp 0.5s ease-out both;
+        }
+
+        .form-group:nth-child(2) { animation-delay: 0.1s; }
+        .form-group:nth-child(3) { animation-delay: 0.2s; }
+        .form-group:nth-child(4) { animation-delay: 0.3s; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .image-upload {
+            border: 2px dashed #ddd;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .image-upload:hover {
+            border-color: var(--primary-color);
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .submit-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            animation: growIn 1s ease-out;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .reward-estimate {
+            background: var(--light-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin-top: 2rem;
+        }
+
+        .reward-value {
+            font-size: 2rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .map-container {
+            margin-top: 3rem;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .leaf-particle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%232ecc71" d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/></svg>') center/contain no-repeat;
+            opacity: 0.3;
+            pointer-events: none;
+            animation: leafFloat 3s infinite;
+        }
+
+        @keyframes leafFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(5px, -5px) rotate(5deg); }
+            50% { transform: translate(0, -10px) rotate(0deg); }
+            75% { transform: translate(-5px, -5px) rotate(-5deg); }
+        }
+
+        @keyframes growIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">EcoWaste</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="submit.html" class="active">Submit Your E-Waste</a>
+                <a href="rewards.html">Rewards</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="submission-form">
+            <h2>Submit Your E-Waste</h2>
+            <p>Fill out the details below to schedule a pickup or find a drop-off location</p>
+            
+            <form id="wasteForm" class="form-grid">
+                <div class="form-container p-4">
+                    <div class="leaf-particle" style="top: 10%; left: 5%;"></div>
+                    <div class="leaf-particle" style="top: 30%; right: 5%;"></div>
+                    <div class="leaf-particle" style="bottom: 20%; left: 10%;"></div>
+                    <div class="form-group">
+                        <label for="deviceType">Device Type</label>
+                        <select id="deviceType" required>
+                            <option value="">Select device type</option>
+                            <option value="smartphone">Smartphone</option>
+                            <option value="laptop">Laptop</option>
+                            <option value="tablet">Tablet</option>
+                            <option value="desktop">Desktop Computer</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="brand">Brand</label>
+                        <input type="text" id="brand" placeholder="e.g., Apple, Samsung, HP" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="condition">Condition</label>
+                        <select id="condition" required>
+                            <option value="">Select condition</option>
+                            <option value="working">Working</option>
+                            <option value="partial">Partially Working</option>
+                            <option value="broken">Not Working</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-container p-4">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" rows="4" placeholder="Please provide any additional details about your device"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="image-upload" id="imageUpload">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <p>Click to upload device photos</p>
+                            <input type="file" hidden accept="image/*" multiple>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-container p-4">
+                    <div class="form-group">
+                        <label for="pickupDate">Preferred Pickup Date</label>
+                        <input type="date" id="pickupDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pickupTime">Preferred Time</label>
+                        <select id="pickupTime" required>
+                            <option value="">Select time slot</option>
+                            <option value="morning">Morning (9 AM - 12 PM)</option>
+                            <option value="afternoon">Afternoon (1 PM - 4 PM)</option>
+                            <option value="evening">Evening (5 PM - 7 PM)</option>
+                        </select>
+                    </div>
+
+                    <div class="reward-estimate">
+                        <h3>Estimated Reward Points</h3>
+                        <div class="reward-value">0</div>
+                        <p>Points will be added to your account after successful collection</p>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Schedule Pickup</button>
+            </form>
+        </div>
+
+        <div class="map-container">
+            <h2>Drop-off Locations</h2>
+            <p>Find the nearest certified e-waste collection center</p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15000!2d-122.419!3d37.775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Handle image upload
+        const imageUpload = document.getElementById('imageUpload');
+        const fileInput = imageUpload.querySelector('input[type="file"]');
+
+        imageUpload.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                imageUpload.querySelector('p').textContent = `${fileInput.files.length} file(s) selected`;
+            }
+        });
+
+        // Calculate reward points
+        function calculateRewards() {
+            const deviceType = document.getElementById('deviceType').value;
+            const condition = document.getElementById('condition').value;
+            
+            let points = 0;
+            
+            // Basic point calculation
+            if (deviceType === 'smartphone') points = 100;
+            else if (deviceType === 'laptop') points = 200;
+            else if (deviceType === 'tablet') points = 150;
+            else if (deviceType === 'desktop') points = 300;
+            else points = 50;
+
+            // Condition multiplier
+            if (condition === 'working') points *= 1.5;
+            else if (condition === 'partial') points *= 1.2;
+
+            document.querySelector('.reward-value').textContent = Math.round(points);
+        }
+
+        // Add event listeners for reward calculation
+        document.getElementById('deviceType').addEventListener('change', calculateRewards);
+        document.getElementById('condition').addEventListener('change', calculateRewards);
+
+        // Form submission
+        document.getElementById('wasteForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your submission! We will contact you to confirm the pickup.');
+        });
+    </script>
+</body>
+</html>
