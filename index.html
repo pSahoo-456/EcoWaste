@@ -7,22 +7,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
-            background-color: #f4f4f4; /* Light background for contrast */
-            color: #333; /* Dark text color for readability */
+            background-color: #003300; /* Dark green background */
+            color: #e0e0e0; /* Light text color for readability */
             font-family: 'Arial', sans-serif; /* Font style */
             line-height: 1.6;
             overflow-x: hidden;
         }
 
         header, footer {
-            background-color: #2c2c2c; /* Darker header/footer */
-            color: #ffffff; /* Light text color */
+            background-color: #004d00; /* Darker green for header/footer */
+            color: #e0e0e0; /* Light text color */
             padding: 20px;
             text-align: center;
         }
 
         a {
-            color: #6200ea; /* Vibrant link color */
+            color: #b3ffb3; /* Light green for links */
             text-decoration: none; /* Remove underline */
         }
 
@@ -32,8 +32,8 @@
         }
 
         button {
-            background-color: #6200ea; /* Button color */
-            color: #ffffff; /* Text color on button */
+            background-color: #006600; /* Medium green for buttons */
+            color: #ffffff; /* White text color */
             border: none;
             border-radius: 5px;
             padding: 10px 20px;
@@ -42,12 +42,12 @@
         }
 
         button:hover {
-            background-color: #3700b3; /* Darker button color on hover */
+            background-color: #005500; /* Darker green on hover */
             transform: scale(1.05); /* Slightly enlarge button on hover */
         }
 
         .card {
-            background-color: #ffffff; /* Card background */
+            background-color: #004d00; /* Dark green for cards */
             border-radius: 10px;
             padding: 20px;
             margin: 10px;
@@ -94,7 +94,7 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: #b3ffb3;
             font-weight: 500;
             transition: var(--transition);
             padding: 0.5rem 1rem;
@@ -137,7 +137,7 @@
         }
 
         .hero-content {
-            color: white;
+            color: #b3ffb3;
             max-width: 800px;
             position: relative;
             z-index: 2;
@@ -152,7 +152,7 @@
         .hero-content h1 {
             font-size: 4rem;
             margin-bottom: 1.5rem;
-            color: white;
+            color: #b3ffb3;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
@@ -160,7 +160,7 @@
             font-size: 1.2rem;
             margin-bottom: 2rem;
             opacity: 0.9;
-            color: white;
+            color: #b3ffb3;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
@@ -356,99 +356,86 @@
         }
 
         .initiative-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
-            aspect-ratio: 1;
-            animation: riseUp 1s ease-out forwards;
-            opacity: 0;
+            align-items: center; /* Center align items */
+            text-align: center; /* Center text */
+            margin: 20px; /* Add margin for spacing */
+            background-color: #004d00; /* Dark green for initiative cards */
+            padding: 20px; /* Add padding for spacing */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
         }
 
-        .initiative-card:nth-child(1) { animation-delay: 0.2s; }
-        .initiative-card:nth-child(2) { animation-delay: 0.4s; }
-        .initiative-card:nth-child(3) { animation-delay: 0.6s; }
-        .initiative-card:nth-child(4) { animation-delay: 0.8s; }
-
-        .initiative-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(135deg, #6200ea, #3700b3);
-            transform-origin: left;
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .initiative-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .initiative-title {
+        .initiative-card h3 {
             font-size: 1.5rem;
-            color: #333;
+            color: #b3ffb3;
             margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            animation: riseUp 0.8s ease-out forwards;
-            opacity: 0;
-            animation-delay: 0.3s;
-        }
-
-        .initiative-title i {
-            font-size: 2rem;
-            background: linear-gradient(135deg, #6200ea, #3700b3);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            transition: transform 0.4s ease;
-        }
-
-        .initiative-card:hover .initiative-title i {
-            transform: scale(1.2) rotate(10deg);
         }
 
         .initiative-card p {
-            color: #666;
+            color: #b3ffb3;
             line-height: 1.6;
             margin-bottom: 2rem;
-            animation: riseUp 0.8s ease-out forwards;
-            opacity: 0;
-            animation-delay: 0.5s;
         }
 
         .initiative-btn {
             display: inline-block;
             padding: 0.8rem 1.5rem;
-            background: white;
-            color: #6200ea;
+            background: #006600;
+            color: white;
             text-decoration: none;
             border-radius: 25px;
             font-weight: 500;
             transition: all 0.4s ease;
-            border: 2px solid #6200ea;
+            border: 2px solid #006600;
             margin-top: auto;
-            animation: riseUp 0.8s ease-out forwards;
-            opacity: 0;
-            animation-delay: 0.7s;
         }
 
         .initiative-btn:hover {
-            background: linear-gradient(135deg, #6200ea, #3700b3);
+            background: #005500;
             color: white;
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+            box-shadow: 0 5px 15px rgba(46,204,113,0.3);
+        }
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #003300;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            color: #b3ffb3;
+        }
+
+        .modal-content h2 {
+            color: #b3ffb3;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
 
         @keyframes riseUp {
@@ -574,43 +561,51 @@
         <h2 class="section-title">Our Green Initiatives</h2>
         <div class="initiatives-grid">
             <div class="initiative-card">
-                <div class="initiative-content">
-                    <h3 class="initiative-title">
-                        <i class="fas fa-lightbulb"></i>
-                        E-Waste Education
-                    </h3>
-                    <p>Join our awareness programs to learn about responsible e-waste disposal and its environmental impact</p>
-                    <a href="#" class="initiative-btn">Learn More</a>
+                <h3>E-Waste Education</h3>
+                <p>Join our awareness programs to learn about responsible e-waste disposal and its environmental impact</p>
+                <button id="learnMoreBtn1">Learn More</button>
+                <div id="myModal1" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Learn More About E-Waste Education</h2>
+                        <p>This is a paragraph of content that educates about e-waste education initiatives.</p>
+                    </div>
                 </div>
             </div>
             <div class="initiative-card">
-                <div class="initiative-content">
-                    <h3 class="initiative-title">
-                        <i class="fas fa-recycle"></i>
-                        Collection Centers
-                    </h3>
-                    <p>Find convenient e-waste collection points near you and contribute to our recycling mission</p>
-                    <a href="#" class="initiative-btn">Learn More</a>
+                <h3>Collection Centers</h3>
+                <p>Find convenient e-waste collection points near you and contribute to our recycling mission</p>
+                <button id="learnMoreBtn2">Learn More</button>
+                <div id="myModal2" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Learn More About Collection Centers</h2>
+                        <p>This is a paragraph of content that educates about collection centers.</p>
+                    </div>
                 </div>
             </div>
             <div class="initiative-card">
-                <div class="initiative-content">
-                    <h3 class="initiative-title">
-                        <i class="fas fa-users"></i>
-                        Community Programs
-                    </h3>
-                    <p>Participate in local community initiatives and help spread awareness about e-waste management</p>
-                    <a href="#" class="initiative-btn">Learn More</a>
+                <h3>Community Programs</h3>
+                <p>Participate in local community initiatives and help spread awareness about e-waste management</p>
+                <button id="learnMoreBtn3">Learn More</button>
+                <div id="myModal3" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Learn More About Community Programs</h2>
+                        <p>This is a paragraph of content that educates about community programs.</p>
+                    </div>
                 </div>
             </div>
             <div class="initiative-card">
-                <div class="initiative-content">
-                    <h3 class="initiative-title">
-                        <i class="fas fa-box"></i>
-                        Smart Bins
-                    </h3>
-                    <p>Access our network of smart e-waste bins for safe and convenient disposal of electronic items</p>
-                    <a href="#" class="initiative-btn">Learn More</a>
+                <h3>Smart Bins</h3>
+                <p>Access our network of smart e-waste bins for safe and convenient disposal of electronic items</p>
+                <button id="learnMoreBtn4">Learn More</button>
+                <div id="myModal4" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Learn More About Smart Bins</h2>
+                        <p>This is a paragraph of content that educates about smart bins.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -647,6 +642,34 @@
             element.style.animationPlayState = 'paused';
             observer.observe(element);
         });
+
+        // Get all the buttons and modals
+        var buttons = document.querySelectorAll("[id^='learnMoreBtn']");
+        var modals = document.querySelectorAll("[id^='myModal']");
+
+        // Add click event to each button
+        buttons.forEach(function(btn, index) {
+            btn.onclick = function() {
+                modals[index].style.display = "block";
+            }
+        });
+
+        // Add click event to close modals
+        modals.forEach(function(modal) {
+            var span = modal.getElementsByClassName("close")[0];
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            modals.forEach(function(modal) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+        }
     </script>
 </body>
 </html>
