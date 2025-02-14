@@ -6,27 +6,56 @@
     <title>EcoWaste - Turn Your E-Waste into Rewards</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #2ecc71;
-            --secondary-color: #27ae60;
-            --dark-color: #2c3e50;
-            --light-color: #ecf0f1;
-            --transition: all 0.3s ease;
-            --gradient: linear-gradient(135deg, #2ecc71, #27ae60);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
         body {
+            background-color: #f4f4f4; /* Light background for contrast */
+            color: #333; /* Dark text color for readability */
+            font-family: 'Arial', sans-serif; /* Font style */
             line-height: 1.6;
-            color: var(--dark-color);
-            background: #f9f9f9;
             overflow-x: hidden;
+        }
+
+        header, footer {
+            background-color: #2c2c2c; /* Darker header/footer */
+            color: #ffffff; /* Light text color */
+            padding: 20px;
+            text-align: center;
+        }
+
+        a {
+            color: #6200ea; /* Vibrant link color */
+            text-decoration: none; /* Remove underline */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+            color: #3700b3; /* Darker shade on hover */
+        }
+
+        button {
+            background-color: #6200ea; /* Button color */
+            color: #ffffff; /* Text color on button */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #3700b3; /* Darker button color on hover */
+            transform: scale(1.05); /* Slightly enlarge button on hover */
+        }
+
+        .card {
+            background-color: #ffffff; /* Card background */
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Elevated shadow effect */
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
         }
 
         .navbar {
@@ -52,7 +81,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            background: var(--gradient);
+            background: linear-gradient(135deg, #6200ea, #3700b3);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -65,7 +94,7 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--dark-color);
+            color: #333;
             font-weight: 500;
             transition: var(--transition);
             padding: 0.5rem 1rem;
@@ -73,7 +102,7 @@
         }
 
         .nav-links a:hover {
-            background: var(--gradient);
+            background: linear-gradient(135deg, #3700b3, #6200ea);
             color: white;
             transform: translateY(-2px);
         }
@@ -138,7 +167,7 @@
         .cta-button {
             display: inline-block;
             padding: 1rem 2.5rem;
-            background: var(--gradient);
+            background: linear-gradient(135deg, #6200ea, #3700b3);
             color: white;
             text-decoration: none;
             border-radius: 30px;
@@ -151,7 +180,7 @@
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(46,204,113,0.4);
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            background: linear-gradient(135deg, #3700b3, #6200ea);
         }
 
         .how-it-works {
@@ -161,141 +190,160 @@
 
         .section-title {
             text-align: center;
-            margin-bottom: 3rem;
-            font-size: 2.5rem;
-            background: var(--gradient);
+            margin-bottom: 4rem;
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #6200ea, #3700b3);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            position: relative;
+            padding-bottom: 1rem;
+            animation: riseUp 1.2s ease-out;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #6200ea, #3700b3);
+            border-radius: 2px;
         }
 
         .steps-container {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
-            flex-wrap: wrap;
         }
 
         .step-card {
             background: rgba(255, 255, 255, 0.9);
-            padding: 2rem;
+            padding: 2.5rem 2rem;
             border-radius: 20px;
             text-align: center;
-            width: 300px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.2);
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            animation: riseUp 1s ease-out forwards;
+            opacity: 0;
         }
 
-        .step-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(46,204,113,0.2);
-        }
+        .step-card:nth-child(1) { animation-delay: 0.2s; }
+        .step-card:nth-child(2) { animation-delay: 0.4s; }
+        .step-card:nth-child(3) { animation-delay: 0.6s; }
 
         .step-icon {
-            font-size: 2.5rem;
-            background: var(--gradient);
+            font-size: 3rem;
+            background: linear-gradient(135deg, #6200ea, #3700b3);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .step-card p {
+            color: #666;
+            line-height: 1.6;
             margin-bottom: 1rem;
         }
 
         .services-section {
-            padding: 5rem 2rem;
+            padding: 6rem 2rem;
             background: linear-gradient(135deg, #f0f0f0, #ffffff);
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
 
         .service-box {
-            background: rgba(255, 255, 255, 0.9);
+            background: white;
             padding: 2.5rem;
             border-radius: 20px;
-            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            min-height: 350px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            gap: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            animation: riseUp 1s ease-out forwards;
+            opacity: 0;
         }
 
-        .service-box.individual {
-            background: linear-gradient(135deg, #e8f8e8, #d1f5d1);
-        }
+        .service-box:nth-child(1) { animation-delay: 0.2s; }
+        .service-box:nth-child(2) { animation-delay: 0.4s; }
+        .service-box:nth-child(3) { animation-delay: 0.6s; }
 
-        .service-box.commercial {
-            background: linear-gradient(135deg, #d1e7c7, #c1e1b5);
-        }
-
-        .service-box.business {
-            background: linear-gradient(135deg, #28a745, #218838);
-            color: white;
+        .service-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(135deg, #6200ea, #3700b3);
         }
 
         .service-icon {
             width: 80px;
             height: 80px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             transition: transform 0.4s ease;
         }
 
         .service-title {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
+            color: #333;
             margin-bottom: 1rem;
-            color: inherit;
         }
 
         .service-description {
+            color: #666;
+            line-height: 1.6;
             margin-bottom: 1.5rem;
-            color: inherit;
-            opacity: 0.9;
         }
 
         .service-btn {
+            display: inline-block;
             padding: 0.8rem 1.5rem;
-            border-radius: 25px;
+            background: linear-gradient(135deg, #6200ea, #3700b3);
+            color: white;
             text-decoration: none;
+            border-radius: 25px;
             font-weight: 500;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--dark-color);
-            border: 1px solid rgba(46, 204, 113, 0.2);
-        }
-
-        .business .service-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-        }
-
-        .service-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.2);
-            background: var(--gradient);
-            color: white;
+            transition: all 0.4s ease;
+            border: 2px solid #6200ea;
+            margin-top: auto;
         }
 
         .initiatives-section {
-            padding: 5rem 2rem;
-            background: linear-gradient(135deg, #f0f0f0, #ffffff);
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #f9f9f9, #ffffff);
         }
 
         .initiatives-grid {
@@ -308,87 +356,144 @@
         }
 
         .initiative-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: white;
             padding: 2.5rem;
             border-radius: 20px;
-            position: relative;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.4s ease;
+            position: relative;
             overflow: hidden;
-            min-height: 250px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            aspect-ratio: 1;
+            animation: riseUp 1s ease-out forwards;
+            opacity: 0;
         }
 
-        .initiative-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(46, 204, 113, 0.2);
+        .initiative-card:nth-child(1) { animation-delay: 0.2s; }
+        .initiative-card:nth-child(2) { animation-delay: 0.4s; }
+        .initiative-card:nth-child(3) { animation-delay: 0.6s; }
+        .initiative-card:nth-child(4) { animation-delay: 0.8s; }
+
+        .initiative-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(135deg, #6200ea, #3700b3);
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
 
-        .initiative-content {
-            position: relative;
-            z-index: 1;
+        .initiative-card:hover::before {
+            transform: scaleX(1);
         }
 
         .initiative-title {
             font-size: 1.5rem;
-            color: var(--dark-color);
-            margin-bottom: 1rem;
+            color: #333;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.8rem;
+            animation: riseUp 0.8s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.3s;
         }
 
         .initiative-title i {
-            font-size: 1.2rem;
-            background: var(--gradient);
+            font-size: 2rem;
+            background: linear-gradient(135deg, #6200ea, #3700b3);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            transition: transform 0.4s ease;
+        }
+
+        .initiative-card:hover .initiative-title i {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .initiative-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            animation: riseUp 0.8s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.5s;
         }
 
         .initiative-btn {
             display: inline-block;
             padding: 0.8rem 1.5rem;
             background: white;
-            color: var(--dark-color);
+            color: #6200ea;
             text-decoration: none;
             border-radius: 25px;
             font-weight: 500;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(46, 204, 113, 0.2);
+            transition: all 0.4s ease;
+            border: 2px solid #6200ea;
+            margin-top: auto;
+            animation: riseUp 0.8s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.7s;
         }
 
         .initiative-btn:hover {
-            background: var(--gradient);
+            background: linear-gradient(135deg, #6200ea, #3700b3);
             color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        @keyframes riseUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .initiatives-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .initiatives-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
         }
 
         @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .steps-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
             .initiatives-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .initiative-card {
+                aspect-ratio: auto;
+                min-height: 300px;
             }
         }
     </style>
@@ -446,19 +551,19 @@
                 </div>
                 <a href="#" class="service-btn">Schedule a Pickup</a>
             </div>
-            <div class="service-box commercial">
-                <img src="https://img.icons8.com/ios/100/27ae60/company.png" alt="Commercial" class="service-icon">
+            <div class="service-box retailer">
+                <img src="https://img.icons8.com/ios/100/27ae60/shop.png" alt="Retailer" class="service-icon">
                 <div>
-                    <h3 class="service-title">Commercial</h3>
-                    <p class="service-description">Office and factory waste management services</p>
+                    <h3 class="service-title">Retailer</h3>
+                    <p class="service-description">Specialized e-waste collection and recycling for retail stores</p>
                 </div>
                 <a href="#" class="service-btn">Partner with Us</a>
             </div>
             <div class="service-box business">
-                <img src="https://img.icons8.com/ios/100/ffffff/recycling.png" alt="EPR" class="service-icon">
+                <img src="https://img.icons8.com/ios/100/27ae60/briefcase.png" alt="Business" class="service-icon">
                 <div>
-                    <h3 class="service-title">Extended Producer Responsibility</h3>
-                    <p class="service-description">EPR compliance services for manufacturers</p>
+                    <h3 class="service-title">Business Services</h3>
+                    <p class="service-description">Comprehensive e-waste management solutions for enterprises</p>
                 </div>
                 <a href="#" class="service-btn">Learn More</a>
             </div>
