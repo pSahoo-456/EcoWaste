@@ -145,6 +145,92 @@
             margin-bottom: 1rem;
         }
 
+        .services-section {
+            padding: 4rem 2rem;
+            background: #f5f5f5;
+        }
+
+        .services-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark-color);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-box {
+            padding: 2rem;
+            border-radius: 10px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-box.individual {
+            background: #e8f8e8;
+        }
+
+        .service-box.commercial {
+            background: #d1e7c7;
+        }
+
+        .service-box.business {
+            background: #28a745;
+            color: white;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            text-align: left;
+        }
+
+        .service-description {
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .service-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 5px;
+            color: inherit;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            width: fit-content;
+        }
+
+        .service-btn:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .business .service-btn {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .business .service-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
         @media (max-width: 768px) {
             .hero {
                 flex-direction: column;
@@ -154,6 +240,14 @@
 
             .nav-links {
                 display: none;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-box {
+                min-height: auto;
             }
         }
     </style>
@@ -197,6 +291,33 @@
                 <i class="fas fa-gift step-icon"></i>
                 <h3>Earn Rewards</h3>
                 <p>Get points and redeem them for exciting rewards</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section">
+        <h2 class="services-title">Our Waste Management Services</h2>
+        
+        <div class="services-grid">
+            <div class="service-box individual">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzI4YTc0NSI+PHBhdGggZD0iTTEyIDJDNi40NyAyIDIgNi40NyAyIDEyczQuNDcgMTAgMTAgMTAgMTAtNC40NyAxMC0xMFMxNy41MyAyIDEyIDJ6bTUgMTMuNTljLS4zOS4zOS0xLjAyLjM5LTEuNDEgMEwxMiAxMS41OWwtMy41OSAzLjU5Yy0uMzkuMzktMS4wMi4zOS0xLjQxIDAtLjM5LS4zOS0uMzktMS4wMiAwLTEuNDFMMTAuNTkgMTAgNyA2LjQxYy0uMzktLjM5LS4zOS0xLjAyIDAtMS40MS4zOS0uMzkgMS4wMi0uMzkgMS40MSAwTDEyIDguNDFsMS41OS0xLjU5Yy4zOS0uMzkgMS4wMi0uMzkgMS40MSAwIC4zOS4zOS4zOSAxLjAyIDAgMS40MUwxMy40MSAxMGwzLjU5IDMuNTljLjM5LjM5LjM5IDEuMDIgMCAxLjQxeiIvPjwvc3ZnPg==" alt="Individual" class="service-icon">
+                <h3 class="service-title">Individual</h3>
+                <p class="service-description">Free Door-to-Door waste pick up services for all residential waste</p>
+                <a href="#" class="service-btn">Schedule a Pickup</a>
+            </div>
+
+            <div class="service-box commercial">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzI4YTc0NSI+PHBhdGggZD0iTTEyIDJDNi40NyAyIDIgNi40NyAyIDEyczQuNDcgMTAgMTAgMTAgMTAtNC40NyAxMC0xMFMxNy41MyAyIDEyIDJ6bTUgMTMuNTljLS4zOS4zOS0xLjAyLjM5LTEuNDEgMEwxMiAxMS41OWwtMy41OSAzLjU5Yy0uMzkuMzktMS4wMi4zOS0xLjQxIDAtLjM5LS4zOS0uMzktMS4wMiAwLTEuNDFMMTAuNTkgMTAgNyA2LjQxYy0uMzktLjM5LS4zOS0xLjAyIDAtMS40MS4zOS0uMzkgMS4wMi0uMzkgMS40MSAwTDEyIDguNDFsMS41OS0xLjU5Yy4zOS0uMzkgMS4wMi0uMzkgMS40MSAwIC4zOS4zOS4zOSAxLjAyIDAgMS40MUwxMy40MSAxMGwzLjU5IDMuNTljLjM5LjM5LjM5IDEuMDIgMCAxLjQxeiIvPjwvc3ZnPg==" alt="Commercial" class="service-icon">
+                <h3 class="service-title">Commercial</h3>
+                <p class="service-description">Get rid of your office and factory waste across India</p>
+                <a href="#" class="service-btn">Schedule a Pickup</a>
+            </div>
+
+            <div class="service-box business">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmZiI+PHBhdGggZD0iTTEyIDJDNi40NyAyIDIgNi40NyAyIDEyczQuNDcgMTAgMTAgMTAgMTAtNC40NyAxMC0xMFMxNy41MyAyIDEyIDJ6bTUgMTMuNTljLS4zOS4zOS0xLjAyLjM5LTEuNDEgMEwxMiAxMS41OWwtMy41OSAzLjU5Yy0uMzkuMzktMS4wMi4zOS0xLjQxIDAtLjM5LS4zOS0uMzktMS4wMiAwLTEuNDFMMTAuNTkgMTAgNyA2LjQxYy0uMzktLjM5LS4zOS0xLjAyIDAtMS40MS4zOS0uMzkgMS4wMi0uMzkgMS40MSAwTDEyIDguNDFsMS41OS0xLjU5Yy4zOS0uMzkgMS4wMi0uMzkgMS40MSAwIC4zOS4zOS4zOSAxLjAyIDAgMS40MUwxMy40MSAxMGwzLjU5IDMuNTljLjM5LjM5LjM5IDEuMDIgMCAxLjQxeiIvPjwvc3ZnPg==" alt="Business" class="service-icon">
+                <h3 class="service-title">Extended Producer Responsibility</h3>
+                <p class="service-description">Hassle free EPR Compliance with complete transparency</p>
+                <a href="#" class="service-btn">Consult Now</a>
             </div>
         </div>
     </section>
