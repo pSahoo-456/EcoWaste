@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWaste - Rewards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: #f9f9f9;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background: rgba(46, 204, 113, 0.1);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+            background: rgba(46, 204, 113, 0.1);
+        }
+
+        .main-content {
+            margin-top: 80px;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.05), rgba(39, 174, 96, 0.05));
+            animation: fadeInUp 0.5s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes leafFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(5px, -5px) rotate(5deg); }
+            50% { transform: translate(0, -10px) rotate(0deg); }
+            75% { transform: translate(-5px, -5px) rotate(-5deg); }
+        }
+
+        @keyframes growIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .progress-tracker {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            width: 60%;
+            transition: width 1s ease;
+        }
+
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            animation: growIn 0.8s ease-out;
+        }
+
+        .reward-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.5s ease-out both;
+        }
+
+        .reward-card:nth-child(2) { animation-delay: 0.1s; }
+        .reward-card:nth-child(3) { animation-delay: 0.2s; }
+        .reward-card:nth-child(4) { animation-delay: 0.3s; }
+
+        .reward-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: left;
+        }
+
+        .reward-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(46, 204, 113, 0.2);
+        }
+
+        .reward-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .reward-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            animation: leafFloat 3s infinite;
+        }
+
+        .reward-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .reward-points {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 1rem 0;
+        }
+
+        .redeem-btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .redeem-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .redeem-btn:hover::before {
+            left: 100%;
+        }
+
+        .redeem-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .leaf-particle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%232ecc71" d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/></svg>') center/contain no-repeat;
+            opacity: 0.3;
+            pointer-events: none;
+            animation: leafFloat 3s infinite;
+        }
+
+        .testimonials {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 2rem;
+        }
+
+        .testimonial-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 2rem;
+            padding: 1rem;
+            scrollbar-width: none;
+        }
+
+        .testimonial-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .testimonial-card {
+            min-width: 300px;
+            scroll-snap-align: start;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .rewards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">EcoWaste</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="submit.html" class="active">Submit Your E-Waste</a>
+                <a href="rewards.html">Rewards</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="leaf-particle" style="top: 10%; left: 5%;"></div>
+        <div class="leaf-particle" style="top: 30%; right: 5%;"></div>
+        <div class="leaf-particle" style="bottom: 20%; left: 10%;"></div>
+        <div class="progress-tracker">
+            <h2>Your Progress</h2>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <p>600 points earned • Next reward at 1000 points</p>
+        </div>
+
+        <div class="rewards-grid">
+            <div class="reward-card">
+                <i class="fas fa-money-bill-wave reward-icon"></i>
+                <h3 class="reward-title">Cash Payout</h3>
+                <p class="reward-points">1000 points</p>
+                <p>Convert your points to cash and get paid directly to your account</p>
+            </div>
+            <div class="reward-card">
+                <i class="fas fa-gift reward-icon"></i>
+                <h3 class="reward-title">Gift Cards</h3>
+                <p class="reward-points">800 points</p>
+                <p>Choose from a variety of popular retail gift cards</p>
+            </div>
+            <div class="reward-card">
+                <i class="fas fa-tree reward-icon"></i>
+                <h3 class="reward-title">Eco-Donations</h3>
+                <p class="reward-points">500 points</p>
+                <p>Donate your points to environmental conservation projects</p>
+            </div>
+            <div class="reward-card">
+                <i class="fas fa-tag reward-icon"></i>
+                <h3 class="reward-title">Exclusive Discounts</h3>
+                <p class="reward-points">300 points</p>
+                <p>Get special discounts on eco-friendly products</p>
+            </div>
+        </div>
+
+        <div class="testimonials">
+            <h2>Success Stories</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="User Avatar" class="testimonial-avatar">
+                        <div>
+                            <h4>Sarah Johnson</h4>
+                            <p>Recycling Enthusiast</p>
+                        </div>
+                    </div>
+                    <p>"I've earned over $200 in rewards just by recycling my old electronics. It's a win-win for me and the environment!"</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="User Avatar" class="testimonial-avatar">
+                        <div>
+                            <h4>Mike Chen</h4>
+                            <p>Tech Professional</p>
+                        </div>
+                    </div>
+                    <p>"The process is so simple, and the rewards are great. I love that I can contribute to environmental conservation."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animate progress bar on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.width = '60%';
+                }
+            });
+        });
+
+        observer.observe(document.querySelector('.progress-fill'));
+
+        // Add hover effect to reward cards
+        document.querySelectorAll('.reward-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

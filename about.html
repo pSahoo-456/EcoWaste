@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWaste - About Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: #f9f9f9;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .main-content {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b') center/cover;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .mission-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--light-color);
+            border-radius: 10px;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-section {
+            margin: 3rem 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .contact-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .submit-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">EcoWaste</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="submit.html">Submit</a>
+                <a href="rewards.html">Rewards</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="hero-section">
+            <h1>Our Mission</h1>
+            <p>Creating a sustainable future through responsible e-waste management</p>
+        </div>
+
+        <div class="mission-section">
+            <h2>Who We Are</h2>
+            <p>EcoWaste is a pioneering e-waste management platform that connects individuals and businesses with certified recycling centers. Our innovative reward system encourages responsible disposal of electronic waste while creating value for our users.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="userCount">50K+</div>
+                    <p>Active Users</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="wasteCount">100T</div>
+                    <p>E-Waste Recycled</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="centerCount">500+</div>
+                    <p>Collection Centers</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-section">
+            <h2>Our Team</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Team Member" class="team-image">
+                    <div class="team-info">
+                        <h3>John Doe</h3>
+                        <p>Founder & CEO</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Team Member" class="team-image">
+                    <div class="team-info">
+                        <h3>Jane Smith</h3>
+                        <p>Head of Operations</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Team Member" class="team-image">
+                    <div class="team-info">
+                        <h3>Mike Johnson</h3>
+                        <p>Technical Lead</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <h2>Contact Us</h2>
+            <div class="contact-grid">
+                <div>
+                    <h3>Get in Touch</h3>
+                    <p>Have questions about our services? We're here to help!</p>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="4" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+                <div>
+                    <h3>Visit Us</h3>
+                    <p>123 Eco Street<br>Green City, EC 12345</p>
+                    <p>Email: info@ecowaste.com<br>Phone: (123) 456-7890</p>
+                    <div class="social-links" style="justify-content: flex-start; margin-top: 2rem;">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add scroll animations for stats
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.stat-card').forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Handle contact form submission
+        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
