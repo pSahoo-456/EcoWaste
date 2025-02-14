@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWaste - Turn Your E-Waste into Rewards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --transition: all 0.3s ease;
+            --gradient: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4)),
+                        url('https://cleanmanagement.com/wp-content/uploads/2024/05/AdobeStock_500968458-2048x939.jpeg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5%;
+            margin-top: 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center 20%;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(46,204,113,0.2), rgba(39,174,96,0.2));
+            z-index: 1;
+        }
+
+        .hero-content {
+            color: white;
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+            padding: 2.5rem;
+            background: rgba(0,0,0,0.5);
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(46,204,113,0.4);
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
+        .how-it-works {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #f9f9f9, #f0f0f0);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .steps-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            width: 300px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(46,204,113,0.2);
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .services-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #f0f0f0, #ffffff);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .service-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-box.individual {
+            background: linear-gradient(135deg, #e8f8e8, #d1f5d1);
+        }
+
+        .service-box.commercial {
+            background: linear-gradient(135deg, #d1e7c7, #c1e1b5);
+        }
+
+        .service-box.business {
+            background: linear-gradient(135deg, #28a745, #218838);
+            color: white;
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+            transition: transform 0.4s ease;
+        }
+
+        .service-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: inherit;
+        }
+
+        .service-description {
+            margin-bottom: 1.5rem;
+            color: inherit;
+            opacity: 0.9;
+        }
+
+        .service-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark-color);
+            border: 1px solid rgba(46, 204, 113, 0.2);
+        }
+
+        .business .service-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .service-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.2);
+            background: var(--gradient);
+            color: white;
+        }
+
+        .initiatives-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #f0f0f0, #ffffff);
+        }
+
+        .initiatives-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .initiative-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2.5rem;
+            border-radius: 20px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .initiative-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(46, 204, 113, 0.2);
+        }
+
+        .initiative-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .initiative-title {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .initiative-title i {
+            font-size: 1.2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .initiative-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: white;
+            color: var(--dark-color);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(46, 204, 113, 0.2);
+        }
+
+        .initiative-btn:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .steps-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .initiatives-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">EcoWaste</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="submit.html">Submit</a>
+                <a href="rewards.html">Rewards</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Turn Your E-Waste into Rewards</h1>
+            <p>Join us in creating a sustainable future by responsibly recycling your electronic waste</p>
+            <a href="submit.html" class="cta-button">Get Started</a>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps-container">
+            <div class="step-card">
+                <i class="fas fa-mobile-alt step-icon"></i>
+                <h3>Register Device</h3>
+                <p>Submit details of your electronic waste through our easy-to-use platform</p>
+            </div>
+            <div class="step-card">
+                <i class="fas fa-truck step-icon"></i>
+                <h3>Schedule Pickup</h3>
+                <p>Choose a convenient time for free pickup from your location</p>
+            </div>
+            <div class="step-card">
+                <i class="fas fa-gift step-icon"></i>
+                <h3>Earn Rewards</h3>
+                <p>Get exciting rewards and points for your contribution to the environment</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section">
+        <h2 class="section-title">Our Waste Management Services</h2>
+        <div class="services-grid">
+            <div class="service-box individual">
+                <img src="https://img.icons8.com/ios/100/27ae60/user.png" alt="Individual" class="service-icon">
+                <div>
+                    <h3 class="service-title">Individual</h3>
+                    <p class="service-description">Free Door-to-Door waste pick up services for all residential waste</p>
+                </div>
+                <a href="#" class="service-btn">Schedule a Pickup</a>
+            </div>
+            <div class="service-box commercial">
+                <img src="https://img.icons8.com/ios/100/27ae60/company.png" alt="Commercial" class="service-icon">
+                <div>
+                    <h3 class="service-title">Commercial</h3>
+                    <p class="service-description">Office and factory waste management services</p>
+                </div>
+                <a href="#" class="service-btn">Partner with Us</a>
+            </div>
+            <div class="service-box business">
+                <img src="https://img.icons8.com/ios/100/ffffff/recycling.png" alt="EPR" class="service-icon">
+                <div>
+                    <h3 class="service-title">Extended Producer Responsibility</h3>
+                    <p class="service-description">EPR compliance services for manufacturers</p>
+                </div>
+                <a href="#" class="service-btn">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="initiatives-section">
+        <h2 class="section-title">Our Green Initiatives</h2>
+        <div class="initiatives-grid">
+            <div class="initiative-card">
+                <div class="initiative-content">
+                    <h3 class="initiative-title">
+                        <i class="fas fa-lightbulb"></i>
+                        E-Waste Education
+                    </h3>
+                    <p>Join our awareness programs to learn about responsible e-waste disposal and its environmental impact</p>
+                    <a href="#" class="initiative-btn">Learn More</a>
+                </div>
+            </div>
+            <div class="initiative-card">
+                <div class="initiative-content">
+                    <h3 class="initiative-title">
+                        <i class="fas fa-recycle"></i>
+                        Collection Centers
+                    </h3>
+                    <p>Find convenient e-waste collection points near you and contribute to our recycling mission</p>
+                    <a href="#" class="initiative-btn">Learn More</a>
+                </div>
+            </div>
+            <div class="initiative-card">
+                <div class="initiative-content">
+                    <h3 class="initiative-title">
+                        <i class="fas fa-users"></i>
+                        Community Programs
+                    </h3>
+                    <p>Participate in local community initiatives and help spread awareness about e-waste management</p>
+                    <a href="#" class="initiative-btn">Learn More</a>
+                </div>
+            </div>
+            <div class="initiative-card">
+                <div class="initiative-content">
+                    <h3 class="initiative-title">
+                        <i class="fas fa-box"></i>
+                        Smart Bins
+                    </h3>
+                    <p>Access our network of smart e-waste bins for safe and convenient disposal of electronic items</p>
+                    <a href="#" class="initiative-btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Add hover effects for step cards
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.step-card, .service-box, .initiative-card').forEach(element => {
+            element.style.animationPlayState = 'paused';
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
