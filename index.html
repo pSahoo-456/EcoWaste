@@ -34,6 +34,7 @@
             padding: 1rem 2rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             z-index: 1000;
+            animation: fadeIn 0.8s ease-out;
         }
 
         .nav-content {
@@ -48,11 +49,13 @@
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--primary-color);
+            animation: slideInLeft 0.8s ease-out;
         }
 
         .nav-links {
             display: flex;
             gap: 2rem;
+            animation: slideInRight 0.8s ease-out;
         }
 
         .nav-links a {
@@ -60,6 +63,22 @@
             color: var(--dark-color);
             font-weight: 500;
             transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-links a:hover {
@@ -81,16 +100,25 @@
         .hero-content {
             color: white;
             max-width: 800px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 0.3s;
         }
 
         .hero-content h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 0.5s;
         }
 
         .hero-content p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 0.7s;
         }
 
         .cta-button {
@@ -101,11 +129,17 @@
             text-decoration: none;
             border-radius: 5px;
             transition: var(--transition);
+            width: fit-content;
+            opacity: 0;
+            animation: scaleIn 1s ease-out forwards;
+            animation-delay: 0.9s;
+            transform-origin: center;
         }
 
         .cta-button:hover {
             background: var(--secondary-color);
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
         }
 
         .how-it-works {
@@ -133,6 +167,20 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             width: 300px;
             transition: var(--transition);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .step-card:nth-child(1) {
+            animation-delay: 0.3s;
+        }
+
+        .step-card:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .step-card:nth-child(3) {
+            animation-delay: 0.7s;
         }
 
         .step-card:hover {
@@ -154,6 +202,9 @@
             text-align: center;
             margin-bottom: 3rem;
             color: var(--dark-color);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.2s;
         }
 
         .services-grid {
@@ -173,6 +224,25 @@
             min-height: 300px;
             display: flex;
             flex-direction: column;
+            opacity: 0;
+            animation: scaleIn 0.8s ease-out forwards;
+        }
+
+        .service-box:nth-child(1) {
+            animation-delay: 0.3s;
+        }
+
+        .service-box:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .service-box:nth-child(3) {
+            animation-delay: 0.7s;
+        }
+
+        .service-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         .service-box.individual {
@@ -192,6 +262,11 @@
             width: 60px;
             height: 60px;
             margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-box:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .service-title {
@@ -217,10 +292,28 @@
             font-weight: 500;
             transition: var(--transition);
             width: fit-content;
+            position: relative;
+            overflow: hidden;
         }
 
         .service-btn:hover {
             background: rgba(0, 0, 0, 0.2);
+        }
+
+        .service-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .service-btn:hover::after {
+            transform: translateX(0);
         }
 
         .business .service-btn {
@@ -229,6 +322,59 @@
 
         .business .service-btn:hover {
             background: rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         @media (max-width: 768px) {
@@ -331,6 +477,27 @@
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'translateY(0)';
             });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.step-card, .service-box').forEach(element => {
+            element.style.animationPlayState = 'paused';
+            observer.observe(element);
         });
     </script>
 </body>
