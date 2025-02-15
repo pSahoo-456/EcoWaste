@@ -37,7 +37,6 @@
         .navbar {
             position: fixed;
             top: 0;
-            left: 0;  /* Ensure full width and left alignment */
             width: 100%;
             background: var(--card-dark);
             padding: 1rem 2rem;
@@ -52,8 +51,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;  /* Ensure full width within max-width container */
-            padding: 0 1rem;  /* Add some padding to prevent content from touching edges */
         }
 
         .logo {
@@ -1364,7 +1361,7 @@
                     updateCounter();
                     observer.disconnect();
                 }
-            }, { threshold: 0.5 });
+            });
             
             observer.observe(counter);
         });
@@ -1461,7 +1458,8 @@
             const steps = 60;
             const stepValue = endValue / steps;
             let currentValue = 0;
-            
+            const stepDuration = duration / steps;
+
             const interval = setInterval(() => {
                 currentValue += stepValue;
                 if (currentValue >= endValue) {
@@ -1469,7 +1467,7 @@
                     clearInterval(interval);
                 }
                 counter.textContent = Math.round(currentValue);
-            }, duration / steps);
+            }, stepDuration);
         }
 
         // Start counter animation when section is in view
