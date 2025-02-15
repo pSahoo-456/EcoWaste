@@ -45,6 +45,24 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
+    user_type = db.Column(db.String(20), nullable=False)  # 'individual', 'retailer', or 'business'
+    
+    # Common fields
+    full_name = db.Column(db.String(100))
+    phone = db.Column(db.String(20))
+    address = db.Column(db.String(200))
+    
+    # Individual-specific fields
+    eco_points = db.Column(db.Integer, default=0)
+    
+    # Retailer-specific fields
+    store_name = db.Column(db.String(100))
+    business_license = db.Column(db.String(50))
+    
+    # Business-specific fields
+    company_name = db.Column(db.String(100))
+    industry_type = db.Column(db.String(50))
+    employee_count = db.Column(db.String(20))
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -127,27 +145,71 @@ def predict():
 
 @app.route('/api/register', methods=['POST'])
 def register():
-    data = request.json
-    if User.query.filter_by(username=data['username']).first():
-        return jsonify({'error': 'Username already exists'}), 400
-    
-    new_user = User(
-        username=data['username'],
-        password=data['password'],  # In production, hash the password
-        email=data['email']
-    )
-    db.session.add(new_user)
-    db.session.commit()
-    return jsonify({'message': 'User created successfully'})
+    try:
+        data = request.json
+        if User.query.filter_by(username=data['username']).first():
+            return jsonify({'error': 'Username already exists'}), 400
+            
+        if User.query.filter_by(email=data['email']).first():
+            return jsonify({'error': 'Email already exists'}), 400
+
+        # Common user data
+        new_user = User(
+            username=data['username'],
+            password=data['password'],  # In production, hash the password
+            email=data['email'],
+            user_type=data['user_type'],
+            full_name=data.get('full_name'),
+            phone=data.get('phone'),
+            address=data.get('address')
+        )
+
+        # Add type-specific fields
+        if data['user_type'] == 'individual':
+            new_user.eco_points = 0
+        elif data['user_type'] == 'retailer':
+            new_user.store_name = data.get('store_name')
+            new_user.business_license = data.get('business_license')
+        elif data['user_type'] == 'business':
+            new_user.company_name = data.get('company_name')
+            new_user.industry_type = data.get('industry_type')
+            new_user.employee_count = data.get('employee_count')
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        # Log the user in after registration
+        login_user(new_user)
+        
+        return jsonify({
+            'message': 'User created successfully',
+            'user_type': new_user.user_type
+        })
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/login', methods=['POST'])
 def login():
-    data = request.json
-    user = User.query.filter_by(username=data['username']).first()
-    if user and user.password == data['password']:  # In production, verify hashed password
-        login_user(user)
-        return jsonify({'message': 'Logged in successfully'})
-    return jsonify({'error': 'Invalid username or password'}), 401
+    try:
+        data = request.json
+        user = User.query.filter_by(email=data['email']).first()
+        
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+            
+        if user.password == data['password']:  # In production, verify hashed password
+            login_user(user)
+            return jsonify({
+                'message': 'Logged in successfully',
+                'user_type': user.user_type
+            })
+        
+        return jsonify({'error': 'Invalid password'}), 401
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/logout')
 @login_required

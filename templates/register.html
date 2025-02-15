@@ -104,26 +104,19 @@
 
         /* Register Section */
         .register-section {
-            padding: 8rem 2rem 4rem;
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
+            padding: 2rem;
         }
 
         .register-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .register-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-light);
-        }
-
-        .register-header p {
-            color: var(--text-gray);
-            max-width: 600px;
-            margin: 0 auto;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
         }
 
         .register-tabs {
@@ -135,150 +128,104 @@
 
         .tab-button {
             padding: 1rem 2rem;
-            background: var(--card-dark);
             border: none;
             border-radius: 8px;
-            color: var(--text-gray);
+            background: var(--card-dark);
+            color: var(--text-light);
             cursor: pointer;
-            transition: var(--transition);
-            font-size: 1rem;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
+        .tab-button i {
+            font-size: 1.2rem;
+        }
+
         .tab-button.active {
             background: var(--primary-color);
-            color: white;
-        }
-
-        .tab-button:hover:not(.active) {
-            background: #3d3d3d;
-        }
-
-        .register-forms {
-            max-width: 500px;
-            margin: 0 auto;
+            transform: translateY(-2px);
         }
 
         .form-container {
             display: none;
             background: var(--card-dark);
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
         }
 
         .form-container.active {
             display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .form-group {
             margin-bottom: 1.5rem;
-            position: relative;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: var(--text-gray);
+            color: var(--text-light);
         }
 
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 0.8rem 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            padding: 0.8rem;
+            border: 1px solid var(--dark-color);
+            border-radius: 5px;
+            background: var(--bg-dark);
             color: var(--text-light);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: var(--primary-color);
-            background: rgba(255, 255, 255, 0.08);
-            outline: none;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
         }
 
         .register-button {
             width: 100%;
             padding: 1rem;
-            background: var(--primary-color);
-            color: white;
             border: none;
             border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
+            background: var(--primary-color);
+            color: white;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: var(--transition);
-            margin-top: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .register-button:hover {
             background: var(--secondary-color);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
         }
 
         .form-info {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: rgba(46, 204, 113, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
             border-radius: 8px;
-            color: var(--text-gray);
         }
 
         .form-info h4 {
             color: var(--primary-color);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
 
         .form-info ul {
             list-style: none;
-            margin-left: 1rem;
         }
 
         .form-info li {
-            margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            margin-bottom: 0.5rem;
         }
 
-        .form-info i {
+        .form-info li i {
             color: var(--primary-color);
-        }
-
-        @media (max-width: 768px) {
-            .register-tabs {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .tab-button {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .form-container {
-                padding: 1.5rem;
-            }
         }
     </style>
 </head>
@@ -316,13 +263,16 @@
 
         <div class="register-tabs" data-aos="fade-up" data-aos-delay="100">
             <button class="tab-button active" data-tab="individual">
-                <i class="fas fa-user"></i> Individual
+                <i class="fas fa-user"></i>
+                Individual
             </button>
             <button class="tab-button" data-tab="retailer">
-                <i class="fas fa-store"></i> Retailer
+                <i class="fas fa-store"></i>
+                Retailer
             </button>
             <button class="tab-button" data-tab="business">
-                <i class="fas fa-building"></i> Business
+                <i class="fas fa-building"></i>
+                Business
             </button>
         </div>
 
@@ -355,7 +305,20 @@
                         <label for="ind-address">Address</label>
                         <textarea id="ind-address" name="address" required></textarea>
                     </div>
-                    <button type="submit">Register as Individual</button>
+                    <button type="submit" class="register-button">
+                        <i class="fas fa-user-plus"></i>
+                        Register as Individual
+                    </button>
+
+                    <div class="form-info">
+                        <h4>Benefits for Individuals</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Earn rewards for recycling e-waste</li>
+                            <li><i class="fas fa-check-circle"></i> Schedule convenient pickups</li>
+                            <li><i class="fas fa-check-circle"></i> Track your environmental impact</li>
+                            <li><i class="fas fa-check-circle"></i> Access to exclusive rewards program</li>
+                        </ul>
+                    </div>
                 </form>
             </div>
 
@@ -376,30 +339,39 @@
                         <input type="password" id="ret-password" name="password" required>
                     </div>
                     <div class="form-group">
-                        <label for="ret-fullname">Full Name</label>
+                        <label for="store-name">Store Name</label>
+                        <input type="text" id="store-name" name="store_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ret-fullname">Owner's Full Name</label>
                         <input type="text" id="ret-fullname" name="full_name" required>
                     </div>
                     <div class="form-group">
-                        <label for="ret-phone">Phone Number</label>
+                        <label for="ret-phone">Business Phone</label>
                         <input type="tel" id="ret-phone" name="phone" required>
                     </div>
                     <div class="form-group">
-                        <label for="ret-address">Address</label>
+                        <label for="ret-address">Store Address</label>
                         <textarea id="ret-address" name="address" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="store-name">Store Name</label>
-                        <input type="text" id="store-name" name="store_name" required>
                     </div>
                     <div class="form-group">
                         <label for="business-license">Business License Number</label>
                         <input type="text" id="business-license" name="business_license" required>
                     </div>
-                    <div class="form-group">
-                        <label for="collection-capacity">Collection Capacity (kg)</label>
-                        <input type="number" id="collection-capacity" name="collection_capacity" required>
+                    <button type="submit" class="register-button">
+                        <i class="fas fa-store"></i>
+                        Register as Retailer
+                    </button>
+
+                    <div class="form-info">
+                        <h4>Benefits for Retailers</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Access to quality recycled electronics</li>
+                            <li><i class="fas fa-check-circle"></i> Competitive pricing on bulk purchases</li>
+                            <li><i class="fas fa-check-circle"></i> Real-time inventory updates</li>
+                            <li><i class="fas fa-check-circle"></i> Verified seller network</li>
+                        </ul>
                     </div>
-                    <button type="submit">Register as Retailer</button>
                 </form>
             </div>
 
@@ -412,7 +384,7 @@
                         <input type="text" id="bus-username" name="username" required>
                     </div>
                     <div class="form-group">
-                        <label for="bus-email">Email</label>
+                        <label for="bus-email">Corporate Email</label>
                         <input type="email" id="bus-email" name="email" required>
                     </div>
                     <div class="form-group">
@@ -420,30 +392,57 @@
                         <input type="password" id="bus-password" name="password" required>
                     </div>
                     <div class="form-group">
-                        <label for="bus-fullname">Full Name</label>
-                        <input type="text" id="bus-fullname" name="full_name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="bus-phone">Phone Number</label>
-                        <input type="tel" id="bus-phone" name="phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="bus-address">Address</label>
-                        <textarea id="bus-address" name="address" required></textarea>
-                    </div>
-                    <div class="form-group">
                         <label for="company-name">Company Name</label>
                         <input type="text" id="company-name" name="company_name" required>
                     </div>
                     <div class="form-group">
+                        <label for="bus-fullname">Contact Person's Name</label>
+                        <input type="text" id="bus-fullname" name="full_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bus-phone">Corporate Phone</label>
+                        <input type="tel" id="bus-phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bus-address">Company Address</label>
+                        <textarea id="bus-address" name="address" required></textarea>
+                    </div>
+                    <div class="form-group">
                         <label for="industry-type">Industry Type</label>
-                        <input type="text" id="industry-type" name="industry_type" required>
+                        <select id="industry-type" name="industry_type" required>
+                            <option value="">Select Industry Type</option>
+                            <option value="technology">Technology</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="retail">Retail</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="education">Education</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="employee-count">Number of Employees</label>
-                        <input type="number" id="employee-count" name="employee_count" required>
+                        <select id="employee-count" name="employee_count" required>
+                            <option value="">Select Company Size</option>
+                            <option value="1-50">Small (1-50 employees)</option>
+                            <option value="51-200">Medium (51-200 employees)</option>
+                            <option value="201-1000">Large (201-1000 employees)</option>
+                            <option value="1000+">Enterprise (1000+ employees)</option>
+                        </select>
                     </div>
-                    <button type="submit">Register as Business</button>
+                    <button type="submit" class="register-button">
+                        <i class="fas fa-building"></i>
+                        Register as Business
+                    </button>
+
+                    <div class="form-info">
+                        <h4>Benefits for Businesses</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Bulk e-waste disposal solutions</li>
+                            <li><i class="fas fa-check-circle"></i> Corporate dashboard and analytics</li>
+                            <li><i class="fas fa-check-circle"></i> Compliance documentation</li>
+                            <li><i class="fas fa-check-circle"></i> Priority pickup service</li>
+                        </ul>
+                    </div>
                 </form>
             </div>
         </div>
@@ -453,7 +452,30 @@
         // Initialize AOS
         AOS.init({
             duration: 800,
+            easing: 'ease-in-out',
             once: true
+        });
+
+        // Tab switching function
+        function switchTab(type) {
+            // Remove active class from all containers and buttons
+            document.querySelectorAll('.form-container').forEach(container => {
+                container.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Add active class to selected container and button
+            document.getElementById(`${type}-form`).classList.add('active');
+            document.querySelector(`.tab-button[data-tab="${type}"]`).classList.add('active');
+        }
+
+        // Add click event listeners to tab buttons
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                switchTab(button.dataset.tab);
+            });
         });
 
         // Handle form submissions
@@ -481,8 +503,7 @@
 
                     const result = await response.json();
                     if (response.ok) {
-                        // Redirect to dashboard
-                        window.location.href = result.redirect;
+                        window.location.href = '/dashboard';
                     } else {
                         alert(result.error);
                     }
@@ -490,25 +511,6 @@
                     alert('An error occurred during registration');
                     console.error('Registration error:', error);
                 }
-            });
-        });
-
-        // Tab switching function
-        function switchTab(type) {
-            // Remove active class from all containers
-            document.querySelectorAll('.form-container').forEach(container => {
-                container.classList.remove('active');
-            });
-            
-            // Add active class to selected container
-            document.getElementById(`${type}-form`).classList.add('active');
-        }
-
-        // Tab Button Click Events
-        const tabButtons = document.querySelectorAll('.tab-button');
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                switchTab(button.dataset.tab);
             });
         });
     </script>
