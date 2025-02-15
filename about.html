@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoWaste - About Us</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <style>
         :root {
             --primary-color: #2ecc71;
             --secondary-color: #27ae60;
             --dark-color: #2c3e50;
             --light-color: #ecf0f1;
+            --bg-dark: #1a1a1a;
+            --card-dark: #2d2d2d;
+            --text-light: #ffffff;
+            --text-gray: #a0aec0;
             --transition: all 0.3s ease;
         }
 
@@ -23,18 +29,19 @@
 
         body {
             line-height: 1.6;
-            color: var(--dark-color);
-            background: #f9f9f9;
+            color: var(--text-light);
+            background: var(--bg-dark);
         }
 
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
-            background: white;
+            background: var(--card-dark);
             padding: 1rem 2rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             z-index: 1000;
+            transition: all 0.3s ease;
         }
 
         .nav-content {
@@ -46,21 +53,38 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .logo:hover {
+            color: var(--secondary-color);
         }
 
         .nav-links {
             display: flex;
             gap: 2rem;
+            align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--dark-color);
+            color: var(--text-gray);
             font-weight: 500;
-            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
 
         .nav-links a:hover {
@@ -78,7 +102,7 @@
         .hero-section {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
                         url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b') center/cover;
-            color: white;
+            color: var(--text-light);
             padding: 4rem 2rem;
             text-align: center;
             border-radius: 10px;
@@ -91,11 +115,12 @@
         }
 
         .mission-section {
-            background: white;
+            background: var(--card-dark);
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             margin-bottom: 3rem;
+            color: var(--text-light);
         }
 
         .stats-grid {
@@ -108,8 +133,9 @@
         .stat-card {
             text-align: center;
             padding: 1.5rem;
-            background: var(--light-color);
+            background: var(--card-dark);
             border-radius: 10px;
+            color: var(--text-light);
         }
 
         .stat-value {
@@ -131,11 +157,12 @@
         }
 
         .team-card {
-            background: white;
+            background: var(--card-dark);
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             transition: var(--transition);
+            color: var(--text-light);
         }
 
         .team-card:hover {
@@ -161,7 +188,7 @@
         }
 
         .social-links a {
-            color: var(--dark-color);
+            color: var(--text-gray);
             text-decoration: none;
             transition: var(--transition);
         }
@@ -171,10 +198,11 @@
         }
 
         .contact-section {
-            background: white;
+            background: var(--card-dark);
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            color: var(--text-light);
         }
 
         .contact-grid {
@@ -200,7 +228,7 @@
 
         .submit-btn {
             background: var(--primary-color);
-            color: white;
+            color: var(--text-light);
             padding: 0.75rem 1.5rem;
             border: none;
             border-radius: 5px;
@@ -210,6 +238,15 @@
 
         .submit-btn:hover {
             background: var(--secondary-color);
+        }
+
+        [data-aos] {
+            opacity: 0;
+            transition-property: transform, opacity;
+        }
+
+        [data-aos].aos-animate {
+            opacity: 1;
         }
 
         @media (max-width: 768px) {
@@ -234,46 +271,49 @@
 <body>
     <nav class="navbar">
         <div class="nav-content">
-            <div class="logo">EcoWaste</div>
+            <a href="index.html" class="logo">
+                <i class="fas fa-recycle"></i>
+                EcoWaste
+            </a>
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="submit.html">Submit</a>
+                <a href="submit.html">Submit Your E-Waste</a>
                 <a href="rewards.html">Rewards</a>
-                <a href="contact.html">Contact</a>
+                <a href="about.html" class="active">About</a>
             </div>
         </div>
     </nav>
 
     <div class="main-content">
-        <div class="hero-section">
+        <div class="hero-section" data-aos="fade-up">
             <h1>Our Mission</h1>
             <p>Creating a sustainable future through responsible e-waste management</p>
         </div>
 
-        <div class="mission-section">
+        <div class="mission-section" data-aos="fade-up">
             <h2>Who We Are</h2>
             <p>EcoWaste is a pioneering e-waste management platform that connects individuals and businesses with certified recycling centers. Our innovative reward system encourages responsible disposal of electronic waste while creating value for our users.</p>
             
             <div class="stats-grid">
-                <div class="stat-card">
+                <div class="stat-card" data-aos="fade-up">
                     <div class="stat-value" id="userCount">50K+</div>
                     <p>Active Users</p>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-aos="fade-up">
                     <div class="stat-value" id="wasteCount">100T</div>
                     <p>E-Waste Recycled</p>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-aos="fade-up">
                     <div class="stat-value" id="centerCount">500+</div>
                     <p>Collection Centers</p>
                 </div>
             </div>
         </div>
 
-        <div class="team-section">
+        <div class="team-section" data-aos="fade-up">
             <h2>Our Team</h2>
             <div class="team-grid">
-                <div class="team-card">
+                <div class="team-card" data-aos="fade-up">
                     <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Team Member" class="team-image">
                     <div class="team-info">
                         <h3>John Doe</h3>
@@ -284,7 +324,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="team-card">
+                <div class="team-card" data-aos="fade-up">
                     <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Team Member" class="team-image">
                     <div class="team-info">
                         <h3>Jane Smith</h3>
@@ -295,7 +335,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="team-card">
+                <div class="team-card" data-aos="fade-up">
                     <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Team Member" class="team-image">
                     <div class="team-info">
                         <h3>Mike Johnson</h3>
@@ -309,7 +349,7 @@
             </div>
         </div>
 
-        <div class="contact-section">
+        <div class="contact-section" data-aos="fade-up">
             <h2>Contact Us</h2>
             <div class="contact-grid">
                 <div>
@@ -344,28 +384,10 @@
     </div>
 
     <script>
-        // Add scroll animations for stats
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        });
-
-        document.querySelectorAll('.stat-card').forEach(card => {
-            card.style.opacity = 0;
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'all 0.6s ease';
-            observer.observe(card);
-        });
-
-        // Handle contact form submission
-        document.querySelector('.contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            e.target.reset();
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: true
         });
     </script>
 </body>

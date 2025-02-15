@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoWaste - Turn Your E-Waste into Rewards</title>
+    <title>EcoWaste - Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --primary-color: #2ecc71;
@@ -15,9 +14,9 @@
             --dark-color: #2c3e50;
             --light-color: #ecf0f1;
             --bg-dark: #1a1a1a;
+            --card-dark: #2d2d2d;
             --text-light: #ffffff;
             --text-gray: #a0aec0;
-            --card-dark: #2d2d2d;
             --transition: all 0.3s ease;
         }
 
@@ -34,16 +33,17 @@
             background: var(--bg-dark);
         }
 
-        /* Navbar Styles */
+        /* Navbar Styles - Exact match from other pages */
         .navbar {
             position: fixed;
             top: 0;
+            left: 0;  /* Ensure full width and left alignment */
             width: 100%;
             background: var(--card-dark);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             z-index: 1000;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .nav-content {
@@ -52,6 +52,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;  /* Ensure full width within max-width container */
+            padding: 0 1rem;  /* Add some padding to prevent content from touching edges */
         }
 
         .logo {
@@ -59,7 +61,15 @@
             font-weight: bold;
             color: var(--primary-color);
             text-decoration: none;
-            transition: var(--transition);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
         }
 
         .logo:hover {
@@ -74,14 +84,34 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text-light);
+            color: var(--text-gray);
             font-weight: 500;
             padding: 0.5rem 1rem;
-            transition: var(--transition);
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
 
         .nav-links a:hover {
             color: var(--primary-color);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+            background: rgba(46, 204, 113, 0.1);
+        }
+
+        .nav-links .login-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .nav-links .login-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
         }
 
         /* Hero Section */
@@ -90,111 +120,165 @@
             padding: 8rem 0 4rem;
             display: flex;
             align-items: center;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
                         url('https://namoewaste.com/wp-content/uploads/2022/06/WhatsApp-Image-2022-06-13-at-4.48.36-PM-1.jpeg') center/cover;
             position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(46, 204, 113, 0.15) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
             color: #ffffff;
-            max-width: 600px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 2rem;
         }
 
         .hero-title {
-            font-size: 3.5rem;
-            font-weight: 700;
+            font-size: 4.5rem;
+            font-weight: 800;
             margin-bottom: 1.5rem;
             line-height: 1.2;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            position: relative;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-title span {
+            color: var(--primary-color);
         }
 
         .hero-description {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+            font-size: 1.4rem;
+            margin: 2rem auto;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 90%;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: var(--primary-color);
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background: var(--secondary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
-        }
-
-        .registration-tabs {
-            flex: 1;
-            max-width: 450px;
-            background: var(--card-dark);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .tab-buttons {
+        .hero-buttons {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 1.5rem;
+            justify-content: center;
         }
 
-        .tab-button {
-            flex: 1;
-            padding: 1rem;
-            border: none;
-            background: var(--card-dark);
-            color: var(--text-gray);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .tab-button.active {
-            background: var(--primary-color);
+        .glow-button {
+            display: inline-block;
+            padding: 1.2rem 2.8rem;
+            font-size: 1.2rem;
+            font-weight: 600;
             color: #ffffff;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-gray);
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #3d3d3d;
-            border-radius: 8px;
-            background: var(--card-dark);
-            color: var(--text-light);
+            background: var(--primary-color);
+            border-radius: 50px;
+            text-decoration: none;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
         }
 
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
+        .glow-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(46, 204, 113, 0.1),
+                rgba(46, 204, 113, 0.3),
+                rgba(46, 204, 113, 0.1));
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .glow-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(46, 204, 113, 0.5);
+            border-color: rgba(46, 204, 113, 0.5);
+        }
+
+        .glow-button:hover::before {
+            transform: translateX(100%);
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        .section-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            animation: slideUp 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        [data-aos] {
+            opacity: 0;
+            transition-property: transform, opacity;
+        }
+
+        [data-aos].aos-animate {
+            opacity: 1;
+        }
+
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.2);
         }
 
         /* Why Recycle Section */
@@ -258,28 +342,62 @@
         }
 
         /* How It Works Section */
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
-            max-width: 1100px;
-            margin: 0 auto;
+        .how-it-works {
+            padding: 6rem 2rem;
+            background: var(--bg-dark);
+            text-align: center;
+            position: relative;
         }
 
-        .step {
-            text-align: center;
-            padding: 2rem;
-            background: var(--card-dark);
-            border-radius: 16px;
-            border: 1px solid #3d3d3d;
-            transition: all 0.3s ease;
+        .process-container {
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             position: relative;
+            padding: 0 2rem;
+        }
+
+        .process-card {
+            background: var(--card-dark);
+            padding: 2rem;
+            border-radius: 15px;
+            width: 300px;
+            position: relative;
+            transition: all 0.3s ease;
             overflow: hidden;
         }
 
-        .step:hover {
+        .process-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+        }
+
+        .process-card h3 {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .process-card p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
         }
 
         .step-arrow {
@@ -297,9 +415,10 @@
             text-decoration: none;
             color: white;
             gap: 0.5rem;
+            font-weight: 500;
         }
 
-        .step:hover .step-arrow {
+        .process-card:hover .step-arrow {
             transform: translateY(0);
         }
 
@@ -307,27 +426,61 @@
             transition: transform 0.3s ease;
         }
 
-        .step:hover .step-arrow i {
+        .process-card:hover .step-arrow i {
             transform: translateX(5px);
         }
 
-        .step-number {
-            width: 40px;
-            height: 40px;
-            background: var(--primary-color);
-            color: #ffffff;
-            border-radius: 50%;
+        .process-arrow {
+            width: 120px;
+            height: 60px;
+            position: relative;
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1rem;
-            font-weight: 600;
+        }
+
+        .arrow-line {
+            position: relative;
+            width: 100px;
+            height: 2px;
+            background: var(--primary-color);
+            opacity: 0.6;
+        }
+
+        .arrow-line::after {
+            content: '';
+            position: absolute;
+            right: -2px;
+            top: -8px;
+            width: 0;
+            height: 0;
+            border-left: 16px solid var(--primary-color);
+            border-top: 9px solid transparent;
+            border-bottom: 9px solid transparent;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 1024px) {
+            .process-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .process-arrow {
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+
+            .process-card {
+                width: 100%;
+                max-width: 300px;
+            }
         }
 
         /* Initiatives Section */
         .initiatives {
             padding: 6rem 0;
-            background: var(--bg-dark);
         }
 
         .initiatives-title {
@@ -372,21 +525,23 @@
         }
 
         .initiative-card h3 {
-            color: var(--text-light);
-            font-size: 1.5rem;
+            color: #ffffff;
+            font-size: 1.8rem;
+            font-weight: 700;
             margin-bottom: 1rem;
             position: relative;
             z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .initiative-arrow {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: 1.5rem;
+            right: 1.5rem;
             color: rgba(255, 255, 255, 0.3);
-            font-size: 1.5rem;
-            width: 40px;
-            height: 40px;
+            font-size: 2.5rem;
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -562,29 +717,375 @@
             transform: translateY(-2px);
             box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
         }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-container {
+            background: var(--card-dark);
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(46, 204, 113, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--primary-color);
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            color: var(--text-light);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .modal-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.2);
+        }
+
+        .submit-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        /* E-Waste Stats Section */
+        .ewaste-stats {
+            padding: 6rem 2rem;
+            background: var(--card-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .stats-content {
+            padding-right: 2rem;
+        }
+
+        .stats-title {
+            font-size: 2.5rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .stats-description {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .counter-wrapper {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .counter {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        .counter-unit {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .counter-label {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-top: 0.5rem;
+        }
+
+        .globe-container {
+            position: relative;
+            padding-bottom: 100%; /* Makes it square */
+            border-radius: 30px;
+            overflow: hidden;
+            background: var(--bg-dark);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .globe-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, 
+                transparent 50%, 
+                rgba(26, 26, 26, 0.3) 70%,
+                rgba(26, 26, 26, 0.8) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .globe-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.85) contrast(1.1) saturate(1.2);
+            mix-blend-mode: screen;
+        }
+
+        @media (max-width: 768px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats-content {
+                padding-right: 0;
+            }
+
+            .counter {
+                font-size: 3rem;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-content">
-            <a href="index.html" class="logo">EcoWaste</a>
+            <a href="index.html" class="logo">
+                <i class="fas fa-recycle"></i>
+                EcoWaste
+            </a>
             <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="submit.html">Submit</a>
+                <a href="index.html" class="active">Home</a>
+                <a href="submit.html">Submit Your E-Waste</a>
                 <a href="rewards.html">Rewards</a>
                 <a href="about.html">About</a>
+                <a href="login.html" class="login-btn">Login</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1 class="hero-title">Transform <span>E-Waste</span><br>into Environmental Impact</h1>
+            <p class="hero-description">Join our mission to create a sustainable future through responsible electronics recycling. Every device recycled contributes to a cleaner, greener planet.</p>
+            <div class="hero-buttons">
+                <a href="#register" class="glow-button">Start Recycling Today</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- E-Waste Stats Section -->
+    <section class="ewaste-stats">
+        <div class="stats-container">
+            <div class="stats-content" data-aos="fade-right">
+                <h2 class="stats-title">Global E-Waste Crisis</h2>
+                <p class="stats-description">Every year, the world generates a staggering amount of electronic waste. This growing environmental challenge requires immediate action and sustainable solutions.</p>
+                
+                <div class="counter-wrapper">
+                    <div class="counter" id="wasteCounter">0</div>
+                    <div class="counter-unit">Million Tons</div>
+                </div>
+                <div class="counter-label">of e-waste generated annually</div>
+            </div>
+            
+            <div class="globe-container" data-aos="fade-left">
+                <img src="https://ian.macky.net/pat/map/globes/earth-bmarbl-256-medium.gif" alt="Earth Globe" class="globe-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Options Section -->
+    <section class="registration-options" id="register">
         <div class="container">
-            <div class="hero-content" data-aos="fade-up">
-                <h1 class="hero-title">Turn Your E-Waste into Rewards</h1>
-                <p class="hero-description">Join our mission to create a sustainable future by recycling your electronic waste. Get rewarded for making a difference!</p>
-                <a href="#register" class="cta-button">Get Started</a>
+            <h2 class="section-title" data-aos="fade-up">Join Our Initiative</h2>
+            <p class="section-description" data-aos="fade-up">Choose how you want to contribute to our e-waste recycling mission</p>
+            
+            <div class="options-grid">
+                <div class="option-card" data-aos="fade-up">
+                    <div class="option-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>Individual</h3>
+                    <p>Start recycling your e-waste and earn rewards</p>
+                    <ul class="option-features">
+                        <li><i class="fas fa-check"></i> Track your impact</li>
+                        <li><i class="fas fa-check"></i> Earn reward points</li>
+                        <li><i class="fas fa-check"></i> Schedule pickups</li>
+                    </ul>
+                    <a href="register.html?type=individual" class="option-button">Register as Individual</a>
+                </div>
+
+                <div class="option-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="option-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Retailer</h3>
+                    <p>Become a certified e-waste collection point</p>
+                    <ul class="option-features">
+                        <li><i class="fas fa-check"></i> Access recycled items</li>
+                        <li><i class="fas fa-check"></i> Verified products</li>
+                        <li><i class="fas fa-check"></i> Collection center status</li>
+                        <li><i class="fas fa-check"></i> Enhanced rewards</li>
+                    </ul>
+                    <a href="register.html?type=retailer" class="option-button">Register as Retailer</a>
+                </div>
+
+                <div class="option-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="option-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Business</h3>
+                    <p>Corporate solutions for large-scale e-waste management</p>
+                    <ul class="option-features">
+                        <li><i class="fas fa-check"></i> Bulk disposal</li>
+                        <li><i class="fas fa-check"></i> Priority service</li>
+                        <li><i class="fas fa-check"></i> Custom reporting</li>
+                        <li><i class="fas fa-check"></i> Corporate dashboard</li>
+                    </ul>
+                    <a href="register.html?type=business" class="option-button">Register as Business</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">How It Works</h2>
+            <p class="section-description" data-aos="fade-up">Simple steps to start recycling your e-waste</p>
+            
+            <div class="process-container">
+                <div class="process-card" data-aos="fade-up">
+                    <div class="step-number">1</div>
+                    <h3>Register</h3>
+                    <p>Create your account and join our eco-friendly community</p>
+                    <a href="register.html" class="step-arrow">
+                        Get Started <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="process-arrow" data-aos="fade-up" data-aos-delay="100">
+                    <div class="arrow-line"></div>
+                </div>
+
+                <div class="process-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">2</div>
+                    <h3>Submit E-Waste</h3>
+                    <p>Schedule a pickup or find a drop-off location near you</p>
+                    <a href="submit.html" class="step-arrow">
+                        Submit Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="process-arrow" data-aos="fade-up" data-aos-delay="300">
+                    <div class="arrow-line"></div>
+                </div>
+
+                <div class="process-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="step-number">3</div>
+                    <h3>Earn Rewards</h3>
+                    <p>Get points for your contribution and redeem exciting rewards</p>
+                    <a href="rewards.html" class="step-arrow">
+                        View Rewards <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -627,119 +1128,187 @@
             <div class="initiative-card" data-aos="fade-up" data-aos-delay="100">
                 <i class="fas fa-arrow-right initiative-arrow"></i>
                 <h3>E-Waste Education Campaign</h3>
-                <a href="/education" class="learn-more-btn">Learn More</a>
+                <a href="#" class="learn-more-btn" onclick="openModal('education-modal'); return false;">Learn More</a>
             </div>
             <div class="initiative-card" data-aos="fade-up" data-aos-delay="200">
                 <i class="fas fa-arrow-right initiative-arrow"></i>
                 <h3>Collection Centers Network</h3>
-                <a href="/collection-centers" class="learn-more-btn">Learn More</a>
+                <a href="#" class="learn-more-btn" onclick="openModal('collection-modal'); return false;">Learn More</a>
             </div>
             <div class="initiative-card" data-aos="fade-up" data-aos-delay="300">
                 <i class="fas fa-arrow-right initiative-arrow"></i>
                 <h3>Corporate Recycling Programs</h3>
-                <a href="/corporate" class="learn-more-btn">Learn More</a>
+                <a href="#" class="learn-more-btn" onclick="openModal('corporate-modal'); return false;">Learn More</a>
             </div>
             <div class="initiative-card" data-aos="fade-up" data-aos-delay="400">
                 <i class="fas fa-arrow-right initiative-arrow"></i>
                 <h3>Smart Bin Deployment</h3>
-                <a href="/smart-bins" class="learn-more-btn">Learn More</a>
+                <a href="#" class="learn-more-btn" onclick="openModal('smartbin-modal'); return false;">Learn More</a>
             </div>
         </div>
     </section>
 
-    <!-- Registration Options Section -->
-    <section class="registration-options" id="register">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2>Join EcoWaste Today</h2>
-                <p>Choose the registration type that best suits your needs</p>
-            </div>
-            <div class="options-grid">
-                <div class="option-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="option-icon">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <h3>Individual</h3>
-                    <p>Perfect for personal e-waste recycling and earning rewards</p>
-                    <ul class="option-features">
-                        <li><i class="fas fa-check"></i> Track your recycling impact</li>
-                        <li><i class="fas fa-check"></i> Earn reward points</li>
-                        <li><i class="fas fa-check"></i> Schedule pickups</li>
-                    </ul>
-                    <a href="/register/individual" class="option-button">Register as Individual</a>
-                </div>
-
-                <div class="option-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="option-icon">
-                        <i class="fas fa-store"></i>
-                    </div>
-                    <h3>Retailer</h3>
-                    <p>Become a certified e-waste collection point</p>
-                    <ul class="option-features">
-                        <li><i class="fas fa-check"></i> Business verification</li>
-                        <li><i class="fas fa-check"></i> Collection center status</li>
-                        <li><i class="fas fa-check"></i> Enhanced rewards</li>
-                    </ul>
-                    <a href="/register/retailer" class="option-button">Register as Retailer</a>
-                </div>
-
-                <div class="option-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="option-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <h3>Business</h3>
-                    <p>Corporate solutions for large-scale e-waste management</p>
-                    <ul class="option-features">
-                        <li><i class="fas fa-check"></i> Bulk collection service</li>
-                        <li><i class="fas fa-check"></i> Custom reporting</li>
-                        <li><i class="fas fa-check"></i> Corporate dashboard</li>
-                    </ul>
-                    <a href="/register/business" class="option-button">Register as Business</a>
-                </div>
-            </div>
+    <!-- Modals -->
+    <div class="modal-overlay" id="education-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('education-modal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="modal-title">E-Waste Education Campaign</h3>
+            <p class="modal-text">
+                Our E-Waste Education Campaign is a comprehensive initiative designed to raise awareness about the environmental impact of electronic waste. Through workshops, seminars, and online resources, we educate communities about proper e-waste disposal methods, the importance of recycling electronics, and the environmental benefits of responsible e-waste management. Our campaign reaches schools, businesses, and local communities, creating a network of informed citizens committed to sustainable e-waste practices.
+            </p>
         </div>
-    </section>
+    </div>
 
-    <!-- How It Works Section -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2>How It Works</h2>
-                <p>Simple steps to start recycling your e-waste</p>
-            </div>
-            <div class="steps">
-                <div class="step" data-aos="fade-up" data-aos-delay="100">
-                    <div class="step-number">1</div>
-                    <h3>Register</h3>
-                    <p>Create your account and join our eco-friendly community</p>
-                    <a href="/register" class="step-arrow">
-                        Get Started <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-                <div class="step" data-aos="fade-up" data-aos-delay="200">
-                    <div class="step-number">2</div>
-                    <h3>Submit E-Waste</h3>
-                    <p>Schedule a pickup or find a drop-off location near you</p>
-                    <a href="submit.html" class="step-arrow">
-                        Submit Now <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-                <div class="step" data-aos="fade-up" data-aos-delay="300">
-                    <div class="step-number">3</div>
-                    <h3>Earn Rewards</h3>
-                    <p>Get points for your contribution and redeem exciting rewards</p>
-                    <a href="rewards.html" class="step-arrow">
-                        View Rewards <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
+    <div class="modal-overlay" id="collection-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('collection-modal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="modal-title">Collection Centers Network</h3>
+            <p class="modal-text">
+                Our Collection Centers Network forms the backbone of our e-waste management system. We've established strategic partnerships with retailers, businesses, and community centers to create convenient drop-off points across the city. Each center is equipped with proper storage facilities and trained staff to handle electronic waste safely. This network makes responsible e-waste disposal accessible to everyone, while ensuring that all collected materials are processed according to environmental standards.
+            </p>
         </div>
-    </section>
+    </div>
+
+    <div class="modal-overlay" id="corporate-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('corporate-modal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="modal-title">Corporate Recycling Programs</h3>
+            <p class="modal-text">
+                Our Corporate Recycling Programs offer tailored solutions for businesses to manage their electronic waste responsibly. We provide end-to-end services including regular collections, data destruction, detailed reporting, and compliance documentation. Our programs help companies achieve their sustainability goals while ensuring secure and environmentally responsible disposal of corporate e-waste. We also offer employee education programs and incentives to promote responsible e-waste management at all levels of the organization.
+            </p>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="smartbin-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('smartbin-modal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="modal-title">Smart Bin Deployment</h3>
+            <p class="modal-text">
+                Our Smart Bin Initiative revolutionizes e-waste collection through technology. These intelligent containers are equipped with sensors to monitor fill levels, sort different types of e-waste, and notify our collection team when they need emptying. Located in high-traffic areas, our smart bins make e-waste disposal convenient while ensuring proper segregation at the source. The bins also provide real-time data about collection patterns, helping us optimize our recycling operations and reduce our carbon footprint.
+            </p>
+        </div>
+    </div>
+
+    <!-- Registration Modals -->
+    <div class="modal-overlay" id="individualModal">
+        <div class="modal-container" data-aos="fade-up">
+            <button class="modal-close">&times;</button>
+            <h2 class="modal-title">Individual Registration</h2>
+            <form class="modal-form">
+                <div class="form-group">
+                    <label for="indName">Full Name</label>
+                    <input type="text" id="indName" required>
+                </div>
+                <div class="form-group">
+                    <label for="indEmail">Email Address</label>
+                    <input type="email" id="indEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="indPhone">Phone Number</label>
+                    <input type="tel" id="indPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="indAddress">Address</label>
+                    <input type="text" id="indAddress" required>
+                </div>
+                <button type="submit" class="submit-btn">Register Now</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="retailerModal">
+        <div class="modal-container" data-aos="fade-up">
+            <button class="modal-close">&times;</button>
+            <h2 class="modal-title">Retailer Registration</h2>
+            <form class="modal-form">
+                <div class="form-group">
+                    <label for="retBusinessName">Business Name</label>
+                    <input type="text" id="retBusinessName" required>
+                </div>
+                <div class="form-group">
+                    <label for="retType">Business Type</label>
+                    <select id="retType" required>
+                        <option value="">Select Type</option>
+                        <option value="electronics">Electronics Store</option>
+                        <option value="repair">Repair Shop</option>
+                        <option value="recycling">Recycling Center</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="retEmail">Business Email</label>
+                    <input type="email" id="retEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="retPhone">Business Phone</label>
+                    <input type="tel" id="retPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="retAddress">Business Address</label>
+                    <input type="text" id="retAddress" required>
+                </div>
+                <button type="submit" class="submit-btn">Register Business</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="businessModal">
+        <div class="modal-container" data-aos="fade-up">
+            <button class="modal-close">&times;</button>
+            <h2 class="modal-title">Corporate Registration</h2>
+            <form class="modal-form">
+                <div class="form-group">
+                    <label for="corpName">Company Name</label>
+                    <input type="text" id="corpName" required>
+                </div>
+                <div class="form-group">
+                    <label for="corpIndustry">Industry</label>
+                    <select id="corpIndustry" required>
+                        <option value="">Select Industry</option>
+                        <option value="tech">Technology</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="retail">Retail</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="corpSize">Company Size</label>
+                    <select id="corpSize" required>
+                        <option value="">Select Size</option>
+                        <option value="small">1-50 Employees</option>
+                        <option value="medium">51-200 Employees</option>
+                        <option value="large">201+ Employees</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="corpEmail">Corporate Email</label>
+                    <input type="email" id="corpEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="corpPhone">Corporate Phone</label>
+                    <input type="tel" id="corpPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="corpAddress">Corporate Address</label>
+                    <input type="text" id="corpAddress" required>
+                </div>
+                <button type="submit" class="submit-btn">Register Corporation</button>
+            </form>
+        </div>
+    </div>
 
     <script>
         // Initialize AOS
         AOS.init({
             duration: 800,
+            offset: 100,
             once: true
         });
 
@@ -795,9 +1364,127 @@
                     updateCounter();
                     observer.disconnect();
                 }
-            });
+            }, { threshold: 0.5 });
             
             observer.observe(counter);
+        });
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside content
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay').forEach(overlay => {
+                    overlay.classList.remove('active');
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Modal functionality
+        function setupModals() {
+            const modalTriggers = {
+                'individual': document.querySelector('[data-modal="individual"]'),
+                'retailer': document.querySelector('[data-modal="retailer"]'),
+                'business': document.querySelector('[data-modal="business"]')
+            };
+
+            const modals = {
+                'individual': document.getElementById('individualModal'),
+                'retailer': document.getElementById('retailerModal'),
+                'business': document.getElementById('businessModal')
+            };
+
+            // Setup modal triggers
+            Object.keys(modalTriggers).forEach(type => {
+                const trigger = modalTriggers[type];
+                const modal = modals[type];
+                
+                if (trigger && modal) {
+                    trigger.addEventListener('click', () => {
+                        modal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    });
+
+                    // Close button
+                    const closeBtn = modal.querySelector('.modal-close');
+                    closeBtn.addEventListener('click', () => {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+
+                    // Click outside to close
+                    modal.addEventListener('click', (e) => {
+                        if (e.target === modal) {
+                            modal.classList.remove('active');
+                            document.body.style.overflow = '';
+                        }
+                    });
+
+                    // Form submission
+                    const form = modal.querySelector('form');
+                    form.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        // Add your form submission logic here
+                        alert('Registration submitted successfully!');
+                        modal.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                }
+            });
+        }
+
+        // Initialize modals when the page loads
+        document.addEventListener('DOMContentLoaded', setupModals);
+
+        // Counter Animation
+        function animateCounter(target, endValue, duration) {
+            const counter = document.getElementById(target);
+            const steps = 60;
+            const stepValue = endValue / steps;
+            let currentValue = 0;
+            
+            const interval = setInterval(() => {
+                currentValue += stepValue;
+                if (currentValue >= endValue) {
+                    currentValue = endValue;
+                    clearInterval(interval);
+                }
+                counter.textContent = Math.round(currentValue);
+            }, duration / steps);
+        }
+
+        // Start counter animation when section is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter('wasteCounter', 54, 2000); // 54 million tons in 2 seconds
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const counterSection = document.querySelector('.ewaste-stats');
+            observer.observe(counterSection);
         });
     </script>
 </body>

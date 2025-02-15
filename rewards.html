@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoWaste - Rewards</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #2ecc71;
             --secondary-color: #27ae60;
             --dark-color: #2c3e50;
             --light-color: #ecf0f1;
+            --bg-dark: #1a1a1a;
+            --card-dark: #2d2d2d;
+            --text-light: #ffffff;
+            --text-gray: #a0aec0;
             --transition: all 0.3s ease;
         }
 
@@ -23,15 +28,15 @@
 
         body {
             line-height: 1.6;
-            color: var(--dark-color);
-            background: #f9f9f9;
+            color: var(--text-light);
+            background: var(--bg-dark);
         }
 
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
-            background: white;
+            background: var(--card-dark);
             padding: 1rem 2rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             z-index: 1000;
@@ -47,11 +52,19 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--primary-color);
             text-decoration: none;
             transition: all 0.3s ease;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
         }
 
         .logo:hover {
@@ -66,7 +79,7 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--dark-color);
+            color: var(--text-gray);
             font-weight: 500;
             padding: 0.5rem 1rem;
             border-radius: 4px;
@@ -75,7 +88,6 @@
 
         .nav-links a:hover {
             color: var(--primary-color);
-            background: rgba(46, 204, 113, 0.1);
         }
 
         .nav-links a.active {
@@ -111,7 +123,7 @@
         }
 
         .progress-tracker {
-            background: white;
+            background: var(--card-dark);
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -143,7 +155,7 @@
         }
 
         .reward-card {
-            background: white;
+            background: var(--card-dark);
             border-radius: 15px;
             padding: 2rem;
             box-shadow: 0 10px 20px rgba(46, 204, 113, 0.1);
@@ -151,6 +163,7 @@
             position: relative;
             overflow: hidden;
             animation: fadeInUp 0.5s ease-out both;
+            color: var(--text-light);
         }
 
         .reward-card:nth-child(2) { animation-delay: 0.1s; }
@@ -189,6 +202,7 @@
         .reward-title {
             font-size: 1.2rem;
             margin-bottom: 0.5rem;
+            color: var(--text-light);
         }
 
         .reward-points {
@@ -203,7 +217,7 @@
 
         .redeem-btn {
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
+            color: var(--text-light);
             border: none;
             padding: 0.8rem 1.5rem;
             border-radius: 25px;
@@ -265,7 +279,7 @@
         .testimonial-card {
             min-width: 300px;
             scroll-snap-align: start;
-            background: white;
+            background: var(--card-dark);
             padding: 1.5rem;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -283,6 +297,24 @@
             border-radius: 50%;
             margin-right: 1rem;
             object-fit: cover;
+        }
+
+        [data-aos] {
+            opacity: 0;
+            transition-property: transform, opacity;
+        }
+
+        [data-aos].aos-animate {
+            opacity: 1;
+        }
+
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.2);
         }
 
         @media (max-width: 768px) {
@@ -303,12 +335,15 @@
 <body>
     <nav class="navbar">
         <div class="nav-content">
-            <div class="logo">EcoWaste</div>
+            <a href="index.html" class="logo">
+                <i class="fas fa-recycle"></i>
+                EcoWaste
+            </a>
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="submit.html" class="active">Submit Your E-Waste</a>
-                <a href="rewards.html">Rewards</a>
-                <a href="contact.html">Contact</a>
+                <a href="submit.html">Submit Your E-Waste</a>
+                <a href="rewards.html" class="active">Rewards</a>
+                <a href="about.html">About</a>
             </div>
         </div>
     </nav>
@@ -379,6 +414,14 @@
         </div>
     </div>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: true
+        });
+    </script>
     <script>
         // Animate progress bar on scroll
         const observer = new IntersectionObserver((entries) => {
