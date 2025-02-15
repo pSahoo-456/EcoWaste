@@ -888,6 +888,76 @@
             }
         }
     </style>
+    <style>
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            background: var(--bg-dark);
+        }
+
+        .spline-viewer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            color: var(--text-light);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+        }
+
+        .spline-watermark {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+
+        [data-spline-watermark] {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-title span {
+            color: var(--primary-color);
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
     <!-- Corner Decorations -->
@@ -915,12 +985,10 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="spline-container">
-            <spline-viewer url="https://prod.spline.design/QmUBVSY-99hO7iI0/scene.splinecode"></spline-viewer>
-        </div>
-        <div class="hero-content" data-aos="fade-up">
-            <h1 class="hero-title">Transform <span>E-Waste</span><br>into Environmental Impact</h1>
+    <section class="hero-section">
+        <spline-viewer class="spline-viewer" url="https://prod.spline.design/QmUBVSY-99hO7iI0/scene.splinecode"></spline-viewer>
+        <div class="hero-content">
+            <h1 class="hero-title" data-aos="fade-up">Transform <span>E-Waste</span><br>into Environmental Impact</h1>
             <p class="hero-description" data-aos="fade-up" data-aos-delay="100">Join our mission to create a sustainable future by responsibly recycling electronic waste. Earn rewards while making a positive impact on our planet.</p>
             <div class="hero-buttons" data-aos="fade-up" data-aos-delay="200">
                 <a href="#register" class="glow-button">Get Started</a>
@@ -1798,6 +1866,41 @@
         }
 
         document.addEventListener('DOMContentLoaded', createParticles);
+    </script>
+
+    <script>
+        // Function to remove Spline watermark
+        const removeWatermark = () => {
+            const watermarks = document.querySelectorAll('[data-spline-watermark], .spline-watermark');
+            watermarks.forEach(mark => {
+                mark.style.display = 'none';
+                mark.remove();
+            });
+
+            // Also try to remove by class name pattern
+            document.querySelectorAll('[class*="watermark" i]').forEach(el => {
+                if (el.className.toLowerCase().includes('watermark')) {
+                    el.style.display = 'none';
+                    el.remove();
+                }
+            });
+        };
+
+        // Try multiple times as the watermark might be added dynamically
+        document.addEventListener('DOMContentLoaded', function() {
+            removeWatermark();
+            setTimeout(removeWatermark, 1000);
+            setTimeout(removeWatermark, 2000);
+            setInterval(removeWatermark, 5000); // Keep checking periodically
+
+            // Create a MutationObserver to watch for watermark
+            const observer = new MutationObserver(function(mutations) {
+                removeWatermark();
+            });
+
+            // Start observing the document with the configured parameters
+            observer.observe(document.body, { childList: true, subtree: true });
+        });
     </script>
 </body>
 </html>

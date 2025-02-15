@@ -1,3 +1,42 @@
+.chatbot-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+@keyframes shake-animation {
+    0% { transform: rotate(0deg); }
+    15% { transform: rotate(-15deg); }
+    30% { transform: rotate(15deg); }
+    45% { transform: rotate(-8deg); }
+    60% { transform: rotate(8deg); }
+    75% { transform: rotate(-4deg); }
+    85% { transform: rotate(4deg); }
+    92% { transform: rotate(-2deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.shake {
+    animation: shake-animation 1s ease-in-out;
+    animation-iteration-count: 1;
+}
+
+.chatbot-toggle:hover {
+    transform: scale(1.1);
+    background: var(--secondary-color);
+}
+
 .chatbot-icon {
     position: fixed;
     bottom: 20px;

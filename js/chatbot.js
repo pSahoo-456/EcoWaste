@@ -72,4 +72,31 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     chatbot.init();
+
+    // Function to trigger shake animation
+    function shakeIcon() {
+        const chatbotIcon = document.querySelector('.chatbot-icon');
+        chatbotIcon.classList.add('animate');
+        
+        // Remove the animate class after animation completes
+        setTimeout(() => {
+            chatbotIcon.classList.remove('animate');
+        }, 4000); // 4 seconds = 3 iterations of 1-second animation + delay
+    }
+
+    // Shake icon periodically if chat window is not open
+    function startPeriodicShake() {
+        if (!document.querySelector('.chatbot-window').classList.contains('active')) {
+            shakeIcon();
+        }
+    }
+
+    // Initial delay before starting periodic shake
+    setTimeout(() => {
+        // Shake every 30 seconds if window is not open
+        setInterval(startPeriodicShake, 30000);
+    }, 3000);
+
+    // Shake icon when page loads
+    shakeIcon();
 });
