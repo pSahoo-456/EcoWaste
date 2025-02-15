@@ -6,8 +6,8 @@
     <title>EcoWaste - Rewards</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/corner-decorations.css">
-    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/corner-decorations.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
     <style>
         :root {
             --primary-color: #2ecc71;
@@ -477,17 +477,17 @@
     
     <nav class="navbar">
         <div class="nav-content">
-            <a href="index.html" class="logo">
+            <a href="{{ url_for('home') }}" class="logo">
                 <i class="fas fa-recycle"></i>
                 EcoWaste
             </a>
             <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="submit.html">Submit Your E-Waste</a>
-                <a href="rewards.html">Rewards</a>
-                <a href="about.html">About</a>
-                <a href="login.html" class="login-btn">Login</a>
-                <a href="register.html" class="register-btn">Register</a>
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="{{ url_for('submit_page') }}">Submit Your E-Waste</a>
+                <a href="{{ url_for('rewards_page') }}" class="active">Rewards</a>
+                <a href="{{ url_for('about_page') }}">About</a>
+                <a href="{{ url_for('login_page') }}" class="login-btn">Login</a>
+                <a href="{{ url_for('register_page') }}" class="register-btn">Register</a>
             </div>
         </div>
     </nav>
