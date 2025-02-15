@@ -1,62 +1,98 @@
 import random
 
-class GreenTalkAI:
-    def __init__(self):
-        self.responses = {
-            "greeting": ["Hi! 🌱 Ready to make a difference? Ask me anything about e-waste recycling!", 
-                         "Hello! 🌍 Let’s work together for a cleaner planet. How can I help?"],
-            
-            "what is e-waste": ["E-waste refers to discarded electronic devices like phones, laptops, and appliances. They contain hazardous materials but can be recycled to reduce pollution. 🌱♻️",
-                                "E-waste, or electronic waste, includes old gadgets like smartphones, computers, and TVs that need proper disposal or recycling to prevent environmental damage."],
-            
-            "why use your platform": ["GreenTalk helps you recycle electronic waste responsibly, earn rewards, and contribute to a sustainable future! 🌍💚",
-                                      "Our platform makes e-waste recycling **easy, rewarding, and eco-friendly**. Join us in reducing pollution! ♻️"],
-            
-            "how your platform helps me": ["We offer **free e-waste collection, instant valuation, and rewards** for recycling your gadgets. Let’s make a greener future together! 🌱",
-                                           "By using our platform, you can **dispose of old devices, earn rewards, and help the planet**. Win-win! 🌎"],
-            
-            "rewards": ["By recycling, you **earn discounts, cashback, or even donations to environmental causes**. It’s our way of thanking you! 🎁",
-                        "Recycle with us and get **vouchers, discounts, or even plant a tree in your name**! 🌳💚"],
-            
-            "login page": ["You can access the login page by clicking on the 'Login' button at the top of our website. Let me know if you need help!"],
-            
-            "examples of e-waste": ["Examples of e-waste include **smartphones, laptops, tablets, TVs, printers, chargers, and batteries**. Do you have something to recycle?"],
-            
-            "eco-waste": ["Eco-waste generally refers to biodegradable waste from organic materials, while **e-waste specifically refers to electronic waste like phones and computers**. ♻️"],
-            
-            "e-waste recycling": ["E-waste recycling helps recover valuable materials like **gold, silver, and copper** while preventing harmful chemicals from polluting the environment. 🌍"],
-            
-            "how much money will I get": ["The price depends on your device's condition, brand, and market value. You can check our valuation tool on the website for an estimate! 📱💰"],
-            
-            "dispose of old device": ["Great! You can **schedule a free pickup** or drop it at a nearby collection center. Let’s recycle responsibly! 🌱"],
-            
-            "where is the nearest recycling center": ["You can find the nearest e-waste recycling center on our website’s ‘Find a Center’ section. Type your city name, and we’ll guide you! 🌍"],
-            
-            "why is e-waste harmful": ["E-waste contains **lead, mercury, and other toxic substances** that can pollute soil and water if not disposed of properly. That’s why recycling is crucial!"],
-            
-            "default": ["That’s an interesting question! Let me find an answer for you. Meanwhile, check out our website for more details. 🌱",
-                        "I’m still learning! But you can explore our FAQs for a detailed answer. Let’s keep our planet green! 🌍💚"]
-        }
+# Predefined chatbot responses
+responses = {
+    "greeting": [
+        "Hello! 🌱 Welcome to GreenTalk AI. How can I assist you today?",
+        "Hi there! 🌍 Let’s talk about responsible e-waste recycling. How can I help?"
+    ],
+    "who_are_you": [
+        "I’m GreenTalk AI, your assistant for e-waste recycling! ♻️",
+        "I help individuals, businesses, and retailers recycle their e-waste responsibly."
+    ],
+    "what_is_ewaste": [
+        "E-Waste includes old phones, laptops, chargers, TVs, and batteries.",
+        "Electronic waste refers to discarded devices that should be disposed of properly."
+    ],
+    "why_use_platform": [
+        "✅ Free doorstep pickup 🚚 \n✅ Eco-friendly disposal ♻️ \n✅ Earn rewards 💰 \n✅ Secure data wiping 🔒",
+        "Use our platform for **safe, legal, and rewarding e-waste disposal.**"
+    ],
+    "pickup": [
+        "We offer **free doorstep pickup** in most locations. Schedule a pickup on our website!",
+        "You can also drop off your e-waste at our nearest collection center."
+    ],
+    "rewards": [
+        "Earn cashback, discount coupons, and reward points when you recycle with us! 🎟️💰",
+        "By recycling, you get **discounts, cashback, and redeemable points.**"
+    ],
+    "individual": [
+        "As an individual, you can recycle your old phone, laptop, or gadgets and get rewards!",
+        "Individuals can **schedule pickups** and get incentives for responsible e-waste disposal."
+    ],
+    "retailer": [
+        "Retailers can recycle unsold or defective electronics in bulk and **earn incentives**.",
+        "We offer **bulk e-waste disposal programs** for retailers with added benefits."
+    ],
+    "business": [
+        "Businesses can request bulk pickup for office electronics and receive **compliance certificates.**",
+        "We provide **secure e-waste disposal** and **data destruction** for businesses."
+    ],
+    "dispose": [
+        "Yes! You can dispose of old smartphones, laptops, and electronic waste through our **free pickup service.**",
+        "We help you dispose of old electronics **safely and legally** while earning rewards."
+    ],
+    "bulk_waste": [
+        "For **bulk waste disposal**, businesses and retailers can schedule a **special pickup**.",
+        "We offer **bulk recycling programs** with rewards for large e-waste collections."
+    ],
+    "default": [
+        "I'm still learning! 🌱 Please check our FAQs or visit our website for more info.",
+        "That’s an interesting question! Let me find an answer for you."
+    ]
+}
 
-    def get_response(self, user_input):
-        user_input = user_input.lower()
-        for key in self.responses.keys():
-            if key in user_input:
-                return random.choice(self.responses[key])
-        return random.choice(self.responses["default"])
+# Function to process user input and return an appropriate response
+def get_response(user_input):
+    user_input = user_input.lower()
 
+    # Mapping user input to relevant responses
+    if any(word in user_input for word in ["hello", "hi", "hey"]):
+        return random.choice(responses["greeting"])
+    elif any(word in user_input for word in ["who are you", "what are you"]):
+        return random.choice(responses["who_are_you"])
+    elif any(word in user_input for word in ["e-waste", "ewaste", "electronic waste"]):
+        return random.choice(responses["what_is_ewaste"])
+    elif any(word in user_input for word in ["why use", "benefits", "why should i use", "why i use"]):
+        return random.choice(responses["why_use_platform"])
+    elif any(word in user_input for word in ["pickup", "collect", "pick up my waste"]):
+        return random.choice(responses["pickup"])
+    elif any(word in user_input for word in ["reward", "cashback", "points", "incentives"]):
+        return random.choice(responses["rewards"])
+    elif any(word in user_input for word in ["individual", "personal", "single device"]):
+        return random.choice(responses["individual"])
+    elif any(word in user_input for word in ["retailer", "shop", "store", "business owner"]):
+        return random.choice(responses["retailer"])
+    elif any(word in user_input for word in ["business", "office", "corporate", "company", "institution"]):
+        return random.choice(responses["business"])
+    elif any(word in user_input for word in ["dispose", "throw away", "get rid of", "discard"]):
+        return random.choice(responses["dispose"])
+    elif any(word in user_input for word in ["bulk waste", "large amount", "huge waste", "many items"]):
+        return random.choice(responses["bulk_waste"])
+    else:
+        return random.choice(responses["default"])
 
-# Run the chatbot
+# Simple chatbot loop for testing
 if __name__ == "__main__":
-    bot = GreenTalkAI()
     print("🌱 GreenTalk AI - E-Waste Chatbot (Type 'exit' to end)")
-    
+
     while True:
         user_input = input("You: ")
         if user_input.lower() == "exit":
-            print("GreenTalk: Thanks for chatting! Keep recycling and making a difference. ♻️🌍")
+            print("GreenTalk: Thank you for chatting! Let's keep our planet green! 🌍💚")
             break
-        response = bot.get_response(user_input)
+        response = get_response(user_input)
         print(f"GreenTalk: {response}")
+
 
 
