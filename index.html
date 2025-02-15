@@ -5,25 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoWaste - Turn Your E-Waste into Rewards</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --primary-color: #2ecc71;
             --secondary-color: #27ae60;
             --dark-color: #2c3e50;
             --light-color: #ecf0f1;
+            --bg-dark: #1a1a1a;
+            --text-light: #ffffff;
+            --text-gray: #a0aec0;
+            --card-dark: #2d2d2d;
             --transition: all 0.3s ease;
-            --color-white: #ffffff;
-            --color-background: #f5f9f5;
-            --color-text: #333333;
-            --color-text-light: #666666;
-            --spacing-xs: 0.5rem;
-            --spacing-sm: 1rem;
-            --spacing-md: 1.5rem;
-            --spacing-lg: 2rem;
-            --spacing-xl: 3rem;
-            --border-radius-sm: 4px;
-            --border-radius-md: 8px;
-            --border-radius-lg: 12px;
         }
 
         * {
@@ -35,19 +30,20 @@
 
         body {
             line-height: 1.6;
-            color: var(--dark-color);
-            background: #f9f9f9;
+            color: var(--text-light);
+            background: var(--bg-dark);
         }
 
+        /* Navbar Styles */
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
-            background: white;
+            background: var(--card-dark);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .nav-content {
@@ -63,7 +59,7 @@
             font-weight: bold;
             color: var(--primary-color);
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .logo:hover {
@@ -78,408 +74,731 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--dark-color);
+            color: var(--text-light);
             font-weight: 500;
             padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .nav-links a:hover {
             color: var(--primary-color);
-            background: rgba(46, 204, 113, 0.1);
         }
 
-        .nav-links a.active {
-            color: var(--primary-color);
-            font-weight: 600;
-            background: rgba(46, 204, 113, 0.1);
-        }
-
-        header, footer {
-            background-color: var(--color-white);
-            color: var(--color-text);
-            padding: var(--spacing-md);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
+        /* Hero Section */
         .hero {
-            padding-top: calc(80px + var(--spacing-xl));
-            min-height: 80vh;
+            min-height: 100vh;
+            padding: 8rem 0 4rem;
             display: flex;
             align-items: center;
-            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-                        url('https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg') center/cover fixed;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                        url('https://namoewaste.com/wp-content/uploads/2022/06/WhatsApp-Image-2022-06-13-at-4.48.36-PM-1.jpeg') center/cover;
             position: relative;
-            overflow: hidden;
         }
 
         .hero-content {
+            position: relative;
+            z-index: 2;
+            color: #ffffff;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
+        }
+
+        .registration-tabs {
+            flex: 1;
+            max-width: 450px;
+            background: var(--card-dark);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: var(--card-dark);
+            color: var(--text-gray);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background: var(--primary-color);
+            color: #ffffff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-gray);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #3d3d3d;
+            border-radius: 8px;
+            background: var(--card-dark);
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
+        }
+
+        /* Why Recycle Section */
+        .why-recycle,
+        .how-it-works {
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
             max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            padding: var(--spacing-xl) 0;
-            position: relative;
-            z-index: 1;
-            animation: growIn 1s ease-out;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .hero-badges {
-            display: flex;
-            justify-content: center;
-            gap: var(--spacing-md);
-            margin: var(--spacing-lg) 0;
-            flex-wrap: wrap;
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
         }
 
-        .badge {
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-            background: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            animation: fadeInUp 0.5s ease-out both;
-        }
-
-        .stats-section {
-            padding: var(--spacing-xl) 0;
-            background: white;
-            position: relative;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--spacing-lg);
-            padding: var(--spacing-lg) 0;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius);
-            background: linear-gradient(135deg, #ffffff, #f5f5f5);
-            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.1);
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            animation: fadeInUp 0.5s ease-out both;
-        }
-
-        .impact-section {
-            padding: var(--spacing-xl) 0;
-            background: linear-gradient(135deg, rgba(46, 204, 113, 0.05), rgba(39, 174, 96, 0.05));
+        .section-title p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
         }
 
         .impact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--spacing-lg);
-            padding: var(--spacing-lg) 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
         .impact-card {
-            background: white;
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius);
+            background: var(--card-dark);
+            padding: 2rem;
+            border-radius: 16px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.5s ease;
+            border: 1px solid #3d3d3d;
+            transition: all 0.3s ease;
         }
 
-        .news-section {
-            padding: var(--spacing-xl) 0;
-            background: white;
+        .impact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
 
-        .news-grid {
+        .impact-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .impact-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+
+        /* How It Works Section */
+        .steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--spacing-lg);
-            padding: var(--spacing-lg) 0;
-        }
-
-        .news-card {
-            background: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.5s ease;
-        }
-
-        .news-content {
-            padding: var(--spacing-lg);
-        }
-
-        .cta-section {
-            padding: var(--spacing-xl) 0;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(39, 174, 96, 0.1));
-            position: relative;
-        }
-
-        .cta-content {
-            max-width: 800px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 var(--spacing-lg);
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card-dark);
+            border-radius: 16px;
+            border: 1px solid #3d3d3d;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .step-arrow {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary-color);
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            gap: 0.5rem;
+        }
+
+        .step:hover .step-arrow {
+            transform: translateY(0);
+        }
+
+        .step-arrow i {
+            transition: transform 0.3s ease;
+        }
+
+        .step:hover .step-arrow i {
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-weight: 600;
+        }
+
+        /* Initiatives Section */
+        .initiatives {
+            padding: 6rem 0;
+            background: var(--bg-dark);
+        }
+
+        .initiatives-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .initiatives-title h2 {
+            font-size: 3rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .initiatives-title p {
+            color: var(--text-gray);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .initiatives-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .initiative-card {
+            background: #8BC34A;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .initiative-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .initiative-card h3 {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
             position: relative;
             z-index: 1;
         }
 
-        .eco-facts {
+        .initiative-arrow {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+            top: 1rem;
+            right: 1rem;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .eco-fact {
-            position: absolute;
-            padding: 0.5rem 1rem;
+        .initiative-card:hover .initiative-arrow {
+            color: rgba(255, 255, 255, 0.8);
+            transform: rotate(-45deg);
+        }
+
+        .initiative-arrow:hover {
+            color: rgba(255, 255, 255, 1);
+            transform: rotate(-90deg) !important;
+        }
+
+        .learn-more-btn {
+            display: inline-block;
             background: white;
-            border-radius: var(--border-radius);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            font-size: 0.9rem;
-            transform: translate(-50%, -50%);
-            animation: fadeInUp 0.5s ease-out both;
+            color: #8BC34A;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--spacing-lg);
+        .learn-more-btn:hover {
+            background: #f0f0f0;
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 768px) {
+            .initiatives-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero .container {
+                flex-direction: column;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .hero-content,
+            .registration-tabs {
+                max-width: 600px;
+                width: 100%;
+            }
+
+            .impact-grid,
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 700px;
+            }
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 0 var(--spacing-md);
+                padding: 0 1.5rem;
             }
 
-            .hero-content {
-                padding: var(--spacing-lg) var(--spacing-md);
+            .hero {
+                padding: 6rem 0 3rem;
             }
 
-            .stats-grid,
             .impact-grid,
-            .news-grid {
+            .steps {
                 grid-template-columns: 1fr;
-                gap: var(--spacing-md);
-                padding: var(--spacing-md);
+                max-width: 400px;
+                gap: 2rem;
             }
 
-            .eco-facts {
-                display: none;
+            .section-title {
+                margin-bottom: 3rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
             }
         }
 
-        @keyframes leafFloat {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(5px, -5px) rotate(5deg); }
-            50% { transform: translate(0, -10px) rotate(0deg); }
-            75% { transform: translate(-5px, -5px) rotate(-5deg); }
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .registration-tabs {
+                padding: 1.5rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
         }
 
-        @keyframes growIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        @keyframes fadeInUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .animate-fadeUp {
+            animation: fadeUp 0.5s ease-out forwards;
+        }
+
+        /* Registration Options Section */
+        .registration-options {
+            padding: 6rem 0;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .option-card {
+            background: var(--card-dark);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid #3d3d3d;
+            transition: all 0.3s ease;
+        }
+
+        .option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .option-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .option-features {
+            margin-bottom: 2rem;
+        }
+
+        .option-features li {
+            margin-bottom: 0.5rem;
+        }
+
+        .option-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .option-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
         }
     </style>
 </head>
 <body>
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-content">
-            <div class="logo">EcoWaste</div>
+            <a href="index.html" class="logo">EcoWaste</a>
             <div class="nav-links">
-                <a href="index.html" class="active">Home</a>
-                <a href="submit.html">Submit Your E-Waste</a>
+                <a href="index.html">Home</a>
+                <a href="submit.html">Submit</a>
                 <a href="rewards.html">Rewards</a>
-                <a href="contact.html">Contact</a>
+                <a href="about.html">About</a>
             </div>
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h1>Transform Your E-Waste into Rewards</h1>
-                <p>Join our mission to create a sustainable future by responsibly recycling your electronic waste</p>
-                <div class="hero-badges">
-                    <div class="badge">
-                        <i class="fas fa-recycle"></i>
-                        <span>Eco-Friendly</span>
-                    </div>
-                    <div class="badge">
-                        <i class="fas fa-gift"></i>
-                        <span>Earn Rewards</span>
-                    </div>
-                    <div class="badge">
-                        <i class="fas fa-leaf"></i>
-                        <span>Sustainable</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="leaf-particle" style="top: 20%; left: 40%;"></div>
-        <div class="leaf-particle" style="top: 50%; left: 60%;"></div>
-        <div class="leaf-particle" style="top: 80%; left: 20%;"></div>
-    </section>
-
-    <section class="stats-section">
-        <div class="container">
-            <h2 class="section-title">Our Impact</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">5000+</div>
-                    <div class="stat-label">Devices Recycled</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">2.5 Tons</div>
-                    <div class="stat-label">E-Waste Processed</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">₹100K+</div>
-                    <div class="stat-label">Rewards Given</div>
-                </div>
+            <div class="hero-content" data-aos="fade-up">
+                <h1 class="hero-title">Turn Your E-Waste into Rewards</h1>
+                <p class="hero-description">Join our mission to create a sustainable future by recycling your electronic waste. Get rewarded for making a difference!</p>
+                <a href="#register" class="cta-button">Get Started</a>
             </div>
         </div>
     </section>
 
-    <section class="impact-section">
+    <!-- Why Recycle Section -->
+    <section class="why-recycle" id="why-recycle">
         <div class="container">
-            <h2 class="section-title">Environmental Impact</h2>
+            <div class="section-title" data-aos="fade-up">
+                <h2>Why Recycle E-Waste?</h2>
+                <p>Make a positive impact on our environment while earning rewards</p>
+            </div>
             <div class="impact-grid">
-                <div class="impact-card">
+                <div class="impact-card" data-aos="fade-up" data-aos-delay="100">
                     <i class="fas fa-tree impact-icon"></i>
-                    <h3>Carbon Reduction</h3>
-                    <p>Reduced carbon emissions through proper e-waste disposal</p>
+                    <div class="impact-number" data-count="1000">0</div>
+                    <p>Trees Saved</p>
                 </div>
-                <div class="impact-card">
-                    <i class="fas fa-water impact-icon"></i>
-                    <h3>Water Conservation</h3>
-                    <p>Prevented toxic materials from contaminating water sources</p>
+                <div class="impact-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-recycle impact-icon"></i>
+                    <div class="impact-number" data-count="5000">0</div>
+                    <p>Kg E-Waste Recycled</p>
                 </div>
-                <div class="impact-card">
-                    <i class="fas fa-seedling impact-icon"></i>
-                    <h3>Resource Recovery</h3>
-                    <p>Recovered valuable materials for reuse and recycling</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="news-section">
-        <div class="container">
-            <h2 class="section-title">Latest Updates</h2>
-            <div class="news-grid">
-                <div class="news-card">
-                    <div class="news-content">
-                        <h3>New Collection Center</h3>
-                        <p>We've opened a new collection center in Mumbai</p>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <div class="news-content">
-                        <h3>Milestone Achieved</h3>
-                        <p>Successfully recycled 5000+ devices</p>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <div class="news-content">
-                        <h3>Partnership News</h3>
-                        <p>Partnered with leading electronics manufacturers</p>
-                    </div>
+                <div class="impact-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-cloud impact-icon"></i>
+                    <div class="impact-number" data-count="2500">0</div>
+                    <p>CO₂ Emissions Reduced</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="cta-section">
+    <!-- Initiatives Section -->
+    <section class="initiatives">
+        <div class="initiatives-title" data-aos="fade-up">
+            <h2>We are</h2>
+            <h2>The E-Waste Healers</h2>
+            <p>Making electronic waste recycling accessible and rewarding</p>
+        </div>
+        <div class="initiatives-grid">
+            <div class="initiative-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-arrow-right initiative-arrow"></i>
+                <h3>E-Waste Education Campaign</h3>
+                <a href="/education" class="learn-more-btn">Learn More</a>
+            </div>
+            <div class="initiative-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-arrow-right initiative-arrow"></i>
+                <h3>Collection Centers Network</h3>
+                <a href="/collection-centers" class="learn-more-btn">Learn More</a>
+            </div>
+            <div class="initiative-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-arrow-right initiative-arrow"></i>
+                <h3>Corporate Recycling Programs</h3>
+                <a href="/corporate" class="learn-more-btn">Learn More</a>
+            </div>
+            <div class="initiative-card" data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-arrow-right initiative-arrow"></i>
+                <h3>Smart Bin Deployment</h3>
+                <a href="/smart-bins" class="learn-more-btn">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Options Section -->
+    <section class="registration-options" id="register">
         <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Make a Difference?</h2>
-                <p>Start recycling your e-waste today and earn rewards while helping the environment</p>
-                <div class="cta-buttons">
-                    <a href="submit.html" class="cta-button primary">Submit E-Waste</a>
-                    <a href="rewards.html" class="cta-button secondary">View Rewards</a>
+            <div class="section-title" data-aos="fade-up">
+                <h2>Join EcoWaste Today</h2>
+                <p>Choose the registration type that best suits your needs</p>
+            </div>
+            <div class="options-grid">
+                <div class="option-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="option-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>Individual</h3>
+                    <p>Perfect for personal e-waste recycling and earning rewards</p>
+                    <ul class="option-features">
+                        <li><i class="fas fa-check"></i> Track your recycling impact</li>
+                        <li><i class="fas fa-check"></i> Earn reward points</li>
+                        <li><i class="fas fa-check"></i> Schedule pickups</li>
+                    </ul>
+                    <a href="/register/individual" class="option-button">Register as Individual</a>
+                </div>
+
+                <div class="option-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="option-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Retailer</h3>
+                    <p>Become a certified e-waste collection point</p>
+                    <ul class="option-features">
+                        <li><i class="fas fa-check"></i> Business verification</li>
+                        <li><i class="fas fa-check"></i> Collection center status</li>
+                        <li><i class="fas fa-check"></i> Enhanced rewards</li>
+                    </ul>
+                    <a href="/register/retailer" class="option-button">Register as Retailer</a>
+                </div>
+
+                <div class="option-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="option-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Business</h3>
+                    <p>Corporate solutions for large-scale e-waste management</p>
+                    <ul class="option-features">
+                        <li><i class="fas fa-check"></i> Bulk collection service</li>
+                        <li><i class="fas fa-check"></i> Custom reporting</li>
+                        <li><i class="fas fa-check"></i> Corporate dashboard</li>
+                    </ul>
+                    <a href="/register/business" class="option-button">Register as Business</a>
                 </div>
             </div>
         </div>
-        <div class="eco-facts">
-            <div class="eco-fact" style="top: 20%; left: 30%;">Every device recycled helps reduce landfill waste!</div>
-            <div class="eco-fact" style="top: 50%; left: 70%;">Join 1000+ eco-conscious users!</div>
-            <div class="eco-fact" style="top: 80%; left: 40%;">Make a positive impact today!</div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>How It Works</h2>
+                <p>Simple steps to start recycling your e-waste</p>
+            </div>
+            <div class="steps">
+                <div class="step" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number">1</div>
+                    <h3>Register</h3>
+                    <p>Create your account and join our eco-friendly community</p>
+                    <a href="/register" class="step-arrow">
+                        Get Started <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="step" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">2</div>
+                    <h3>Submit E-Waste</h3>
+                    <p>Schedule a pickup or find a drop-off location near you</p>
+                    <a href="submit.html" class="step-arrow">
+                        Submit Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="step" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">3</div>
+                    <h3>Earn Rewards</h3>
+                    <p>Get points for your contribution and redeem exciting rewards</p>
+                    <a href="rewards.html" class="step-arrow">
+                        View Rewards <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
     <script>
-        // Add hover effects for step cards
-        document.querySelectorAll('.step-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-10px)';
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0)';
-            });
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
         });
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.2,
-            rootMargin: '0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.querySelectorAll('.step-card, .service-box, .initiative-card').forEach(element => {
-            element.style.animationPlayState = 'paused';
-            observer.observe(element);
-        });
-
-        // Get all the buttons and modals
-        var buttons = document.querySelectorAll("[id^='learnMoreBtn']");
-        var modals = document.querySelectorAll("[id^='myModal']");
-
-        // Add click event to each button
-        buttons.forEach(function(btn, index) {
-            btn.onclick = function() {
-                modals[index].style.display = "block";
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.querySelector('.theme-toggle i');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
             }
-        });
-
-        // Add click event to close modals
-        modals.forEach(function(modal) {
-            var span = modal.getElementsByClassName("close")[0];
-            span.onclick = function() {
-                modal.style.display = "none";
-            }
-        });
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            modals.forEach(function(modal) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            });
         }
+
+        // Tab Switching
+        function switchTab(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-button');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Number Counter Animation
+        const counters = document.querySelectorAll('.impact-number');
+        
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-count'));
+            const duration = 2000; // 2 seconds
+            const step = target / (duration / 16); // 60fps
+            let current = 0;
+            
+            const updateCounter = () => {
+                current += step;
+                if (current < target) {
+                    counter.textContent = Math.round(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target;
+                }
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    updateCounter();
+                    observer.disconnect();
+                }
+            });
+            
+            observer.observe(counter);
+        });
     </script>
 </body>
 </html>
