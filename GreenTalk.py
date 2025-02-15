@@ -1,86 +1,62 @@
 import random
-import json
-import torch
-from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
-# Load Pretrained Transformer Model (Optional, for advanced responses)
-model_name = "facebook/blenderbot-400M-distill"  # Conversational AI model
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+class GreenTalkAI:
+    def __init__(self):
+        self.responses = {
+            "greeting": ["Hi! 🌱 Ready to make a difference? Ask me anything about e-waste recycling!", 
+                         "Hello! 🌍 Let’s work together for a cleaner planet. How can I help?"],
+            
+            "what is e-waste": ["E-waste refers to discarded electronic devices like phones, laptops, and appliances. They contain hazardous materials but can be recycled to reduce pollution. 🌱♻️",
+                                "E-waste, or electronic waste, includes old gadgets like smartphones, computers, and TVs that need proper disposal or recycling to prevent environmental damage."],
+            
+            "why use your platform": ["GreenTalk helps you recycle electronic waste responsibly, earn rewards, and contribute to a sustainable future! 🌍💚",
+                                      "Our platform makes e-waste recycling **easy, rewarding, and eco-friendly**. Join us in reducing pollution! ♻️"],
+            
+            "how your platform helps me": ["We offer **free e-waste collection, instant valuation, and rewards** for recycling your gadgets. Let’s make a greener future together! 🌱",
+                                           "By using our platform, you can **dispose of old devices, earn rewards, and help the planet**. Win-win! 🌎"],
+            
+            "rewards": ["By recycling, you **earn discounts, cashback, or even donations to environmental causes**. It’s our way of thanking you! 🎁",
+                        "Recycle with us and get **vouchers, discounts, or even plant a tree in your name**! 🌳💚"],
+            
+            "login page": ["You can access the login page by clicking on the 'Login' button at the top of our website. Let me know if you need help!"],
+            
+            "examples of e-waste": ["Examples of e-waste include **smartphones, laptops, tablets, TVs, printers, chargers, and batteries**. Do you have something to recycle?"],
+            
+            "eco-waste": ["Eco-waste generally refers to biodegradable waste from organic materials, while **e-waste specifically refers to electronic waste like phones and computers**. ♻️"],
+            
+            "e-waste recycling": ["E-waste recycling helps recover valuable materials like **gold, silver, and copper** while preventing harmful chemicals from polluting the environment. 🌍"],
+            
+            "how much money will I get": ["The price depends on your device's condition, brand, and market value. You can check our valuation tool on the website for an estimate! 📱💰"],
+            
+            "dispose of old device": ["Great! You can **schedule a free pickup** or drop it at a nearby collection center. Let’s recycle responsibly! 🌱"],
+            
+            "where is the nearest recycling center": ["You can find the nearest e-waste recycling center on our website’s ‘Find a Center’ section. Type your city name, and we’ll guide you! 🌍"],
+            
+            "why is e-waste harmful": ["E-waste contains **lead, mercury, and other toxic substances** that can pollute soil and water if not disposed of properly. That’s why recycling is crucial!"],
+            
+            "default": ["That’s an interesting question! Let me find an answer for you. Meanwhile, check out our website for more details. 🌱",
+                        "I’m still learning! But you can explore our FAQs for a detailed answer. Let’s keep our planet green! 🌍💚"]
+        }
 
-# Load predefined responses
-responses = {
-    "greeting": [
-        "Hello! I'm GreenTalk, your eco-friendly assistant. 🌱 How can I help you?",
-        "Hey there! I'm GreenTalk, here to guide you in recycling e-waste. How can I assist you today?",
-        "Hi! 🌍 Let's make the planet greener together. Ask me anything about e-waste!"
-    ],
-    "recycle_importance": [
-        "Did you know? **80% of e-waste is not recycled properly**, causing pollution! Let's change that! 🌿♻️",
-        "Recycling e-waste saves natural resources and **reduces toxic waste**. Join the movement! 🌎",
-        "By recycling old electronics, we can **prevent hazardous materials from polluting soil and water**. 🌱💡"
-    ],
-    "how_to_dispose": [
-        "To dispose of e-waste: 1️⃣ Find a certified recycling center. 2️⃣ Drop off your old electronics. 3️⃣ Get rewards for responsible disposal! ♻️",
-        "Not sure where to dispose of e-waste? Use our **locator tool** to find nearby recycling stations. 📍",
-        "Dispose of e-waste **safely and legally**. Avoid throwing electronics in regular trash! 🚫🗑️"
-    ],
-    "rewards": [
-        "Great news! By recycling, you can **earn discounts & rewards** for your next gadget purchase! 🎁💰",
-        "Every time you recycle, you **get GreenPoints**, which can be redeemed for eco-friendly products. 🌿💚"
-    ],
-    "environmental_impact": [
-        "E-waste contains **lead, mercury, and arsenic**. If not recycled, they contaminate the air, water, and soil. 🚨",
-        "A single discarded phone **pollutes 40,000 liters of water**. Imagine the impact of millions of devices! 🚱",
-        "Proper recycling can **reduce CO₂ emissions by 50%**. Let's act responsibly! 🌎💙"
-    ],
-    "e_products_disposal": [
-        "Different e-products need different disposal methods. 📱 Laptops, phones, and batteries should go to **certified recyclers**.",
-        "For large appliances like **TVs, refrigerators, and washing machines**, schedule a pickup with an e-waste facility. 🚛♻️"
-    ],
-    "user_guidance": [
-        "Our platform helps you: 1️⃣ Check your device’s expiry 2️⃣ Find the best recycling options 3️⃣ Get rewards! 🌍💚",
-        "Want to recycle? **Upload your device details**, and we’ll guide you through safe disposal! 🚀"
-    ],
-    "default": [
-        "I'm still learning! 🤖 But I can definitely help with e-waste and recycling. Try asking me something else!",
-        "Hmmm... I don’t have an answer for that, but let's talk about recycling! ♻️",
-    ]
-}
+    def get_response(self, user_input):
+        user_input = user_input.lower()
+        for key in self.responses.keys():
+            if key in user_input:
+                return random.choice(self.responses[key])
+        return random.choice(self.responses["default"])
 
-# Function to get chatbot response
-def get_response(user_input):
-    user_input = user_input.lower()
 
-    # Intent Matching
-    if any(word in user_input for word in ["hi", "hello", "hey"]):
-        return random.choice(responses["greeting"])
-    elif any(word in user_input for word in ["why recycle", "importance of recycling", "why should i recycle"]):
-        return random.choice(responses["recycle_importance"])
-    elif any(word in user_input for word in ["how to dispose", "where to dispose", "throw away electronics"]):
-        return random.choice(responses["how_to_dispose"])
-    elif any(word in user_input for word in ["rewards", "benefits", "incentives", "what do i get"]):
-        return random.choice(responses["rewards"])
-    elif any(word in user_input for word in ["environment", "pollution", "impact"]):
-        return random.choice(responses["environmental_impact"])
-    elif any(word in user_input for word in ["dispose old tv", "throw old laptop", "phone disposal"]):
-        return random.choice(responses["e_products_disposal"])
-    elif any(word in user_input for word in ["how to use", "guide me", "platform help"]):
-        return random.choice(responses["user_guidance"])
+# Run the chatbot
+if __name__ == "__main__":
+    bot = GreenTalkAI()
+    print("🌱 GreenTalk AI - E-Waste Chatbot (Type 'exit' to end)")
     
-    # Use AI Model for unknown questions
-    input_ids = tokenizer.encode(user_input, return_tensors="pt")
-    with torch.no_grad():
-        output = model.generate(input_ids, max_length=50)
-    ai_response = tokenizer.decode(output[0], skip_special_tokens=True)
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == "exit":
+            print("GreenTalk: Thanks for chatting! Keep recycling and making a difference. ♻️🌍")
+            break
+        response = bot.get_response(user_input)
+        print(f"GreenTalk: {response}")
 
-    return ai_response if ai_response else random.choice(responses["default"])
 
-# Chat Loop
-print("🌱 GreenTalk AI - E-Waste Chatbot (Type 'exit' to end)")
-while True:
-    user_query = input("You: ")
-    if user_query.lower() == "exit":
-        print("GreenTalk: Thank you for being eco-friendly! ♻️🌍 See you again!")
-        break
-    print("GreenTalk:", get_response(user_query))
