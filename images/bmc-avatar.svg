@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Circle -->
+    <circle cx="100" cy="100" r="98" fill="#27ae60" fill-opacity="0.1" stroke="#27ae60" stroke-width="4"/>
+    
+    <!-- Building Icon -->
+    <path d="M60 140V80H140V140" stroke="#27ae60" stroke-width="4"/>
+    <path d="M80 140V100H120V140" stroke="#27ae60" stroke-width="4"/>
+    <path d="M90 110H110M90 120H110M90 130H110" stroke="#27ae60" stroke-width="2"/>
+    <path d="M50 140H150" stroke="#27ae60" stroke-width="6"/>
+    
+    <!-- Text -->
+    <text x="100" y="70" font-family="Arial" font-size="24" fill="#27ae60" text-anchor="middle" font-weight="bold">BMC</text>
+</svg>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Circle -->
+    <circle cx="100" cy="100" r="98" fill="#2ecc71" fill-opacity="0.1" stroke="#2ecc71" stroke-width="4"/>
+    
+    <!-- Graduation Cap -->
+    <path d="M50 90L100 70L150 90L100 110L50 90Z" fill="#2ecc71"/>
+    <path d="M100 110V140M85 115V135M115 115V135" stroke="#2ecc71" stroke-width="4"/>
+    <path d="M90 65L110 65L108 85L92 85L90 65Z" fill="#2ecc71"/>
+    
+    <!-- Initial Letters -->
+    <text x="100" y="160" font-family="Arial" font-size="24" fill="#2ecc71" text-anchor="middle" font-weight="bold">PJ</text>
+</svg>

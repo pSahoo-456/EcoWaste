@@ -1396,6 +1396,136 @@
         }
     </style>
 
+    <style>
+        .conclusion-section {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1a252f 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .conclusion-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .conclusion-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        .conclusion-text {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-primary {
+            background: var(--primary-color);
+            color: var(--text-light);
+            border: none;
+        }
+
+        .cta-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--primary-color);
+        }
+
+        .cta-secondary:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .eco-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .eco-particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(var(--tx), var(--ty)) rotate(360deg); }
+        }
+    </style>
+
+    <!-- Add this right before the closing body tag -->
+    <section class="conclusion-section">
+        <div class="eco-particles">
+            <!-- Particles will be added by JavaScript -->
+        </div>
+        <div class="conclusion-content" data-aos="fade-up">
+            <h2 class="conclusion-title">Join the E-Waste Revolution</h2>
+            <p class="conclusion-text">
+                Together, we can create a sustainable future by responsibly managing electronic waste. 
+                Start your journey with EcoWaste today and be part of the solution.
+            </p>
+            <div class="cta-buttons">
+                <a href="about.html" class="cta-button cta-primary">Learn More About Us</a>
+                <a href="submit.html" class="cta-button cta-secondary">Submit E-Waste</a>
+            </div>
+        </div>
+    </section>
+
     <script>
         // Initialize AOS
         AOS.init({
@@ -1637,5 +1767,37 @@
         }
     </script>
     <script src="js/chatbot.js"></script>
+
+    <script>
+        // Add this to your existing scripts
+        function createParticles() {
+            const container = document.querySelector('.eco-particles');
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'eco-particle';
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random size
+                const size = 5 + Math.random() * 10;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random animation properties
+                particle.style.setProperty('--tx', `${-50 + Math.random() * 100}%`);
+                particle.style.setProperty('--ty', `${-50 + Math.random() * 100}%`);
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                particle.style.animationDuration = `${10 + Math.random() * 20}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', createParticles);
+    </script>
 </body>
 </html>

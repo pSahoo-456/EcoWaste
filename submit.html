@@ -261,6 +261,29 @@
             transform: translateX(100%);
         }
 
+        .form-group small.help-text {
+            display: block;
+            color: var(--text-gray);
+            margin-top: 5px;
+            font-size: 0.85em;
+        }
+
+        input[type="date"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -303,81 +326,89 @@
     <div class="main-content">
         <div class="submission-form">
             <h2 data-aos="fade-up">Submit Your E-Waste</h2>
-            <p data-aos="fade-up" data-aos-delay="100">Fill out the details below to schedule a pickup or find a drop-off location</p>
+            <p data-aos="fade-up" data-aos-delay="100">Fill out the details below to submit your e-waste</p>
             
-            <form id="wasteForm" class="form-grid" data-aos="fade-up" data-aos-delay="200">
-                <div class="form-container p-4">
-                    <div class="leaf-particle" style="top: 10%; left: 5%;"></div>
-                    <div class="leaf-particle" style="top: 30%; right: 5%;"></div>
-                    <div class="leaf-particle" style="bottom: 20%; left: 10%;"></div>
-                    <div class="form-group">
-                        <label for="deviceType">Device Type</label>
-                        <select id="deviceType" required>
-                            <option value="">Select device type</option>
-                            <option value="smartphone">Smartphone</option>
-                            <option value="laptop">Laptop</option>
-                            <option value="tablet">Tablet</option>
-                            <option value="desktop">Desktop Computer</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="brand">Brand</label>
-                        <input type="text" id="brand" placeholder="e.g., Apple, Samsung, HP" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="condition">Condition</label>
-                        <select id="condition" required>
-                            <option value="">Select condition</option>
-                            <option value="working">Working</option>
-                            <option value="partial">Partially Working</option>
-                            <option value="broken">Not Working</option>
-                        </select>
-                    </div>
+            <form id="ewasteForm" class="form-grid">
+                <div class="form-group">
+                    <label for="deviceType">Device Type</label>
+                    <select id="deviceType" name="deviceType" required>
+                        <option value="">Select Device Type</option>
+                        <option value="smartphone">Smartphone</option>
+                        <option value="laptop">Laptop</option>
+                        <option value="tablet">Tablet</option>
+                        <option value="desktop">Desktop Computer</option>
+                        <option value="printer">Printer</option>
+                        <option value="monitor">Monitor</option>
+                        <option value="tv">Television</option>
+                        <option value="camera">Digital Camera</option>
+                        <option value="console">Gaming Console</option>
+                    </select>
                 </div>
 
-                <div class="form-container p-4">
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea id="description" rows="4" placeholder="Please provide any additional details about your device"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="image-upload" id="imageUpload">
-                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
-                            <p>Click to upload device photos</p>
-                            <input type="file" hidden accept="image/*" multiple>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="brand">Brand</label>
+                    <select id="brand" name="brand" required>
+                        <option value="">Select Brand</option>
+                        <option value="apple">Apple</option>
+                        <option value="samsung">Samsung</option>
+                        <option value="dell">Dell</option>
+                        <option value="hp">HP</option>
+                        <option value="lenovo">Lenovo</option>
+                        <option value="sony">Sony</option>
+                        <option value="lg">LG</option>
+                        <option value="asus">Asus</option>
+                        <option value="acer">Acer</option>
+                        <option value="other">Other</option>
+                    </select>
                 </div>
 
-                <div class="form-container p-4">
-                    <div class="form-group">
-                        <label for="pickupDate">Preferred Pickup Date</label>
-                        <input type="date" id="pickupDate" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="pickupTime">Preferred Time</label>
-                        <select id="pickupTime" required>
-                            <option value="">Select time slot</option>
-                            <option value="morning">Morning (9 AM - 12 PM)</option>
-                            <option value="afternoon">Afternoon (1 PM - 4 PM)</option>
-                            <option value="evening">Evening (5 PM - 7 PM)</option>
-                        </select>
-                    </div>
-
-                    <div class="reward-estimate">
-                        <h3>Estimated Reward Points</h3>
-                        <div class="reward-value">0</div>
-                        <p>Points will be added to your account after successful collection</p>
-                    </div>
+                <div class="form-group">
+                    <label for="age">Age of Device</label>
+                    <select id="age" name="age" required>
+                        <option value="">Select Age</option>
+                        <option value="0-1">Less than 1 year</option>
+                        <option value="1-2">1-2 years</option>
+                        <option value="2-3">2-3 years</option>
+                        <option value="3-5">3-5 years</option>
+                        <option value="5+">More than 5 years</option>
+                    </select>
                 </div>
 
-                <button type="submit" class="submit-btn">Schedule Pickup</button>
+                <div class="form-group">
+                    <label for="condition">Device Condition</label>
+                    <select id="condition" name="condition" required>
+                        <option value="">Select Condition</option>
+                        <option value="excellent">Excellent - Like New</option>
+                        <option value="good">Good - Minor Wear</option>
+                        <option value="fair">Fair - Visible Wear</option>
+                        <option value="poor">Poor - Significant Damage</option>
+                        <option value="broken">Non-functional</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="expectedPrice">Expected Selling Price (₹)</label>
+                    <input type="number" id="expectedPrice" name="expectedPrice" placeholder="Enter your expected price" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="expiryDate">Expected Expiry Date</label>
+                    <input type="date" id="expiryDate" name="expiryDate" required>
+                    <small class="help-text">When do you expect this device to become non-functional or obsolete?</small>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <button type="submit" class="submit-btn">
+                        Submit E-Waste
+                    </button>
+                </div>
             </form>
+
+            <div class="reward-estimate">
+                <h3>Estimated Reward Points</h3>
+                <div class="reward-value" id="rewardValue">0</div>
+                <p>Points will be added to your account after verification</p>
+            </div>
         </div>
 
         <div class="map-container">
@@ -394,49 +425,116 @@
             once: true
         });
 
-        // Handle image upload
-        const imageUpload = document.getElementById('imageUpload');
-        const fileInput = imageUpload.querySelector('input[type="file"]');
-
-        imageUpload.addEventListener('click', () => {
-            fileInput.click();
-        });
-
-        fileInput.addEventListener('change', () => {
-            if (fileInput.files.length > 0) {
-                imageUpload.querySelector('p').textContent = `${fileInput.files.length} file(s) selected`;
-            }
-        });
-
-        // Calculate reward points
         function calculateRewards() {
             const deviceType = document.getElementById('deviceType').value;
             const condition = document.getElementById('condition').value;
+            const age = document.getElementById('age').value;
+            const brand = document.getElementById('brand').value;
+            const expiryDate = document.getElementById('expiryDate').value;
             
-            let points = 0;
+            let basePoints = 0;
             
-            // Basic point calculation
-            if (deviceType === 'smartphone') points = 100;
-            else if (deviceType === 'laptop') points = 200;
-            else if (deviceType === 'tablet') points = 150;
-            else if (deviceType === 'desktop') points = 300;
-            else points = 50;
+            // Base points by device type
+            const devicePoints = {
+                'smartphone': 500,
+                'laptop': 1000,
+                'tablet': 400,
+                'desktop': 800,
+                'printer': 300,
+                'monitor': 400,
+                'tv': 600,
+                'camera': 300,
+                'console': 400
+            };
+            
+            basePoints = devicePoints[deviceType] || 0;
 
-            // Condition multiplier
-            if (condition === 'working') points *= 1.5;
-            else if (condition === 'partial') points *= 1.2;
+            // Multiply by condition factor
+            const conditionMultiplier = {
+                'excellent': 1.5,
+                'good': 1.2,
+                'fair': 1.0,
+                'poor': 0.7,
+                'broken': 0.4
+            };
+            
+            basePoints *= conditionMultiplier[condition] || 1;
 
-            document.querySelector('.reward-value').textContent = Math.round(points);
+            // Age factor
+            const ageMultiplier = {
+                '0-1': 1.3,
+                '1-2': 1.1,
+                '2-3': 1.0,
+                '3-5': 0.8,
+                '5+': 0.6
+            };
+            
+            basePoints *= ageMultiplier[age] || 1;
+
+            // Brand factor
+            const premiumBrands = ['apple', 'samsung', 'dell', 'hp', 'sony'];
+            if (premiumBrands.includes(brand)) {
+                basePoints *= 1.2;
+            }
+
+            // Expiry date factor
+            if (expiryDate) {
+                const today = new Date();
+                const expiry = new Date(expiryDate);
+                const monthsUntilExpiry = (expiry - today) / (1000 * 60 * 60 * 24 * 30);
+                
+                // Adjust points based on expected lifespan
+                if (monthsUntilExpiry <= 6) {
+                    basePoints *= 0.7; // Short lifespan
+                } else if (monthsUntilExpiry <= 12) {
+                    basePoints *= 0.85; // Medium lifespan
+                } else if (monthsUntilExpiry <= 24) {
+                    basePoints *= 1.0; // Standard lifespan
+                } else {
+                    basePoints *= 1.2; // Long lifespan
+                }
+            }
+
+            // Update the display
+            const rewardValue = document.getElementById('rewardValue');
+            rewardValue.textContent = Math.round(basePoints);
+
+            // Update expected price suggestion
+            const expectedPrice = document.getElementById('expectedPrice');
+            const suggestedPrice = Math.round(basePoints * 2); // Simple conversion of points to rupees
+            expectedPrice.placeholder = `Suggested: ₹${suggestedPrice}`;
         }
 
         // Add event listeners for reward calculation
         document.getElementById('deviceType').addEventListener('change', calculateRewards);
         document.getElementById('condition').addEventListener('change', calculateRewards);
+        document.getElementById('age').addEventListener('change', calculateRewards);
+        document.getElementById('brand').addEventListener('change', calculateRewards);
+        document.getElementById('expiryDate').addEventListener('change', calculateRewards);
+
+        // Set minimum date for expiry date input
+        const expiryDateInput = document.getElementById('expiryDate');
+        const today = new Date();
+        const minDate = new Date(today);
+        minDate.setMonth(today.getMonth() + 1); // Minimum 1 month from today
+        expiryDateInput.min = minDate.toISOString().split('T')[0];
 
         // Form submission
-        document.getElementById('wasteForm').addEventListener('submit', (e) => {
+        document.getElementById('ewasteForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Thank you for your submission! We will contact you to confirm the pickup.');
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            // Validate expected price
+            const suggestedPrice = parseInt(document.getElementById('rewardValue').textContent) * 2;
+            const expectedPrice = parseInt(data.expectedPrice);
+            
+            if (expectedPrice > suggestedPrice * 1.5) {
+                alert('Your expected price seems high compared to our estimate. Please review or contact support for assistance.');
+                return;
+            }
+            
+            alert('Thank you for your submission! We will review your details and contact you soon.');
         });
     </script>
 </body>
