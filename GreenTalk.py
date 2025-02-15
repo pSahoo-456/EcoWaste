@@ -3,11 +3,11 @@ import random
 # Predefined chatbot responses
 responses = {
     "greeting": [
-        "Hello! 🌱 Welcome to GreenTalk AI. How can I assist you today?",
-        "Hi there! 🌍 Let’s talk about responsible e-waste recycling. How can I help?"
+        "Hello!  Welcome to GreenTalk AI. How can I assist you today?",
+        "Hi there!  Let’s talk about responsible e-waste recycling. How can I help?"
     ],
     "who_are_you": [
-        "I’m GreenTalk AI, your assistant for e-waste recycling! ♻️",
+        "I’m GreenTalk AI, your assistant for e-waste recycling! ",
         "I help individuals, businesses, and retailers recycle their e-waste responsibly."
     ],
     "what_is_ewaste": [
@@ -15,7 +15,7 @@ responses = {
         "Electronic waste refers to discarded devices that should be disposed of properly."
     ],
     "why_use_platform": [
-        "✅ Free doorstep pickup 🚚 \n✅ Eco-friendly disposal ♻️ \n✅ Earn rewards 💰 \n✅ Secure data wiping 🔒",
+        " Free doorstep pickup  \n Eco-friendly disposal  \n Earn rewards  \n Secure data wiping ",
         "Use our platform for **safe, legal, and rewarding e-waste disposal.**"
     ],
     "pickup": [
@@ -23,7 +23,7 @@ responses = {
         "You can also drop off your e-waste at our nearest collection center."
     ],
     "rewards": [
-        "Earn cashback, discount coupons, and reward points when you recycle with us! 🎟️💰",
+        "Earn cashback, discount coupons, and reward points when you recycle with us! ",
         "By recycling, you get **discounts, cashback, and redeemable points.**"
     ],
     "individual": [
@@ -47,7 +47,7 @@ responses = {
         "We offer **bulk recycling programs** with rewards for large e-waste collections."
     ],
     "default": [
-        "I'm still learning! 🌱 Please check our FAQs or visit our website for more info.",
+        "I'm still learning!  Please check our FAQs or visit our website for more info.",
         "That’s an interesting question! Let me find an answer for you."
     ]
 }
@@ -84,7 +84,7 @@ def get_response(user_input):
 
 # Simple chatbot loop for testing
 if __name__ == "__main__":
-    print("🌱 GreenTalk AI - E-Waste Chatbot (Type 'exit' to end)")
+    print("GreenTalk AI - E-Waste Chatbot (Type 'exit' to end)")
 
     while True:
         user_input = input("You: ")
@@ -93,6 +93,4 @@ if __name__ == "__main__":
             break
         response = get_response(user_input)
         print(f"GreenTalk: {response}")
-
-
 
