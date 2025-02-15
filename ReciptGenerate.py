@@ -2,15 +2,15 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import os
 
-# Function to generate receipt PDF
+#  generate receipt PDF
 def generate_receipt(user_name, email, product_name, collection_date, condition, usage, reward_points):
-    # Ensure file name is valid (no spaces or special characters)
+    
     receipt_filename = f"{user_name.replace(' ', '_')}_receipt.pdf"
     
-    # Define where to save the file
+    # where to save the file
     output_folder = "receipts"
     if not os.path.exists(output_folder):
-        os.makedirs(output_folder)  # Create the folder if it doesn’t exist
+        os.makedirs(output_folder)  
 
     full_path = os.path.join(output_folder, receipt_filename)
 
@@ -19,7 +19,7 @@ def generate_receipt(user_name, email, product_name, collection_date, condition,
         c.setFont("Helvetica-Bold", 14)
 
         # Title
-        c.drawString(200, 750, "🌱 GreenTalk - E-Waste Collection Receipt ♻️")
+        c.drawString(200, 750, " GreenTalk - E-Waste Collection Receipt ")
 
         # User Information
         c.setFont("Helvetica", 12)
@@ -33,7 +33,7 @@ def generate_receipt(user_name, email, product_name, collection_date, condition,
 
         # Footer
         c.setFont("Helvetica-Oblique", 10)
-        c.drawString(50, 540, "Thank you for recycling responsibly! 🌍💚")
+        c.drawString(50, 540, "Thank you for recycling responsibly!💚")
         c.drawString(50, 520, "Visit EcoWaste for more details: www.EcoWaste.com")
 
         # Save and close the PDF
@@ -57,7 +57,7 @@ receipt_path = generate_receipt(
 )
 
 if receipt_path:
-    print(f"📄 Receipt generated successfully at: {receipt_path}")
+    print(f"Receipt generated successfully at: {receipt_path}")
 else:
     print("Failed to generate receipt.")
 
