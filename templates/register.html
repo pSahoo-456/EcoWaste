@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWaste - Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="css/corner-decorations.css">
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --bg-dark: #1a1a1a;
+            --card-dark: #2d2d2d;
+            --text-light: #ffffff;
+            --text-gray: #a0aec0;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--bg-dark);
+            min-height: 100vh;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--card-dark);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links .login-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .nav-links .login-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Register Section */
+        .register-section {
+            padding: 8rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .register-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .register-header p {
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .register-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-button {
+            padding: 1rem 2rem;
+            background: var(--card-dark);
+            border: none;
+            border-radius: 8px;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .tab-button:hover:not(.active) {
+            background: #3d3d3d;
+        }
+
+        .register-forms {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-container {
+            display: none;
+            background: var(--card-dark);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-gray);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.08);
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .register-button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+
+        .register-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .form-info {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(46, 204, 113, 0.1);
+            border-radius: 8px;
+            color: var(--text-gray);
+        }
+
+        .form-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-info ul {
+            list-style: none;
+            margin-left: 1rem;
+        }
+
+        .form-info li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-info i {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .register-tabs {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .tab-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Corner Decorations -->
+    <div class="corner-decoration corner-top-left"></div>
+    <div class="corner-decoration corner-top-right"></div>
+    <div class="corner-decoration corner-bottom-left"></div>
+    <div class="corner-decoration corner-bottom-right"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="logo">
+                <i class="fas fa-recycle"></i>
+                EcoWaste
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="submit.html">Submit Your E-Waste</a>
+                <a href="rewards.html">Rewards</a>
+                <a href="about.html">About</a>
+                <a href="login.html" class="login-btn">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Register Section -->
+    <section class="register-section">
+        <div class="register-header" data-aos="fade-up">
+            <h1>Join EcoWaste</h1>
+            <p>Choose your account type and start contributing to a sustainable future</p>
+        </div>
+
+        <div class="register-tabs" data-aos="fade-up" data-aos-delay="100">
+            <button class="tab-button active" data-tab="individual">
+                <i class="fas fa-user"></i> Individual
+            </button>
+            <button class="tab-button" data-tab="retailer">
+                <i class="fas fa-store"></i> Retailer
+            </button>
+            <button class="tab-button" data-tab="business">
+                <i class="fas fa-building"></i> Business
+            </button>
+        </div>
+
+        <div class="register-forms" data-aos="fade-up" data-aos-delay="200">
+            <!-- Individual Form -->
+            <div class="form-container active" id="individual-form">
+                <form>
+                    <div class="form-group">
+                        <label for="ind-name">Full Name</label>
+                        <input type="text" id="ind-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ind-email">Email Address</label>
+                        <input type="email" id="ind-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ind-phone">Phone Number</label>
+                        <input type="tel" id="ind-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ind-password">Password</label>
+                        <input type="password" id="ind-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ind-address">Address</label>
+                        <textarea id="ind-address" required></textarea>
+                    </div>
+                    <button type="submit" class="register-button">Register as Individual</button>
+                    
+                    <div class="form-info">
+                        <h4>Benefits for Individuals</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Earn rewards for recycling e-waste</li>
+                            <li><i class="fas fa-check-circle"></i> Schedule convenient pickups</li>
+                            <li><i class="fas fa-check-circle"></i> Track your environmental impact</li>
+                            <li><i class="fas fa-check-circle"></i> Access to exclusive rewards program</li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Retailer Form -->
+            <div class="form-container" id="retailer-form">
+                <form>
+                    <div class="form-group">
+                        <label for="ret-name">Store Name</label>
+                        <input type="text" id="ret-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ret-email">Business Email</label>
+                        <input type="email" id="ret-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ret-phone">Business Phone</label>
+                        <input type="tel" id="ret-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ret-license">Business License Number</label>
+                        <input type="text" id="ret-license" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ret-type">Store Type</label>
+                        <select id="ret-type" required>
+                            <option value="">Select Store Type</option>
+                            <option value="electronics">Electronics Store</option>
+                            <option value="recycling">Recycling Center</option>
+                            <option value="repair">Repair Shop</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ret-address">Store Address</label>
+                        <textarea id="ret-address" required></textarea>
+                    </div>
+                    <button type="submit" class="register-button">Register as Retailer</button>
+
+                    <div class="form-info">
+                        <h4>Benefits for Retailers</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Access to quality recycled electronics</li>
+                            <li><i class="fas fa-check-circle"></i> Competitive pricing on bulk purchases</li>
+                            <li><i class="fas fa-check-circle"></i> Real-time inventory updates</li>
+                            <li><i class="fas fa-check-circle"></i> Verified seller network</li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Business Form -->
+            <div class="form-container" id="business-form">
+                <form>
+                    <div class="form-group">
+                        <label for="bus-name">Company Name</label>
+                        <input type="text" id="bus-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bus-email">Corporate Email</label>
+                        <input type="email" id="bus-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bus-phone">Corporate Phone</label>
+                        <input type="tel" id="bus-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bus-reg">Company Registration Number</label>
+                        <input type="text" id="bus-reg" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bus-size">Company Size</label>
+                        <select id="bus-size" required>
+                            <option value="">Select Company Size</option>
+                            <option value="small">Small (1-50 employees)</option>
+                            <option value="medium">Medium (51-250 employees)</option>
+                            <option value="large">Large (251+ employees)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bus-waste">Estimated Monthly E-Waste Volume (kg)</label>
+                        <input type="number" id="bus-waste" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bus-address">Company Address</label>
+                        <textarea id="bus-address" required></textarea>
+                    </div>
+                    <button type="submit" class="register-button">Register as Business</button>
+
+                    <div class="form-info">
+                        <h4>Benefits for Businesses</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Bulk e-waste disposal solutions</li>
+                            <li><i class="fas fa-check-circle"></i> Corporate dashboard and analytics</li>
+                            <li><i class="fas fa-check-circle"></i> Compliance documentation</li>
+                            <li><i class="fas fa-check-circle"></i> Priority pickup service</li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Tab Switching Function
+        function switchTab(tabType) {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const formContainers = document.querySelectorAll('.form-container');
+
+            // Remove active class from all buttons and forms
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            formContainers.forEach(form => form.classList.remove('active'));
+
+            // Add active class to specified tab and form
+            const targetButton = document.querySelector(`.tab-button[data-tab="${tabType}"]`);
+            const targetForm = document.getElementById(`${tabType}-form`);
+
+            if (targetButton && targetForm) {
+                targetButton.classList.add('active');
+                targetForm.classList.add('active');
+                
+                // Smooth scroll to the form
+                targetForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Handle URL Parameters
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const type = urlParams.get('type');
+            if (type) {
+                switchTab(type);
+            }
+        });
+
+        // Tab Button Click Events
+        const tabButtons = document.querySelectorAll('.tab-button');
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                switchTab(button.dataset.tab);
+            });
+        });
+
+        // Form Submission
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Add your registration logic here
+                alert('Registration functionality will be implemented here');
+            });
+        });
+    </script>
+</body>
+</html>
