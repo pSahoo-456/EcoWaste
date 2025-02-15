@@ -329,135 +329,121 @@
         <div class="register-forms" data-aos="fade-up" data-aos-delay="200">
             <!-- Individual Form -->
             <div class="form-container active" id="individual-form">
-                <form>
+                <form id="individual-register-form">
+                    <input type="hidden" name="user_type" value="individual">
                     <div class="form-group">
-                        <label for="ind-name">Full Name</label>
-                        <input type="text" id="ind-name" required>
+                        <label for="ind-username">Username</label>
+                        <input type="text" id="ind-username" name="username" required>
                     </div>
                     <div class="form-group">
-                        <label for="ind-email">Email Address</label>
-                        <input type="email" id="ind-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="ind-phone">Phone Number</label>
-                        <input type="tel" id="ind-phone" required>
+                        <label for="ind-email">Email</label>
+                        <input type="email" id="ind-email" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="ind-password">Password</label>
-                        <input type="password" id="ind-password" required>
+                        <input type="password" id="ind-password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ind-fullname">Full Name</label>
+                        <input type="text" id="ind-fullname" name="full_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ind-phone">Phone Number</label>
+                        <input type="tel" id="ind-phone" name="phone" required>
                     </div>
                     <div class="form-group">
                         <label for="ind-address">Address</label>
-                        <textarea id="ind-address" required></textarea>
+                        <textarea id="ind-address" name="address" required></textarea>
                     </div>
-                    <button type="submit" class="register-button">Register as Individual</button>
-                    
-                    <div class="form-info">
-                        <h4>Benefits for Individuals</h4>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Earn rewards for recycling e-waste</li>
-                            <li><i class="fas fa-check-circle"></i> Schedule convenient pickups</li>
-                            <li><i class="fas fa-check-circle"></i> Track your environmental impact</li>
-                            <li><i class="fas fa-check-circle"></i> Access to exclusive rewards program</li>
-                        </ul>
-                    </div>
+                    <button type="submit">Register as Individual</button>
                 </form>
             </div>
 
             <!-- Retailer Form -->
             <div class="form-container" id="retailer-form">
-                <form>
+                <form id="retailer-register-form">
+                    <input type="hidden" name="user_type" value="retailer">
                     <div class="form-group">
-                        <label for="ret-name">Store Name</label>
-                        <input type="text" id="ret-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="ret-email">Business Email</label>
-                        <input type="email" id="ret-email" required>
+                        <label for="ret-username">Username</label>
+                        <input type="text" id="ret-username" name="username" required>
                     </div>
                     <div class="form-group">
-                        <label for="ret-phone">Business Phone</label>
-                        <input type="tel" id="ret-phone" required>
+                        <label for="ret-email">Email</label>
+                        <input type="email" id="ret-email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="ret-license">Business License Number</label>
-                        <input type="text" id="ret-license" required>
+                        <label for="ret-password">Password</label>
+                        <input type="password" id="ret-password" name="password" required>
                     </div>
                     <div class="form-group">
-                        <label for="ret-type">Store Type</label>
-                        <select id="ret-type" required>
-                            <option value="">Select Store Type</option>
-                            <option value="electronics">Electronics Store</option>
-                            <option value="recycling">Recycling Center</option>
-                            <option value="repair">Repair Shop</option>
-                            <option value="other">Other</option>
-                        </select>
+                        <label for="ret-fullname">Full Name</label>
+                        <input type="text" id="ret-fullname" name="full_name" required>
                     </div>
                     <div class="form-group">
-                        <label for="ret-address">Store Address</label>
-                        <textarea id="ret-address" required></textarea>
+                        <label for="ret-phone">Phone Number</label>
+                        <input type="tel" id="ret-phone" name="phone" required>
                     </div>
-                    <button type="submit" class="register-button">Register as Retailer</button>
-
-                    <div class="form-info">
-                        <h4>Benefits for Retailers</h4>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Access to quality recycled electronics</li>
-                            <li><i class="fas fa-check-circle"></i> Competitive pricing on bulk purchases</li>
-                            <li><i class="fas fa-check-circle"></i> Real-time inventory updates</li>
-                            <li><i class="fas fa-check-circle"></i> Verified seller network</li>
-                        </ul>
+                    <div class="form-group">
+                        <label for="ret-address">Address</label>
+                        <textarea id="ret-address" name="address" required></textarea>
                     </div>
+                    <div class="form-group">
+                        <label for="store-name">Store Name</label>
+                        <input type="text" id="store-name" name="store_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="business-license">Business License Number</label>
+                        <input type="text" id="business-license" name="business_license" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="collection-capacity">Collection Capacity (kg)</label>
+                        <input type="number" id="collection-capacity" name="collection_capacity" required>
+                    </div>
+                    <button type="submit">Register as Retailer</button>
                 </form>
             </div>
 
             <!-- Business Form -->
             <div class="form-container" id="business-form">
-                <form>
+                <form id="business-register-form">
+                    <input type="hidden" name="user_type" value="business">
                     <div class="form-group">
-                        <label for="bus-name">Company Name</label>
-                        <input type="text" id="bus-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="bus-email">Corporate Email</label>
-                        <input type="email" id="bus-email" required>
+                        <label for="bus-username">Username</label>
+                        <input type="text" id="bus-username" name="username" required>
                     </div>
                     <div class="form-group">
-                        <label for="bus-phone">Corporate Phone</label>
-                        <input type="tel" id="bus-phone" required>
+                        <label for="bus-email">Email</label>
+                        <input type="email" id="bus-email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="bus-reg">Company Registration Number</label>
-                        <input type="text" id="bus-reg" required>
+                        <label for="bus-password">Password</label>
+                        <input type="password" id="bus-password" name="password" required>
                     </div>
                     <div class="form-group">
-                        <label for="bus-size">Company Size</label>
-                        <select id="bus-size" required>
-                            <option value="">Select Company Size</option>
-                            <option value="small">Small (1-50 employees)</option>
-                            <option value="medium">Medium (51-250 employees)</option>
-                            <option value="large">Large (251+ employees)</option>
-                        </select>
+                        <label for="bus-fullname">Full Name</label>
+                        <input type="text" id="bus-fullname" name="full_name" required>
                     </div>
                     <div class="form-group">
-                        <label for="bus-waste">Estimated Monthly E-Waste Volume (kg)</label>
-                        <input type="number" id="bus-waste" required>
+                        <label for="bus-phone">Phone Number</label>
+                        <input type="tel" id="bus-phone" name="phone" required>
                     </div>
                     <div class="form-group">
-                        <label for="bus-address">Company Address</label>
-                        <textarea id="bus-address" required></textarea>
+                        <label for="bus-address">Address</label>
+                        <textarea id="bus-address" name="address" required></textarea>
                     </div>
-                    <button type="submit" class="register-button">Register as Business</button>
-
-                    <div class="form-info">
-                        <h4>Benefits for Businesses</h4>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Bulk e-waste disposal solutions</li>
-                            <li><i class="fas fa-check-circle"></i> Corporate dashboard and analytics</li>
-                            <li><i class="fas fa-check-circle"></i> Compliance documentation</li>
-                            <li><i class="fas fa-check-circle"></i> Priority pickup service</li>
-                        </ul>
+                    <div class="form-group">
+                        <label for="company-name">Company Name</label>
+                        <input type="text" id="company-name" name="company_name" required>
                     </div>
+                    <div class="form-group">
+                        <label for="industry-type">Industry Type</label>
+                        <input type="text" id="industry-type" name="industry_type" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="employee-count">Number of Employees</label>
+                        <input type="number" id="employee-count" name="employee_count" required>
+                    </div>
+                    <button type="submit">Register as Business</button>
                 </form>
             </div>
         </div>
@@ -470,52 +456,59 @@
             once: true
         });
 
-        // Tab Switching Function
-        function switchTab(tabType) {
-            const tabButtons = document.querySelectorAll('.tab-button');
-            const formContainers = document.querySelectorAll('.form-container');
+        // Handle form submissions
+        const forms = {
+            individual: document.getElementById('individual-register-form'),
+            retailer: document.getElementById('retailer-register-form'),
+            business: document.getElementById('business-register-form')
+        };
 
-            // Remove active class from all buttons and forms
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            formContainers.forEach(form => form.classList.remove('active'));
+        Object.values(forms).forEach(form => {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const data = {};
+                formData.forEach((value, key) => data[key] = value);
 
-            // Add active class to specified tab and form
-            const targetButton = document.querySelector(`.tab-button[data-tab="${tabType}"]`);
-            const targetForm = document.getElementById(`${tabType}-form`);
+                try {
+                    const response = await fetch('/api/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
 
-            if (targetButton && targetForm) {
-                targetButton.classList.add('active');
-                targetForm.classList.add('active');
-                
-                // Smooth scroll to the form
-                targetForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
-
-        // Handle URL Parameters
-        window.addEventListener('load', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const type = urlParams.get('type');
-            if (type) {
-                switchTab(type);
-            }
+                    const result = await response.json();
+                    if (response.ok) {
+                        // Redirect to dashboard
+                        window.location.href = result.redirect;
+                    } else {
+                        alert(result.error);
+                    }
+                } catch (error) {
+                    alert('An error occurred during registration');
+                    console.error('Registration error:', error);
+                }
+            });
         });
+
+        // Tab switching function
+        function switchTab(type) {
+            // Remove active class from all containers
+            document.querySelectorAll('.form-container').forEach(container => {
+                container.classList.remove('active');
+            });
+            
+            // Add active class to selected container
+            document.getElementById(`${type}-form`).classList.add('active');
+        }
 
         // Tab Button Click Events
         const tabButtons = document.querySelectorAll('.tab-button');
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
                 switchTab(button.dataset.tab);
-            });
-        });
-
-        // Form Submission
-        const forms = document.querySelectorAll('form');
-        forms.forEach(form => {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                // Add your registration logic here
-                alert('Registration functionality will be implemented here');
             });
         });
     </script>

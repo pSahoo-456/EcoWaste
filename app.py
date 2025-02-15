@@ -1,7 +1,8 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect, url_for
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 import joblib
 import os
 from datetime import datetime
@@ -153,6 +154,16 @@ def login():
 def logout():
     logout_user()
     return jsonify({'message': 'Logged out successfully'})
+
+@app.route('/dashboard')
+@login_required
+def dashboard():
+    if current_user.user_type == 'individual':
+        return render_template('dashboards/individual/dashboard.html', user=current_user)
+    elif current_user.user_type == 'retailer':
+        return render_template('dashboards/retailer/dashboard.html', user=current_user)
+    else:
+        return render_template('dashboards/business/dashboard.html', user=current_user)
 
 @app.route('/api/products', methods=['GET'])
 @login_required
