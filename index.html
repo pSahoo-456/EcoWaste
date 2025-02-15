@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.68/build/spline-viewer.js"></script>
+    <link rel="stylesheet" href="css/corner-decorations.css">
+    <link rel="stylesheet" href="css/navigation.css">
     <style>
         :root {
             --primary-color: #2ecc71;
-            --secondary-color: #27ae60;
+            --secondary-color: #8BC34A;
             --dark-color: #2c3e50;
             --light-color: #ecf0f1;
             --bg-dark: #1a1a1a;
@@ -33,92 +36,13 @@
             background: var(--bg-dark);
         }
 
-        /* Navbar Styles - Exact match from other pages */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: var(--card-dark);
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo i {
-            font-size: 1.8rem;
-            color: var(--primary-color);
-        }
-
-        .logo:hover {
-            color: var(--secondary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-gray);
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .nav-links a.active {
-            color: var(--primary-color);
-            background: rgba(46, 204, 113, 0.1);
-        }
-
-        .nav-links .login-btn {
-            background: var(--primary-color);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 600;
-        }
-
-        .nav-links .login-btn:hover {
-            background: var(--secondary-color);
-            color: white;
-            transform: translateY(-2px);
-        }
-
         /* Hero Section */
         .hero {
             min-height: 100vh;
             padding: 8rem 0 4rem;
             display: flex;
             align-items: center;
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-                        url('https://namoewaste.com/wp-content/uploads/2022/06/WhatsApp-Image-2022-06-13-at-4.48.36-PM-1.jpeg') center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
             position: relative;
             overflow: hidden;
         }
@@ -130,8 +54,24 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at center, rgba(46, 204, 113, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle at center, 
+                rgba(46, 204, 113, 0.15) 0%, 
+                transparent 70%);
             pointer-events: none;
+        }
+
+        .spline-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        spline-viewer {
+            width: 100%;
+            height: 100%;
         }
 
         .hero-content {
@@ -157,7 +97,8 @@
         }
 
         .hero-title span {
-            color: var(--primary-color);
+            color: var(--secondary-color);
+            text-shadow: 0 0 15px rgba(139, 195, 74, 0.3);
         }
 
         .hero-description {
@@ -685,9 +626,15 @@
         }
 
         .option-icon {
-            font-size: 2.5rem;
-            color: var(--primary-color);
+            font-size: 3rem;
+            color: var(--secondary-color);
             margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .option-card:hover .option-icon {
+            transform: scale(1.1);
+            color: var(--primary-color);
         }
 
         .option-features {
@@ -853,9 +800,10 @@
 
         .stats-title {
             font-size: 2.5rem;
-            color: var(--text-light);
+            color: var(--secondary-color);
             margin-bottom: 1.5rem;
             line-height: 1.2;
+            text-shadow: 0 0 10px rgba(139, 195, 74, 0.2);
         }
 
         .stats-description {
@@ -880,9 +828,10 @@
         }
 
         .counter-unit {
-            font-size: 1.5rem;
-            color: var(--text-light);
-            font-weight: 500;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
         }
 
         .counter-label {
@@ -940,6 +889,12 @@
     </style>
 </head>
 <body>
+    <!-- Corner Decorations -->
+    <div class="corner-decoration corner-top-left"></div>
+    <div class="corner-decoration corner-top-right"></div>
+    <div class="corner-decoration corner-bottom-left"></div>
+    <div class="corner-decoration corner-bottom-right"></div>
+
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-content">
@@ -948,22 +903,26 @@
                 EcoWaste
             </a>
             <div class="nav-links">
-                <a href="index.html" class="active">Home</a>
+                <a href="index.html">Home</a>
                 <a href="submit.html">Submit Your E-Waste</a>
                 <a href="rewards.html">Rewards</a>
                 <a href="about.html">About</a>
                 <a href="login.html" class="login-btn">Login</a>
+                <a href="register.html" class="register-btn">Register</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="spline-container">
+            <spline-viewer url="https://prod.spline.design/QmUBVSY-99hO7iI0/scene.splinecode"></spline-viewer>
+        </div>
         <div class="hero-content" data-aos="fade-up">
             <h1 class="hero-title">Transform <span>E-Waste</span><br>into Environmental Impact</h1>
-            <p class="hero-description">Join our mission to create a sustainable future through responsible electronics recycling. Every device recycled contributes to a cleaner, greener planet.</p>
-            <div class="hero-buttons">
-                <a href="#register" class="glow-button">Start Recycling Today</a>
+            <p class="hero-description" data-aos="fade-up" data-aos-delay="100">Join our mission to create a sustainable future by responsibly recycling electronic waste. Earn rewards while making a positive impact on our planet.</p>
+            <div class="hero-buttons" data-aos="fade-up" data-aos-delay="200">
+                <a href="#register" class="glow-button">Get Started</a>
             </div>
         </div>
     </section>
@@ -983,7 +942,7 @@
             </div>
             
             <div class="globe-container" data-aos="fade-left">
-                <img src="https://ian.macky.net/pat/map/globes/earth-bmarbl-256-medium.gif" alt="Earth Globe" class="globe-image">
+                <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnRpaXhkZ2k2dGVwb3VrbnludG03OXJxbHRxM2YzenNybWdpN21kYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1ZdhDw5772Fzy/giphy.gif" alt="Earth Globe" class="globe-image">
             </div>
         </div>
     </section>
@@ -1349,6 +1308,7 @@
             const updateCounter = () => {
                 current += step;
                 if (current < target) {
+                    current += step;
                     counter.textContent = Math.round(current);
                     requestAnimationFrame(updateCounter);
                 } else {
@@ -1361,8 +1321,8 @@
                     updateCounter();
                     observer.disconnect();
                 }
-            });
-            
+            }, { threshold: 0.5 });
+
             observer.observe(counter);
         });
 
@@ -1458,8 +1418,7 @@
             const steps = 60;
             const stepValue = endValue / steps;
             let currentValue = 0;
-            const stepDuration = duration / steps;
-
+            
             const interval = setInterval(() => {
                 currentValue += stepValue;
                 if (currentValue >= endValue) {
@@ -1467,7 +1426,7 @@
                     clearInterval(interval);
                 }
                 counter.textContent = Math.round(currentValue);
-            }, stepDuration);
+            }, duration / steps);
         }
 
         // Start counter animation when section is in view

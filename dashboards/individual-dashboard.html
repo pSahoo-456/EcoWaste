@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWaste - Individual Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/corner-decorations.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --bg-dark: #1a1a1a;
+            --card-dark: #2d2d2d;
+            --text-light: #ffffff;
+            --text-gray: #a0aec0;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--bg-dark);
+        }
+
+        .dashboard-container {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .action-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--card-dark);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .card-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .action-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .action-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-dark);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .badges-section {
+            background: var(--card-dark);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .badge-item {
+            text-align: center;
+        }
+
+        .badge-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .share-btn {
+            background: #1da1f2;
+            margin-top: 0.5rem;
+        }
+
+        .share-btn:hover {
+            background: #1991db;
+        }
+
+        .product-form {
+            display: none;
+            background: var(--card-dark);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-gray);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--text-gray);
+            border-radius: 5px;
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .action-cards,
+            .stats-section {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-recycle"></i>
+                EcoWaste
+            </a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../submit.html">Submit Your E-Waste</a>
+                <a href="../rewards.html">Rewards</a>
+                <a href="../about.html">About</a>
+                <a href="#" class="login-btn">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <h2>Welcome, <span id="userName">John Doe</span></h2>
+                    <p>Individual Seller</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-cards">
+            <div class="card">
+                <h3 class="card-title"><i class="fas fa-list"></i> List a Product</h3>
+                <div class="card-content">
+                    <p>List your e-waste products for sale. Fill in the details manually or use our smart scanning feature.</p>
+                </div>
+                <button class="action-btn" onclick="showProductForm()">List Manually</button>
+                <button class="action-btn" onclick="startScanning()" style="margin-left: 1rem;">
+                    <i class="fas fa-qr-code"></i> Scan Product
+                </button>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title"><i class="fas fa-gift"></i> Your Rewards</h3>
+                <div class="card-content">
+                    <p>Current Points: <span id="rewardPoints">2,500</span></p>
+                    <p>Equivalent Value: $<span id="rewardValue">25.00</span></p>
+                </div>
+                <button class="action-btn" onclick="withdrawRewards()">Withdraw Rewards</button>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-value">125 kg</div>
+                <div class="stat-label">E-Waste Recycled</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">250 kg</div>
+                <div class="stat-label">CO₂ Emissions Saved</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">15</div>
+                <div class="stat-label">Items Sold</div>
+            </div>
+        </div>
+
+        <div class="badges-section">
+            <h3 class="card-title"><i class="fas fa-medal"></i> Your Achievement Badges</h3>
+            <div class="badges-grid">
+                <div class="badge-item">
+                    <div class="badge-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h4>Green Warrior</h4>
+                    <button class="action-btn share-btn">Share</button>
+                </div>
+                <div class="badge-item">
+                    <div class="badge-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>Top Seller</h4>
+                    <button class="action-btn share-btn">Share</button>
+                </div>
+                <div class="badge-item">
+                    <div class="badge-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h4>Earth Saver</h4>
+                    <button class="action-btn share-btn">Share</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Listing Form -->
+        <div id="productForm" class="product-form">
+            <h3 class="card-title">List Your Product</h3>
+            <form onsubmit="submitProduct(event)">
+                <div class="form-group">
+                    <label for="productName">Product Name</label>
+                    <input type="text" id="productName" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" required>
+                        <option value="">Select Category</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="appliances">Appliances</option>
+                        <option value="computers">Computers</option>
+                        <option value="mobile">Mobile Devices</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="condition">Condition</label>
+                    <select id="condition" required>
+                        <option value="">Select Condition</option>
+                        <option value="new">Like New</option>
+                        <option value="good">Good</option>
+                        <option value="fair">Fair</option>
+                        <option value="poor">Poor</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price (USD)</label>
+                    <input type="number" id="price" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="images">Product Images</label>
+                    <input type="file" id="images" multiple accept="image/*">
+                </div>
+                <button type="submit" class="action-btn">Submit Listing</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showProductForm() {
+            document.getElementById('productForm').style.display = 'block';
+        }
+
+        function startScanning() {
+            // Implement scanning functionality
+            alert('Scanning feature will be implemented here');
+        }
+
+        function withdrawRewards() {
+            // Implement rewards withdrawal
+            alert('Withdrawal feature will be implemented here');
+        }
+
+        function submitProduct(event) {
+            event.preventDefault();
+            // Implement product submission
+            alert('Product submission will be implemented here');
+            document.getElementById('productForm').style.display = 'none';
+        }
+
+        // Initialize AOS
+        AOS.init();
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</body>
+</html>

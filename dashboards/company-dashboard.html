@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWaste - Company Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/corner-decorations.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --bg-dark: #1a1a1a;
+            --card-dark: #2d2d2d;
+            --text-light: #ffffff;
+            --text-gray: #a0aec0;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--bg-dark);
+        }
+
+        .dashboard-container {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-card {
+            background: var(--card-dark);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .option-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .option-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .option-description {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .action-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .action-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .inventory-section,
+        .impact-section {
+            background: var(--card-dark);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--card-dark);
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-gray);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--text-gray);
+            border-radius: 5px;
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 1rem;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-recycle"></i>
+                EcoWaste
+            </a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../submit.html">Submit Your E-Waste</a>
+                <a href="../rewards.html">Rewards</a>
+                <a href="../about.html">About</a>
+                <a href="#" class="login-btn">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div>
+                    <h2>Welcome, <span id="companyName">EcoTech Solutions</span></h2>
+                    <p>Company Dashboard</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="options-grid">
+            <div class="option-card">
+                <div class="option-icon">
+                    <i class="fas fa-boxes"></i>
+                </div>
+                <h3 class="option-title">Bulk Retailer Contact</h3>
+                <p class="option-description">Connect directly with retailers for bulk e-waste transactions</p>
+                <button class="action-btn" onclick="showRetailerModal()">Contact Retailers</button>
+            </div>
+
+            <div class="option-card">
+                <div class="option-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3 class="option-title">Inventory Management</h3>
+                <p class="option-description">Manage and track your e-waste inventory database</p>
+                <button class="action-btn" onclick="showInventoryModal()">Manage Inventory</button>
+            </div>
+
+            <div class="option-card">
+                <div class="option-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3 class="option-title">Collaboration Hub</h3>
+                <p class="option-description">Partner with us for bulk e-waste selling opportunities</p>
+                <button class="action-btn" onclick="showCollabModal()">Start Collaboration</button>
+            </div>
+        </div>
+
+        <div class="inventory-section">
+            <div class="section-header">
+                <h3>Inventory Overview</h3>
+                <button class="action-btn" onclick="exportInventory()">Export Data</button>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">1,234</div>
+                    <div class="stat-label">Total Items</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">45</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">89%</div>
+                    <div class="stat-label">Recycling Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$12.5K</div>
+                    <div class="stat-label">Monthly Value</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="impact-section">
+            <div class="section-header">
+                <h3>Environmental Impact</h3>
+                <button class="action-btn" onclick="shareImpact()">Share Impact</button>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">25.6K</div>
+                    <div class="stat-label">CO₂ Saved (kg)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">15.2K</div>
+                    <div class="stat-label">Water Saved (L)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">8.7K</div>
+                    <div class="stat-label">Energy Saved (kWh)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">456</div>
+                    <div class="stat-label">Trees Saved</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="retailerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Contact Retailers</h3>
+                <button class="close-modal" onclick="closeModal('retailerModal')">&times;</button>
+            </div>
+            <form onsubmit="submitRetailerContact(event)">
+                <div class="form-group">
+                    <label for="productType">Product Type</label>
+                    <select id="productType" required>
+                        <option value="">Select Product Type</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="computers">Computers</option>
+                        <option value="mobile">Mobile Devices</option>
+                        <option value="appliances">Appliances</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity Required</label>
+                    <input type="number" id="quantity" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="timeline">Preferred Timeline</label>
+                    <input type="date" id="timeline" required>
+                </div>
+                <div class="form-group">
+                    <label for="additionalDetails">Additional Details</label>
+                    <textarea id="additionalDetails" rows="4"></textarea>
+                </div>
+                <button type="submit" class="action-btn">Send Request</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="inventoryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Inventory Management</h3>
+                <button class="close-modal" onclick="closeModal('inventoryModal')">&times;</button>
+            </div>
+            <form onsubmit="submitInventoryUpdate(event)">
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" required>
+                        <option value="">Select Category</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="computers">Computers</option>
+                        <option value="mobile">Mobile Devices</option>
+                        <option value="appliances">Appliances</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="itemName">Item Name</label>
+                    <input type="text" id="itemName" required>
+                </div>
+                <div class="form-group">
+                    <label for="currentStock">Current Stock</label>
+                    <input type="number" id="currentStock" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="reorderPoint">Reorder Point</label>
+                    <input type="number" id="reorderPoint" min="0" required>
+                </div>
+                <button type="submit" class="action-btn">Update Inventory</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="collabModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Start Collaboration</h3>
+                <button class="close-modal" onclick="closeModal('collabModal')">&times;</button>
+            </div>
+            <form onsubmit="submitCollabRequest(event)">
+                <div class="form-group">
+                    <label for="companyDetails">Company Details</label>
+                    <textarea id="companyDetails" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="collabType">Collaboration Type</label>
+                    <select id="collabType" required>
+                        <option value="">Select Type</option>
+                        <option value="bulk-selling">Bulk Selling</option>
+                        <option value="recycling">Recycling Partnership</option>
+                        <option value="distribution">Distribution Network</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="proposedTerms">Proposed Terms</label>
+                    <textarea id="proposedTerms" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="action-btn">Submit Proposal</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showRetailerModal() {
+            document.getElementById('retailerModal').style.display = 'flex';
+        }
+
+        function showInventoryModal() {
+            document.getElementById('inventoryModal').style.display = 'flex';
+        }
+
+        function showCollabModal() {
+            document.getElementById('collabModal').style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function submitRetailerContact(event) {
+            event.preventDefault();
+            // Implement retailer contact submission
+            alert('Retailer contact request will be implemented here');
+            closeModal('retailerModal');
+        }
+
+        function submitInventoryUpdate(event) {
+            event.preventDefault();
+            // Implement inventory update
+            alert('Inventory update will be implemented here');
+            closeModal('inventoryModal');
+        }
+
+        function submitCollabRequest(event) {
+            event.preventDefault();
+            // Implement collaboration request
+            alert('Collaboration request will be implemented here');
+            closeModal('collabModal');
+        }
+
+        function exportInventory() {
+            // Implement inventory export
+            alert('Inventory export will be implemented here');
+        }
+
+        function shareImpact() {
+            // Implement impact sharing
+            alert('Impact sharing will be implemented here');
+        }
+
+        // Initialize AOS
+        AOS.init();
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</body>
+</html>

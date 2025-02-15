@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="css/corner-decorations.css">
+    <link rel="stylesheet" href="css/navigation.css">
     <style>
         :root {
             --primary-color: #2ecc71;
@@ -31,71 +33,6 @@
             line-height: 1.6;
             color: var(--text-light);
             background: var(--bg-dark);
-        }
-
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: var(--card-dark);
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .logo i {
-            font-size: 1.8rem;
-            color: var(--primary-color);
-        }
-
-        .logo:hover {
-            color: var(--secondary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-gray);
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-            background: rgba(46, 204, 113, 0.1);
-        }
-
-        .nav-links a.active {
-            color: var(--primary-color);
-            font-weight: 600;
-            background: rgba(46, 204, 113, 0.1);
         }
 
         .main-content {
@@ -340,6 +277,12 @@
     </style>
 </head>
 <body>
+    <!-- Corner Decorations -->
+    <div class="corner-decoration corner-top-left"></div>
+    <div class="corner-decoration corner-top-right"></div>
+    <div class="corner-decoration corner-bottom-left"></div>
+    <div class="corner-decoration corner-bottom-right"></div>
+    
     <nav class="navbar">
         <div class="nav-content">
             <a href="index.html" class="logo">
@@ -348,9 +291,11 @@
             </a>
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="submit.html" class="active">Submit Your E-Waste</a>
+                <a href="submit.html">Submit Your E-Waste</a>
                 <a href="rewards.html">Rewards</a>
                 <a href="about.html">About</a>
+                <a href="login.html" class="login-btn">Login</a>
+                <a href="register.html" class="register-btn">Register</a>
             </div>
         </div>
     </nav>

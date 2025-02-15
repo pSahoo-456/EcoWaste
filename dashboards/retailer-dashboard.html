@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWaste - Retailer Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/corner-decorations.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --bg-dark: #1a1a1a;
+            --card-dark: #2d2d2d;
+            --text-light: #ffffff;
+            --text-gray: #a0aec0;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--bg-dark);
+        }
+
+        .dashboard-container {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .filters-section {
+            background: var(--card-dark);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-gray);
+        }
+
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--text-gray);
+            border-radius: 5px;
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: var(--card-dark);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: #444;
+            object-fit: cover;
+        }
+
+        .product-details {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .action-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .action-btn.secondary {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .action-btn.secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .bulk-order-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--card-dark);
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-gray);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--text-gray);
+            border-radius: 5px;
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 1rem;
+            }
+
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-recycle"></i>
+                EcoWaste
+            </a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../submit.html">Submit Your E-Waste</a>
+                <a href="../rewards.html">Rewards</a>
+                <a href="../about.html">About</a>
+                <a href="#" class="login-btn">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div>
+                    <h2>Welcome, <span id="retailerName">Tech Solutions Inc.</span></h2>
+                    <p>Retailer Dashboard</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="filters-section">
+            <h3>Filter Products</h3>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label for="categoryFilter">Category</label>
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="appliances">Appliances</option>
+                        <option value="computers">Computers</option>
+                        <option value="mobile">Mobile Devices</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="conditionFilter">Condition</label>
+                    <select id="conditionFilter">
+                        <option value="">All Conditions</option>
+                        <option value="new">Like New</option>
+                        <option value="good">Good</option>
+                        <option value="fair">Fair</option>
+                        <option value="poor">Poor</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="priceRange">Price Range</label>
+                    <select id="priceRange">
+                        <option value="">Any Price</option>
+                        <option value="0-100">$0 - $100</option>
+                        <option value="101-500">$101 - $500</option>
+                        <option value="501-1000">$501 - $1000</option>
+                        <option value="1001+">$1001+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sortBy">Sort By</label>
+                    <select id="sortBy">
+                        <option value="newest">Newest First</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="condition">Best Condition</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="products-grid">
+            <!-- Sample Product Cards -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200" alt="Product" class="product-image">
+                <div class="product-details">
+                    <h3 class="product-title">iPhone 12 Pro (Refurbished)</h3>
+                    <div class="product-meta">
+                        <span>Condition: Good</span>
+                        <span>$499</span>
+                    </div>
+                    <p>Fully functional iPhone 12 Pro with minor cosmetic wear. Includes original charger and box.</p>
+                    <div class="product-actions">
+                        <button class="action-btn" onclick="orderSingle(1)">Order Single</button>
+                        <button class="action-btn secondary" onclick="showBulkOrder(1)">Bulk Order</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200" alt="Product" class="product-image">
+                <div class="product-details">
+                    <h3 class="product-title">MacBook Pro 2019</h3>
+                    <div class="product-meta">
+                        <span>Condition: Like New</span>
+                        <span>$899</span>
+                    </div>
+                    <p>13-inch MacBook Pro, excellent condition, recently serviced with new battery.</p>
+                    <div class="product-actions">
+                        <button class="action-btn" onclick="orderSingle(2)">Order Single</button>
+                        <button class="action-btn secondary" onclick="showBulkOrder(2)">Bulk Order</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More product cards can be added here -->
+        </div>
+    </div>
+
+    <!-- Bulk Order Modal -->
+    <div id="bulkOrderModal" class="bulk-order-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Bulk Order Request</h3>
+                <button class="close-modal" onclick="closeBulkOrder()">&times;</button>
+            </div>
+            <form onsubmit="submitBulkOrder(event)">
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="deliveryDate">Preferred Delivery Date</label>
+                    <input type="date" id="deliveryDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Additional Notes</label>
+                    <textarea id="notes" rows="4"></textarea>
+                </div>
+                <button type="submit" class="action-btn">Submit Order</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function orderSingle(productId) {
+            // Implement single order functionality
+            alert('Single order processing will be implemented here');
+        }
+
+        function showBulkOrder(productId) {
+            document.getElementById('bulkOrderModal').style.display = 'flex';
+        }
+
+        function closeBulkOrder() {
+            document.getElementById('bulkOrderModal').style.display = 'none';
+        }
+
+        function submitBulkOrder(event) {
+            event.preventDefault();
+            // Implement bulk order submission
+            alert('Bulk order submission will be implemented here');
+            closeBulkOrder();
+        }
+
+        // Filter functionality
+        document.querySelectorAll('select').forEach(select => {
+            select.addEventListener('change', function() {
+                // Implement filter functionality
+                console.log('Filtering products...');
+            });
+        });
+
+        // Initialize AOS
+        AOS.init();
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</body>
+</html>
