@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoWaste - About Us</title>
+    <title>About Us - EcoWaste</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="css/corner-decorations.css">
@@ -11,13 +12,16 @@
     <style>
         :root {
             --primary-color: #2ecc71;
-            --secondary-color: #27ae60;
+            --secondary-color: #8BC34A;
             --dark-color: #2c3e50;
             --light-color: #ecf0f1;
             --bg-dark: #1a1a1a;
             --card-dark: #2d2d2d;
             --text-light: #ffffff;
             --text-gray: #a0aec0;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
             --transition: all 0.3s ease;
         }
 
@@ -25,184 +29,380 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: var(--text-light);
             background: var(--bg-dark);
         }
 
-        .main-content {
-            margin-top: 80px;
-            padding: 2rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-                        url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b') center/cover;
-            color: var(--text-light);
-            padding: 4rem 2rem;
+        .about-header {
+            padding: 8rem 2rem 4rem;
             text-align: center;
-            border-radius: 10px;
-            margin-bottom: 3rem;
-        }
-
-        .hero-section h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .mission-section {
             background: var(--card-dark);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 3rem;
-            color: var(--text-light);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 1.5rem;
-            background: var(--card-dark);
-            border-radius: 10px;
-            color: var(--text-light);
-        }
-
-        .stat-value {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .team-section {
-            margin: 3rem 0;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .team-card {
-            background: var(--card-dark);
-            border-radius: 10px;
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: var(--transition);
+        }
+
+        .about-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(46, 204, 113, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .about-header h1 {
+            font-size: 3.5rem;
             color: var(--text-light);
+            margin-bottom: 1rem;
+            position: relative;
         }
 
-        .team-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .team-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .team-info {
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
+        .about-header p {
+            font-size: 1.2rem;
             color: var(--text-gray);
-            text-decoration: none;
-            transition: var(--transition);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
         }
 
-        .social-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .contact-section {
+        .who-we-are {
             background: var(--card-dark);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            color: var(--text-light);
+            padding: 4rem 2rem;
+            margin: 2rem auto;
+            position: relative;
+            overflow: hidden;
         }
 
-        .contact-grid {
+        .who-we-are::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(46, 204, 113, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 195, 74, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .who-we-are-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
         }
 
-        .contact-form {
-            display: grid;
-            gap: 1rem;
+        .mission-text {
+            position: relative;
+            z-index: 1;
         }
 
-        .form-group input,
-        .form-group textarea {
+        .mission-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .mission-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), transparent);
+        }
+
+        .mission-text p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .eco-visualization {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .eco-gif {
+            width: 350px;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 40px rgba(46, 204, 113, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(46, 204, 113, 0.2);
+        }
+
+        .eco-gif::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            backdrop-filter: blur(5px);
+            z-index: -1;
+        }
+
+        .eco-gif img {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
-        .submit-btn {
-            background: var(--primary-color);
-            color: var(--text-light);
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .submit-btn:hover {
-            background: var(--secondary-color);
-        }
-
-        [data-aos] {
-            opacity: 0;
-            transition-property: transform, opacity;
-        }
-
-        [data-aos].aos-animate {
-            opacity: 1;
+        .eco-gif:hover img {
+            transform: scale(1.05);
         }
 
         @media (max-width: 768px) {
-            .main-content {
+            .eco-gif {
+                width: 280px;
+                height: 280px;
+            }
+        }
+
+        .roadmap {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .roadmap-item {
+            width: 100%;
+            margin-bottom: 6rem;
+            position: relative;
+            min-height: 250px;
+        }
+
+        .roadmap-item:last-child {
+            margin-bottom: 2rem;
+        }
+
+        .roadmap-item:nth-child(odd) {
+            padding-right: calc(50% + 2rem);
+        }
+
+        .roadmap-item:nth-child(even) {
+            padding-left: calc(50% + 2rem);
+        }
+
+        .roadmap-number {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: var(--primary-color);
+            color: var(--text-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            box-shadow: 0 0 0 8px rgba(46, 204, 113, 0.2);
+            z-index: 1;
+            top: 0;
+        }
+
+        .roadmap-item:nth-child(odd) .roadmap-number {
+            right: calc(50% - 16px);
+        }
+
+        .roadmap-item:nth-child(even) .roadmap-number {
+            left: calc(50% - 16px);
+        }
+
+        .roadmap-image {
+            position: absolute;
+            width: calc(50% - 4rem);
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--card-dark);
+        }
+
+        .roadmap-image:hover {
+            transform: translateY(calc(-50% - 5px));
+            box-shadow: var(--shadow-lg);
+        }
+
+        .roadmap-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .roadmap-image:hover img {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .roadmap-item:nth-child(odd) .roadmap-image {
+            right: 2rem;
+        }
+
+        .roadmap-item:nth-child(even) .roadmap-image {
+            left: 2rem;
+        }
+
+        .roadmap-content {
+            background: var(--card-dark);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+            margin-top: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .roadmap-content::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--card-dark);
+            top: 15px;
+            transform: rotate(45deg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .roadmap-item:nth-child(odd) .roadmap-content::before {
+            right: -10px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .roadmap-item:nth-child(even) .roadmap-content::before {
+            left: -10px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .roadmap-content:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .roadmap-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .roadmap-content p {
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        .roadmap-content ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .roadmap-content ul li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .roadmap-content ul li::before {
+            content: '✓';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+        }
+
+        @media (max-width: 768px) {
+            .about-header {
+                padding: 6rem 1rem 3rem;
+            }
+
+            .about-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .who-we-are-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .eco-gif {
+                width: 280px;
+                height: 280px;
+            }
+
+            .roadmap {
                 padding: 1rem;
             }
 
-            .hero-section {
-                padding: 2rem 1rem;
+            .roadmap::before {
+                left: 16px;
             }
 
-            .team-grid {
-                grid-template-columns: 1fr;
+            .roadmap-item:nth-child(odd),
+            .roadmap-item:nth-child(even) {
+                padding-left: 50px;
+                padding-right: 0;
+            }
+
+            .roadmap-item:nth-child(odd) .roadmap-number,
+            .roadmap-item:nth-child(even) .roadmap-number {
+                left: 0;
+                right: auto;
+            }
+
+            .roadmap-item:nth-child(odd) .roadmap-content::before,
+            .roadmap-item:nth-child(even) .roadmap-content::before {
+                left: -10px;
+                right: auto;
+                border-right: none;
+                border-top: none;
+            }
+
+            .roadmap-image {
+                display: none;
             }
         }
     </style>
@@ -213,7 +413,8 @@
     <div class="corner-decoration corner-top-right"></div>
     <div class="corner-decoration corner-bottom-left"></div>
     <div class="corner-decoration corner-bottom-right"></div>
-    
+
+    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-content">
             <a href="index.html" class="logo">
@@ -226,115 +427,123 @@
                 <a href="rewards.html">Rewards</a>
                 <a href="about.html">About</a>
                 <a href="login.html" class="login-btn">Login</a>
-                <a href="register.html" class="register-btn">Register</a>
             </div>
         </div>
     </nav>
 
-    <div class="main-content">
-        <div class="hero-section" data-aos="fade-up">
-            <h1>Our Mission</h1>
-            <p>Creating a sustainable future through responsible e-waste management</p>
-        </div>
+    <header class="about-header" data-aos="fade-up">
+        <h1>Our E-Waste Journey</h1>
+        <p>Transforming electronic waste into rewards while protecting our environment. Here's how we make it happen.</p>
+    </header>
 
-        <div class="mission-section" data-aos="fade-up">
-            <h2>Who We Are</h2>
-            <p>EcoWaste is a pioneering e-waste management platform that connects individuals and businesses with certified recycling centers. Our innovative reward system encourages responsible disposal of electronic waste while creating value for our users.</p>
-            
-            <div class="stats-grid">
-                <div class="stat-card" data-aos="fade-up">
-                    <div class="stat-value" id="userCount">50K+</div>
-                    <p>Active Users</p>
-                </div>
-                <div class="stat-card" data-aos="fade-up">
-                    <div class="stat-value" id="wasteCount">100T</div>
-                    <p>E-Waste Recycled</p>
-                </div>
-                <div class="stat-card" data-aos="fade-up">
-                    <div class="stat-value" id="centerCount">500+</div>
-                    <p>Collection Centers</p>
-                </div>
+    <section class="roadmap">
+        <div class="roadmap-item" data-aos="fade-right">
+            <div class="roadmap-number">1</div>
+            <div class="roadmap-content">
+                <h3><i class="fas fa-laptop"></i> Registration & Assessment</h3>
+                <p>Begin your e-waste recycling journey by registering your electronic items on our platform.</p>
+                <ul>
+                    <li>Submit details and photos of your e-waste</li>
+                    <li>AI-powered evaluation of device condition and worth</li>
+                    <li>Instant preliminary price estimate</li>
+                    <li>Verification of device reusability potential</li>
+                </ul>
+            </div>
+            <div class="roadmap-image">
+                <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGFwd3I4ZXZlMWZnd3p4cWV4bHVpNzRzaHIybjNwYmoyMzdzMWt6ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CTX0ivSQbI78A/giphy.gif" alt="Registration Process">
             </div>
         </div>
 
-        <div class="team-section" data-aos="fade-up">
-            <h2>Our Team</h2>
-            <div class="team-grid">
-                <div class="team-card" data-aos="fade-up">
-                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Team Member" class="team-image">
-                    <div class="team-info">
-                        <h3>John Doe</h3>
-                        <p>Founder & CEO</p>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-card" data-aos="fade-up">
-                    <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Team Member" class="team-image">
-                    <div class="team-info">
-                        <h3>Jane Smith</h3>
-                        <p>Head of Operations</p>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-card" data-aos="fade-up">
-                    <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Team Member" class="team-image">
-                    <div class="team-info">
-                        <h3>Mike Johnson</h3>
-                        <p>Technical Lead</p>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                </div>
+        <div class="roadmap-item" data-aos="fade-left">
+            <div class="roadmap-number">2</div>
+            <div class="roadmap-content">
+                <h3><i class="fas fa-calendar-check"></i> Scheduling & Collection</h3>
+                <p>We make the collection process convenient and professional.</p>
+                <ul>
+                    <li>Choose your preferred pickup date and time</li>
+                    <li>Expert evaluation by our trained team member</li>
+                    <li>Secure packaging and handling</li>
+                    <li>Doorstep collection service</li>
+                </ul>
+            </div>
+            <div class="roadmap-image">
+                <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3psemhnenB4NnV6eWhuYml6c21hMHUwMXJoY282N21ydGZubHp6MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QBd2kLB5qDmysEXre9/giphy.gif" alt="Collection Process">
             </div>
         </div>
 
-        <div class="contact-section" data-aos="fade-up">
-            <h2>Contact Us</h2>
-            <div class="contact-grid">
-                <div>
-                    <h3>Get in Touch</h3>
-                    <p>Have questions about our services? We're here to help!</p>
-                    <form class="contact-form">
-                        <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea rows="4" placeholder="Your Message" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
-                    </form>
-                </div>
-                <div>
-                    <h3>Visit Us</h3>
-                    <p>123 Eco Street<br>Green City, EC 12345</p>
-                    <p>Email: info@ecowaste.com<br>Phone: (123) 456-7890</p>
-                    <div class="social-links" style="justify-content: flex-start; margin-top: 2rem;">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                    </div>
+        <div class="roadmap-item" data-aos="fade-right">
+            <div class="roadmap-number">3</div>
+            <div class="roadmap-content">
+                <h3><i class="fas fa-file-invoice"></i> Documentation & Rewards</h3>
+                <p>Immediate processing and reward distribution upon collection.</p>
+                <ul>
+                    <li>Digital receipt generation</li>
+                    <li>Confirmation email with collection details</li>
+                    <li>Instant rewards points credit</li>
+                    <li>Track your contribution to e-waste recycling</li>
+                </ul>
+            </div>
+            <div class="roadmap-image">
+                <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2swdmI1azdxdmQ4aHU1N2VmanIwN3pieWdrZHdwdWk5bm83NWo3dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/67ThRZlYBvibtdF9JH/giphy.gif" alt="Rewards Process">
+            </div>
+        </div>
+
+        <div class="roadmap-item" data-aos="fade-left">
+            <div class="roadmap-number">4</div>
+            <div class="roadmap-content">
+                <h3><i class="fas fa-store"></i> Retailer Processing</h3>
+                <p>Your e-waste finds new life through our certified retail partners.</p>
+                <ul>
+                    <li>Professional assessment by certified retailers</li>
+                    <li>Competitive pricing better than local rates</li>
+                    <li>Transparent pricing structure</li>
+                    <li>Eco-friendly processing guaranteed</li>
+                </ul>
+            </div>
+            <div class="roadmap-image">
+                <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnNsZnF1cnJmaWE2a2VhbG14bjdzanJ0bXpzMTJ3MnhpOG9zNTFicCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bfnQWPlBeD1a32MqHm/giphy.gif" alt="Retail Processing">
+            </div>
+        </div>
+
+        <div class="roadmap-item" data-aos="fade-right">
+            <div class="roadmap-number">5</div>
+            <div class="roadmap-content">
+                <h3><i class="fas fa-recycle"></i> Environmental Impact</h3>
+                <p>Together, we make a difference in creating a sustainable future.</p>
+                <ul>
+                    <li>Reduction in e-waste pollution</li>
+                    <li>Proper recycling of hazardous materials</li>
+                    <li>Support for circular economy</li>
+                    <li>Track your environmental impact</li>
+                </ul>
+            </div>
+            <div class="roadmap-image">
+                <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3Vja3NzNDZtbnAyM3BvOWtuamlleXl4OGw4cnFud3MxZGZtbDVnNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/E8BKRmebpiire/giphy.gif">
+            </div>
+        </div>
+    </section>
+
+    <section class="who-we-are">
+        <div class="who-we-are-content">
+            <div class="mission-text" data-aos="fade-right">
+                <h2>Who We Are</h2>
+                <p>At EcoWaste, we're more than just a recycling platform – we're environmental innovators committed to creating a sustainable future. Our mission is to transform the way society handles electronic waste by making recycling rewarding, accessible, and impactful.</p>
+                <p>Through cutting-edge technology and partnerships with certified recyclers, we ensure that every device is properly processed, reducing environmental impact while creating value for our users.</p>
+            </div>
+            <div class="eco-visualization" data-aos="fade-left">
+                <div class="eco-gif">
+                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExczZ5OHJqODU1dTc4a3k3NXd3eGN0N2FoZmtvZjNteWgxN2Y1ZW5haiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZI4owdgI8ob1LtkFjt/giphy.gif" alt="Environmental Impact">
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
-            duration: 800,
-            offset: 100,
-            once: true
+            duration: 1000,
+            once: true,
+            offset: 100
         });
     </script>
 </body>
