@@ -34,7 +34,7 @@ def generate_receipt(user_name, email, product_name, collection_date, condition,
         # Footer
         c.setFont("Helvetica-Oblique", 10)
         c.drawString(50, 540, "Thank you for recycling responsibly! 🌍💚")
-        c.drawString(50, 520, "Visit GreenTalk for more details: www.greentalk.com")
+        c.drawString(50, 520, "Visit EcoWaste for more details: www.EcoWaste.com")
 
         # Save and close the PDF
         c.save()
@@ -47,8 +47,8 @@ def generate_receipt(user_name, email, product_name, collection_date, condition,
 
 
 receipt_path = generate_receipt(
-    user_name="John Doe",
-    email="johndoe@gmail.com",
+    user_name="Prakash Sahoo",
+    email="prakash2004sahoo@gmail.com",
     product_name="Laptop - Dell XPS 13",
     collection_date="2025-02-15",
     condition="Good",
@@ -63,4 +63,34 @@ else:
 
 
 ###Recipt send to the mail 
+def send_receipt(email, receipt_filename):
+    sender_email = "prakash2004sahoo@gmail.com"
+    sender_password = "Prakash@2004"
+    
+    subject = "Your E-Waste Collection Receipt - EcoWaste"
+    body = "Thank you for using EcoWaste to recycle your e-waste! Attached is your digital receipt."
+
+    try:
+        # Connect to SMTP Server (Gmail Example)
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(sender_email, sender_password)
+
+        message = f"Subject: {subject}\n\n{body}"
+
+        # Send email with attachment
+        with open(receipt_filename, "rb") as attachment:
+            server.sendmail(sender_email, email, message)
+        
+        server.quit()
+        print(f"Receipt sent to {email}")
+    except Exception as e:
+        print(f"Failed to send email: {e}")
+        
+        
+        #Test it 
+        
+        send_receipt("prakash2004sahoo@gmail.com", receipt_filename)
+
+
 
