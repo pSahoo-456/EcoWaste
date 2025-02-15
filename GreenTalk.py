@@ -1,4 +1,8 @@
+import spacy
 import random
+
+# Load NLP Model
+nlp = spacy.load("en_core_web_sm")
 
 # Predefined chatbot responses
 responses = {
