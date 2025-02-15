@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -59,11 +59,36 @@ class Product(db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# Routes
+# Page Routes
 @app.route('/')
 def home():
-    return "EcoWaste API is running!"
+    return render_template('index.html')
 
+@app.route('/submit')
+def submit_page():
+    return render_template('submit.html')
+
+@app.route('/login')
+def login_page():
+    return render_template('login.html')
+
+@app.route('/register')
+def register_page():
+    return render_template('register.html')
+
+@app.route('/rewards')
+def rewards_page():
+    return render_template('rewards.html')
+
+@app.route('/about')
+def about_page():
+    return render_template('about.html')
+
+@app.route('/chatbot')
+def chatbot_page():
+    return render_template('chatbot.html')
+
+# API Routes
 @app.route('/api/predict', methods=['POST'])
 @login_required
 def predict():
@@ -152,6 +177,12 @@ if __name__ == '__main__':
     print("\nStarting EcoWaste Server...")
     print("Available routes:")
     print("  - / (GET): Home")
+    print("  - /submit (GET): Submit page")
+    print("  - /login (GET): Login page")
+    print("  - /register (GET): Register page")
+    print("  - /rewards (GET): Rewards page")
+    print("  - /about (GET): About page")
+    print("  - /chatbot (GET): Chatbot page")
     print("  - /api/predict (POST): Make predictions")
     print("  - /api/register (POST): Register new user")
     print("  - /api/login (POST): Login user")
