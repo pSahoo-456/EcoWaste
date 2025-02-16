@@ -1,17 +1,33 @@
-# EcoWaste Project
+# EcoWaste - AI-Powered E-Waste Management Platform
 
-A machine learning-powered application for predicting product expiry and prices.
+EcoWaste is an AI-powered, end-to-end e-waste management platform that automates collection, tracking, recycling, and rewards to encourage sustainable disposal of electronic waste.
 
-## Project Structure
-```
-EcoWaste/
-├── app.py                         # Main backend Flask application
-├── Expiary_Price_Prediction.py    # ML model training script
-├── requirements.txt               # Python dependencies
-├── login.html                     # Frontend login page
-├── .env                          # Environment variables (do not commit!)
-├── *.pkl                         # Saved ML models and encoders
-└── README.md                     # Project documentation
+
+## 🛠 Project Structure
+
+### Backend (Python/Flask)
+
+├── app.py                         # Main Flask application file
+├── GreenTalk.py                  # Chatbot implementation
+├── data.py                       # Data handling utilities
+├── setup_database.py             # Database initialization
+├── check_database.py             # Database verification
+├── recreate_db.py               # Database recreation utility
+├── ReciptGenerate.py            # Receipt generation functionality
+├── Expiary_Price_Prediction.py   # ML prediction implementation
+├── requirements.txt              # Python dependencies
+
+
+### Machine Learning Models
+
+├── brand_encoder.pkl             # Brand encoding model
+├── product_encoder.pkl           # Product type encoding model
+├── usage_encoder.pkl            # Usage pattern encoding model
+├── fixed_multi_output_model.pkl  # Main prediction model
+├── expiry_price_data.csv        # Training data
+
+
+
 ```
 
 ## Setup Instructions
